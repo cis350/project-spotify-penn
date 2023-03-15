@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Login from "./Login";
-import { Navigate, Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import './App.css';
+import Login from './Login';
 
 function App() {
   return (
