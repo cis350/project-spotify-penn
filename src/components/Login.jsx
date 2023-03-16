@@ -15,6 +15,11 @@ import {
 } from '@mantine/core';
 
 function Login() {
+  fetch('http://localhost:3000/posts/1')
+    .then((response) => response.json())
+    // eslint-disable-next-line no-console
+    .then((data) => console.log(data));
+
   // eslint-disable-next-line no-unused-vars
   const handleSubmit = (event) => {
     event.preventDefault();
