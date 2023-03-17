@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
+import { useNavigate } from 'react-router-dom';
 import '@fontsource/inter';
 import {
   Container,
@@ -15,23 +16,8 @@ import {
 } from '@mantine/core';
 
 function Login() {
-  fetch('http://localhost:3000/posts/1')
-    .then((response) => response.json())
-    // eslint-disable-next-line no-console
-    .then((data) => console.log(data));
+  const navigate = useNavigate();
 
-  // eslint-disable-next-line no-unused-vars
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  // eslint-disable-next-line no-unused-vars
   const form = useForm({
     initialValues: {
       email: '',
@@ -46,6 +32,21 @@ function Login() {
         : null),
     },
   });
+
+  const handleSubmit = () => {
+    const username = form.values.email;
+    console.log(username);
+    const { password } = form.values.password;
+    fetch(`http://localhost:3000/user/${username}`).then((response) => response.json()).then(((data) => {
+      if (Object.keys(data).length === 0) {
+        console.log('please enter a valid username');
+      } else if (data.password === password) {
+        navigate('/');
+      } else {
+        console.log('incorrect password');
+      }
+    }));
+  };
 
   return (
     <Container size={420} my={40}>
@@ -67,22 +68,37 @@ function Login() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@upenn.edu" required />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          required
-          mt="md"
-        />
-        <Group position="apart" mt="lg">
-          <Checkbox label="Remember me" />
-          <Anchor component="button" size="sm">
-            Forgot password?
-          </Anchor>
-        </Group>
-        <Button fullWidth mt="xl">
-          Sign in
-        </Button>
+        <form onSubmit={form.onSubmit(() => handleSubmit())}>
+          <TextInput
+            label="Email"
+            placeholder="you@upenn.edu"
+            required
+            value={form.values.email}
+            onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
+            error={form.errors.email && 'Invalid email'}
+          />
+          <PasswordInput
+            label="Password"
+            placeholder="Your password"
+            required
+            mt="md"
+            value={form.values.password}
+            onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
+            error={
+            form.errors.password
+            && 'Password should include at least 6 characters'
+          }
+          />
+          <Group position="apart" mt="lg">
+            <Checkbox label="Remember me" />
+            <Anchor component="button" size="sm">
+              Forgot password?
+            </Anchor>
+          </Group>
+          <Button type="submit" fullWidth mt="xl">
+            Sign in
+          </Button>
+        </form>
       </Paper>
     </Container>
   );

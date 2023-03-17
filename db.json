@@ -1,14 +1,8 @@
 {
-  "posts": [
+  "user": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    },
-    {
-      "id": 2,
-      "title": "Test",
-      "author": "Abhijay"
+      "id": "admin@gmail.com",
+      "password": "password"
     }
   ],
   "comments": [
