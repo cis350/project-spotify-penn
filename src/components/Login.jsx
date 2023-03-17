@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/inter';
+// eslint-disable-next-line no-unused-vars
+import { IconAlertCircle } from '@tabler/icons-react';
 import {
   Container,
   Title,
@@ -13,10 +15,14 @@ import {
   Checkbox,
   Text,
   Button,
+  Alert,
+  Space,
 } from '@mantine/core';
 
 function Login() {
   const navigate = useNavigate();
+
+  const [login, setLogin] = useState(true);
 
   const form = useForm({
     initialValues: {
@@ -34,16 +40,20 @@ function Login() {
   });
 
   const handleSubmit = () => {
-    const username = form.values.email;
-    console.log(username);
-    const { password } = form.values.password;
-    fetch(`http://localhost:3000/user/${username}`).then((response) => response.json()).then(((data) => {
+    const { email } = form.values;
+    const { password } = form.values;
+
+    fetch(`http://localhost:3000/user/${email}`).then((response) => response.json()).then(((data) => {
       if (Object.keys(data).length === 0) {
-        console.log('please enter a valid username');
+        // eslint-disable-next-line no-lone-blocks
+        setLogin(false);
+        form.reset();
       } else if (data.password === password) {
-        navigate('/');
+        setLogin(true);
+        navigate('/home');
       } else {
-        console.log('incorrect password');
+        setLogin(false);
+        form.reset();
       }
     }));
   };
@@ -68,6 +78,7 @@ function Login() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
             label="Email"
@@ -99,6 +110,13 @@ function Login() {
             Sign in
           </Button>
         </form>
+        {!login
+          && (
+            <>
+              <Space h="md" />
+              <Alert icon={<IconAlertCircle size="1rem" />} title="Incorrect Password!" color="red" />
+            </>
+          )}
       </Paper>
     </Container>
   );
