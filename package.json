@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/inter": "^4.5.15",
+    "@fontsource/rubik": "^4.5.14",
     "@mantine/carousel": "^6.0.2",
     "@mantine/core": "^6.0.2",
     "@mantine/dates": "^6.0.2",

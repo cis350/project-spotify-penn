@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '@fontsource/inter';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@fontsource/rubik';
 // eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
 import {
   Container,
   Title,
-  Anchor,
   TextInput,
   PasswordInput,
   Group,
@@ -17,7 +18,10 @@ import {
   Button,
   Alert,
   Space,
+  Image,
+  Center,
 } from '@mantine/core';
+import logo from '../assets/logo.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -43,9 +47,8 @@ function Login() {
     const { email } = form.values;
     const { password } = form.values;
 
-    fetch(`http://localhost:3000/user/${email}`).then((response) => response.json()).then(((data) => {
+    fetch(`http://localhost:3000/user/${email}`).then((response) => response.json()).then((data) => {
       if (Object.keys(data).length === 0) {
-        // eslint-disable-next-line no-lone-blocks
         setLogin(false);
         form.reset();
       } else if (data.password === password) {
@@ -55,29 +58,43 @@ function Login() {
         setLogin(false);
         form.reset();
       }
-    }));
+    });
   };
 
   return (
     <Container size={420} my={40}>
       <Title
         align="center"
+        size={60}
         sx={(theme) => ({
           fontFamily: `Greycliff CF, ${theme.fontFamily}`,
           fontWeight: 900,
         })}
       >
-        Welcome back!
+        Welcome to
       </Title>
+      <Center>
+        <Image miw={500} src={logo} alt="spotify-at-penn-logo" />
+      </Center>
+
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?
+        Don&#39;t have an account yet?
         {' '}
-        <Anchor size="sm" component="button">
-          Create account
-        </Anchor>
+        <Link
+          component={Link}
+          to="/home"
+          style={{
+            fontFamily: 'Rubik',
+            fontSize: 14,
+            fontWeight: 400,
+            color: '#288CE4',
+          }}
+        >
+          Create account.
+        </Link>
       </Text>
 
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+      <Paper withBorder shadow="md" p={30} mt={20} radius="md">
 
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
@@ -102,11 +119,20 @@ function Login() {
           />
           <Group position="apart" mt="lg">
             <Checkbox label="Remember me" />
-            <Anchor component="button" size="sm">
+            <Link
+              component={Link}
+              to="/home"
+              style={{
+                fontFamily: 'Inter',
+                fontSize: 14,
+                fontWeight: 400,
+                color: '#288CE4',
+              }}
+            >
               Forgot password?
-            </Anchor>
+            </Link>
           </Group>
-          <Button type="submit" fullWidth mt="xl">
+          <Button type="submit" fullWidth mt="xl" style={{ background: '#20D464' }}>
             Sign in
           </Button>
         </form>
@@ -114,7 +140,7 @@ function Login() {
           && (
             <>
               <Space h="md" />
-              <Alert icon={<IconAlertCircle size="1rem" />} title="Incorrect Password!" color="red" />
+              <Alert icon={<IconAlertCircle size="1rem" />} title="Invalid Login!" color="red" />
             </>
           )}
       </Paper>
