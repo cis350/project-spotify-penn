@@ -2,7 +2,15 @@
   "user": [
     {
       "id": "admin@gmail.com",
+      "firstName": "admin",
+      "lastName": "admin",
       "password": "password"
+    },
+    {
+      "id": "a",
+      "firstName": "a",
+      "lastName": "a",
+      "password": "a"
     }
   ],
   "comments": [

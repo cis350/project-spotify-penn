@@ -47,7 +47,7 @@ function Login() {
     const { email } = form.values;
     const { password } = form.values;
 
-    fetch(`http://localhost:3000/user/${email}`).then((response) => response.json()).then((data) => {
+    fetch(`http://localhost:8000/user/${email}`).then((response) => response.json()).then((data) => {
       if (Object.keys(data).length === 0) {
         setLogin(false);
         form.reset();
@@ -74,7 +74,7 @@ function Login() {
         Welcome to
       </Title>
       <Center>
-        <Image miw={500} src={logo} alt="spotify-at-penn-logo" />
+        <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
       </Center>
 
       <Text color="dimmed" size="sm" align="center" mt={5}>
@@ -82,7 +82,7 @@ function Login() {
         {' '}
         <Link
           component={Link}
-          to="/home"
+          to="/register"
           style={{
             fontFamily: 'Rubik',
             fontSize: 14,
@@ -104,6 +104,7 @@ function Login() {
             value={form.values.email}
             onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
             error={form.errors.email && 'Invalid email'}
+            radius="md"
           />
           <PasswordInput
             label="Password"
@@ -116,6 +117,7 @@ function Login() {
             form.errors.password
             && 'Password should include at least 6 characters'
           }
+            radius="md"
           />
           <Group position="apart" mt="lg">
             <Checkbox label="Remember me" />
@@ -132,7 +134,7 @@ function Login() {
               Forgot password?
             </Link>
           </Group>
-          <Button type="submit" fullWidth mt="xl" style={{ background: '#20D464' }}>
+          <Button type="submit" fullWidth mt="xl" sx={{ background: 'red' }} radius="md">
             Sign in
           </Button>
         </form>
