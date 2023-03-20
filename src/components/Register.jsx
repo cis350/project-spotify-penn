@@ -140,9 +140,8 @@ function Register() {
               radius="md"
               size="md"
               sx={{
-                background: 'red',
                 '&:hover': {
-                  background: '#FFFFFF',
+                  backgroundColor: '#eee',
                 },
               }}
             >

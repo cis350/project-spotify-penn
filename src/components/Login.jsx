@@ -94,12 +94,13 @@ function Login() {
         </Link>
       </Text>
 
-      <Paper withBorder shadow="md" p={30} mt={20} radius="md">
+      <Paper withBorder shadow="md" p={30} mt={10} radius="md">
 
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
             label="Email"
             placeholder="you@upenn.edu"
+            variant="filled"
             required
             value={form.values.email}
             onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
@@ -109,6 +110,7 @@ function Login() {
           <PasswordInput
             label="Password"
             placeholder="Your password"
+            variant="filled"
             required
             mt="md"
             value={form.values.password}
@@ -134,7 +136,7 @@ function Login() {
               Forgot password?
             </Link>
           </Group>
-          <Button type="submit" fullWidth mt="xl" sx={{ background: 'red' }} radius="md">
+          <Button type="submit" fullWidth mt="xl" radius="md">
             Sign in
           </Button>
         </form>
