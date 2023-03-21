@@ -104,7 +104,7 @@ function MainHeader() {
           <Group className={classes.hiddenMobile}>
             <Avatar
               component="a"
-              href="http://localhost:3000/profile"
+              href="http://localhost:3001/profile"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU"
               alt="User"
               radius="xl"
