@@ -77,27 +77,11 @@ function Login() {
         <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
       </Center>
 
-      <Text color="dimmed" size="sm" align="center" mt={5}>
-        Don&#39;t have an account yet?
-        {' '}
-        <Link
-          component={Link}
-          to="/register"
-          style={{
-            fontFamily: 'Rubik',
-            fontSize: 14,
-            fontWeight: 400,
-            color: '#288CE4',
-          }}
-        >
-          Create account.
-        </Link>
-      </Text>
-
       <Paper withBorder shadow="md" p={30} mt={10} radius="md">
 
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
+            size="md"
             label="Email"
             placeholder="you@upenn.edu"
             variant="filled"
@@ -108,6 +92,7 @@ function Login() {
             radius="md"
           />
           <PasswordInput
+            size="md"
             label="Password"
             placeholder="Your password"
             variant="filled"
@@ -136,10 +121,25 @@ function Login() {
               Forgot password?
             </Link>
           </Group>
-          <Button type="submit" fullWidth mt="xl" radius="md">
+          <Button size="md" type="submit" fullWidth mt="xl" radius="md">
             Sign in
           </Button>
         </form>
+        <Text size="sm" align="center" mt={10}>
+          Don&#39;t have an account yet?
+          {' '}
+          <Link
+            component={Link}
+            to="/register"
+            style={{
+              fontSize: 14,
+              fontWeight: 400,
+              color: '#288CE4',
+            }}
+          >
+            Create account.
+          </Link>
+        </Text>
         {!login
           && (
             <>
@@ -148,6 +148,7 @@ function Login() {
             </>
           )}
       </Paper>
+
     </Container>
   );
 }

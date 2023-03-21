@@ -5,6 +5,7 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import Chat from './components/Chat';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/chat" element={<Chat />} />
     </Routes>
   );
 }

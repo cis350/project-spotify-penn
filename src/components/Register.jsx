@@ -155,10 +155,9 @@ function Register() {
                 component={Link}
                 to="/login"
                 style={{
-                  fontFamily: 'Inter',
                   fontSize: 14,
-                  fontWeight: 700,
-                  color: '#000D70',
+                  fontWeight: 400,
+                  color: '#288CE4',
                 }}
               >
                 Login
