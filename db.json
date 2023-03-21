@@ -17,6 +17,12 @@
       "firstName": "a",
       "lastName": "a",
       "password": "afasdfasdfasdf"
+    },
+    {
+      "id": "maggie@idiot.com",
+      "firstName": "maggie",
+      "lastName": "schwierking",
+      "password": "maggiesucks"
     }
   ],
   "comments": [

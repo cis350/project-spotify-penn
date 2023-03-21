@@ -25,8 +25,9 @@ import logo from '../assets/logo.png';
 
 function Login() {
   const navigate = useNavigate();
+  // const { login } = useAuth();
 
-  const [login, setLogin] = useState(true);
+  const [loginError, setLoginError] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -49,13 +50,12 @@ function Login() {
 
     fetch(`http://localhost:8000/user/${email}`).then((response) => response.json()).then((data) => {
       if (Object.keys(data).length === 0) {
-        setLogin(false);
+        setLoginError(true);
         form.reset();
       } else if (data.password === password) {
-        setLogin(true);
         navigate('/home');
       } else {
-        setLogin(false);
+        setLoginError(true);
         form.reset();
       }
     });
@@ -140,7 +140,7 @@ function Login() {
             Create account.
           </Link>
         </Text>
-        {!login
+        {loginError
           && (
             <>
               <Space h="md" />
