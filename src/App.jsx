@@ -11,6 +11,8 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import { AuthProvider, useAuth } from './utils/auth';
+import UserProfile from './components/user-profiles';
+import MainHeader from './components/header';
 
 function PrivateRoute({ component: Component, ...rest }) {
   const { isAuthenticated, requireAuth } = useAuth();
@@ -31,13 +33,18 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/chat" element={<Chat />} />
-    </Routes>
+    <>
+      <MainHeader />
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/profile" element={<UserProfile />} />
+      </Routes>
+
+    </>
   );
 }
 
