@@ -34,15 +34,6 @@
     }
   ],
   "conversations": [
-    {
-      "name": "Conversation 1"
-    },
-    {
-      "name": "Conversation 2"
-    },
-    {
-      "name": "Conversation 3"
-    }
   ],
   "communities": [
     {
@@ -54,5 +45,8 @@
     {
       "name": "Community 3"
     }
+  ],
+  "playlists": [
+    
   ]
 }

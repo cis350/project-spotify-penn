@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
 import {
-  Avatar, Table, Group, Text, ScrollArea, Center,
+  Avatar, Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 
@@ -11,6 +10,9 @@ export function FriendsTable() {
     fetch('http://localhost:8000/friends')
       .then((res) => res.json())
       .then((data) => {
+        if (data.length === 0) {
+          throw new Error('empty data');
+        }
         setRows(
           data.map((item) => (
             <tr key={item.name}>
@@ -26,7 +28,17 @@ export function FriendsTable() {
           )),
         );
       })
-      .catch((error) => console.error(error));
+      .catch(() => setRows(
+        <tr>
+          <td>
+            <Group spacing="sm" position="center">
+              <Button>
+                Find Friends
+              </Button>
+            </Group>
+          </td>
+        </tr>,
+      ));
   }, []);
 
   return (

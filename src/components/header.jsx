@@ -4,12 +4,10 @@ import {
   Header,
   Group,
   Button,
-  Divider,
   Box,
   Burger,
-  Drawer,
-  ScrollArea,
   rem,
+  Image,
   Avatar,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -58,8 +56,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function MainHeader() {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const { classes, theme } = useStyles();
+  const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
+  const { classes } = useStyles();
 
   return (
     <Box pb={10}>
@@ -67,8 +65,23 @@ function MainHeader() {
         <Group position="apart" sx={{ height: '100%' }}>
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <Avatar src='../src/assets/logo.svg'/>
-            
+            <a href="/">
+              <Image
+                Image
+                width={180}
+                height={50}
+                fit="contain"
+                src="https://drive.google.com/uc?export=view&id=15by11GBK3ZHEukwOi-lQchSMbG9DZxpp"
+                alt="logo"
+                placeholder={
+                  <div style={{ width: 180, height: 50, backgroundColor: 'grey' }} />
+                      }
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </a>
+
             <a href="/" className={classes.link}>
               Leaderboard
             </a>
@@ -102,44 +115,6 @@ function MainHeader() {
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>
-
-      <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Navigation"
-        className={classes.hiddenDesktop}
-        zIndex={1000000}
-      >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-
-          <a href="/" className={classes.link}>
-            Leaderboard
-          </a>
-          <a href="/" className={classes.link}>
-            PennMix
-          </a>
-          <a href="/" className={classes.link}>
-            Community
-          </a>
-          <a href="/" className={classes.link}>
-            Chat
-          </a>
-          <a href="/" className={classes.link}>
-            Vibe
-          </a>
-          <a href="/" className={classes.link}>
-            New Artists
-          </a>
-
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-          <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log out</Button>
-          </Group>
-        </ScrollArea>
-      </Drawer>
     </Box>
   );
 }

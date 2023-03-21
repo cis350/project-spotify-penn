@@ -1,14 +1,11 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import {
-  Tabs, Button, Center, Avatar, Group, Title, Space,
+  Tabs, Avatar, Group, Title, Space,
 } from '@mantine/core';
-import FriendsTable from './friends-table.jsx';
-import CommunitiesTable from './communities-table.jsx';
-import ConversationsTable from './conversations-table.jsx';
+import Friends from './friends-table';
+import Communities from './communities-table';
+import Conversations from './conversations-table';
+import Playlists from './playlists-table';
 
 function UserGroup() {
   return (
@@ -19,7 +16,7 @@ function UserGroup() {
   );
 }
 
-function UserProfile(prop) {
+function UserProfile() {
   const [activeTab, setActiveTab] = useState('Playlists');
 
   return (
@@ -35,21 +32,16 @@ function UserProfile(prop) {
           <Tabs.Tab value="Communities">Communities tab</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="Playlists">
-          <Center>
-            <Space h="40px" />
-            {' '}
-            <Button>Add New Playlists</Button>
-            {' '}
-          </Center>
+          <Playlists />
         </Tabs.Panel>
         <Tabs.Panel value="Friends">
-          <FriendsTable friends={prop.friends} />
+          <Friends />
         </Tabs.Panel>
         <Tabs.Panel value="Conversations">
-          <ConversationsTable />
+          <Conversations />
         </Tabs.Panel>
         <Tabs.Panel value="Communities">
-          <CommunitiesTable />
+          <Communities />
         </Tabs.Panel>
       </Tabs>
     </>
