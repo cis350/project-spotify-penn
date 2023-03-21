@@ -1,11 +1,9 @@
+ import React from 'react';
  import {
     createStyles,
     Header,
     Group,
     Button,
-    UnstyledButton,
-    Text,
-    ThemeIcon,
     Divider,
     Box,
     Burger,
@@ -59,27 +57,27 @@
     },
   }));
   
-  export function HeaderMegaMenu() {
+function MainHeader() {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const { classes, theme } = useStyles();
   
-    const links = mockdata.map((item) => (
-      <UnstyledButton className={classes.subLink} key={item.title}>
-        <Group noWrap align="flex-start">
-          <ThemeIcon size={34} variant="default" radius="md">
-            <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
-          </ThemeIcon>
-          <div>
-            <Text size="sm" fw={500}>
-              {item.title}
-            </Text>
-            <Text size="xs" color="dimmed">
-              {item.description}
-            </Text>
-          </div>
-        </Group>
-      </UnstyledButton>
-    ));
+    // const links = mockdata.map((item) => (
+    //   <UnstyledButton className={classes.subLink} key={item.title}>
+    //     <Group noWrap align="flex-start">
+    //       <ThemeIcon size={34} variant="default" radius="md">
+    //         <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
+    //       </ThemeIcon>
+    //       <div>
+    //         <Text size="sm" fw={500}>
+    //           {item.title}
+    //         </Text>
+    //         <Text size="xs" color="dimmed">
+    //           {item.description}
+    //         </Text>
+    //       </div>
+    //     </Group>
+    //   </UnstyledButton>
+    // ));
   
     return (
       <Box pb={120}>
@@ -162,18 +160,4 @@
     );
   }
 
-
-
-
-
-  /**
-    <AppShell
-      padding="md"
-      header={<Header height={60} p="xs">{Header}</Header>}
-      styles={(theme) => ({
-        main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
-      })}
-    >
-    insert app contents here
-    </AppShell>
-  */
+export default MainHeader;

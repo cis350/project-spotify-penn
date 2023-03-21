@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */ 
 import React from 'react';
-import Header from './components/header';
 import { Route, Routes} from 'react-router-dom';
-import ' ./App.css';
-import UserProfile from './components/UserProfile';
+import './App.css';
+import UserProfile from './components/user-profiles.js';
+import MainHeader from './components/Header.js';
 
 function App() {
   return (
     <>
-      <Header>
-      </Header>
+      <MainHeader>
+      </MainHeader>
       <Routes>
         <Route path="/profile" element={<UserProfile />} />
       </ Routes>

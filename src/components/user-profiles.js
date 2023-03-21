@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Tabs, Avatar, Table, Group, Text, ActionIcon, Menu, ScrollArea } from '@mantine/core';
+import React, { useState } from 'react';
+import { Tabs } from '@mantine/core';
+import FriendsTable from './components/friends-table.js';
+import CommunitiesTable from './communities-table.js';
+import ConversationsTable from './conversations-table.js';
 
-
-function UserProfile() {
+function UserProfile(prop) {
   const [activeTab, setActiveTab] = useState<string | null>('Playlists');
 
   return (
@@ -17,15 +19,20 @@ function UserProfile() {
       <Tabs.Panel value="Playlists">
         <button>Add New Playlists</button>
       </Tabs.Panel>
-      <Tabs.Panel value="Friends">Friends panel</Tabs.Panel>
-      <Tabs.Panel value="Conversations">
-        <button>Start New Conversations</button>
+      <Tabs.Panel value="Friends">
+        <FriendsTable friends={prop.friends} />
       </Tabs.Panel>
-      <Tabs.Panel value="Communities">Communities panel</Tabs.Panel>
+      <Tabs.Panel value="Conversations">
+        <ConversationsTable />
+      </Tabs.Panel>
+      <Tabs.Panel value="Communities">
+        <CommunitiesTable />
+      </Tabs.Panel>
     </Tabs>
   );
 }
 
+export default UserProfile;
 
 
 
