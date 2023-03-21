@@ -11,6 +11,7 @@ import {
   Avatar,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -58,6 +59,7 @@ const useStyles = createStyles((theme) => ({
 function MainHeader() {
   const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
   const { classes } = useStyles();
+  const navigate = useNavigate();
 
   return (
     <Box pb={10}>
@@ -67,7 +69,6 @@ function MainHeader() {
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/">
               <Image
-                Image
                 width={180}
                 height={50}
                 fit="contain"
@@ -104,12 +105,13 @@ function MainHeader() {
           <Group className={classes.hiddenMobile}>
             <Avatar
               component="a"
+              onClick={() => navigate('/profile')}
               href="http://localhost:3000/profile"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU"
               alt="User"
               radius="xl"
             />
-            <Button color="dark">Log out</Button>
+            <Button color="dark" onClick={(() => navigate('/login'))}>Log out</Button>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

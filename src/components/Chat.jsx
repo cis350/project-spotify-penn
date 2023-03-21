@@ -16,6 +16,7 @@ function Chat() {
 
   const handleSendMessage = () => {
     const newMessage = { text: inputValue, sender: 'user' };
+    if (newMessage.text === '') return;
     setMessages([...messages, newMessage]);
     setInputValue('');
   };

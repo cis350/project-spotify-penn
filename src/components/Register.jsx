@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useForm } from '@mantine/form';
 import '@fontsource/inter';
-
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 import {
   TextInput,
@@ -25,6 +27,8 @@ import {
 import logo from '../assets/logo.png';
 
 function Register() {
+  const navigate = useNavigate();
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -43,26 +47,32 @@ function Register() {
   });
 
   const onSubmitHandler = (event) => {
-    const { firstName } = form.values;
-    const { lastName } = form.values;
-    const { email } = form.values;
-    const { password } = form.values;
+    event.preventDefault();
+    const {
+      firstName, lastName, email, password,
+    } = form.values;
 
-    fetch('http://localhost:8000/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    axios.post(
+      'http://localhost:8000/user',
+      {
         id: email,
         firstName,
         lastName,
         password,
-      }),
-    }).then((response) => response.json()).then((data) => {
-      // eslint-disable-next-line no-console
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    ).then((response) => {
+      const { data } = response;
       console.log(data);
-    });
+      navigate('/login');
+    })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

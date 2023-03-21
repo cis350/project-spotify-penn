@@ -10,26 +10,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
-import { AuthProvider, useAuth } from './utils/auth';
-import UserProfile from './components/user-profiles';
+import UserProfile from './components/UserProfiles';
 import MainHeader from './components/Header';
-
-function PrivateRoute({ component: Component, ...rest }) {
-  const { isAuthenticated, requireAuth } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={(props) => (
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/login" replace />
-        )
-      )}
-      onEnter={requireAuth}
-    />
-  );
-}
 
 function App() {
   return (

@@ -23,6 +23,18 @@
       "firstName": "maggie",
       "lastName": "schwierking",
       "password": "maggiesucks"
+    },
+    {
+      "id": "c",
+      "firstName": "a",
+      "lastName": "b",
+      "password": "d"
+    },
+    {
+      "id": "lmao",
+      "firstName": "a",
+      "lastName": "a",
+      "password": "lmao"
     }
   ],
   "comments": [
@@ -52,8 +64,7 @@
       "name": "Shrek"
     }
   ],
-  "conversations": [
-  ],
+  "conversations": [],
   "communities": [
     {
       "name": "Community 1"
@@ -65,7 +76,5 @@
       "name": "Community 3"
     }
   ],
-  "playlists": [
-    
-  ]
+  "playlists": []
 }

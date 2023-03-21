@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import '@fontsource/inter';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fontsource/rubik';
@@ -45,20 +48,26 @@ function Login() {
   });
 
   const handleSubmit = () => {
-    const { email } = form.values;
-    const { password } = form.values;
+    const { email, password } = form.values;
 
-    fetch(`http://localhost:8000/user/${email}`).then((response) => response.json()).then((data) => {
-      if (Object.keys(data).length === 0) {
+    axios.get(`http://localhost:8000/user/${email}`)
+      .then((response) => {
+        const { data } = response;
+        if (Object.keys(data).length === 0) {
+          setLoginError(true);
+          form.reset();
+        } else if (data.password === password) {
+          navigate('/home');
+        } else {
+          setLoginError(true);
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
         setLoginError(true);
         form.reset();
-      } else if (data.password === password) {
-        navigate('/home');
-      } else {
-        setLoginError(true);
-        form.reset();
-      }
-    });
+      });
   };
 
   return (
@@ -112,7 +121,7 @@ function Login() {
               component={Link}
               to="/home"
               style={{
-                fontFamily: 'Inter',
+                fontFamily: 'Rubik',
                 fontSize: 14,
                 fontWeight: 400,
                 color: '#288CE4',
@@ -125,7 +134,7 @@ function Login() {
             Sign in
           </Button>
         </form>
-        <Text size="sm" align="center" mt={10}>
+        <Text size={14} align="center" mt={10}>
           Don&#39;t have an account yet?
           {' '}
           <Link
