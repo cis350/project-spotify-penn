@@ -12,7 +12,7 @@ import Home from './components/Home';
 import Chat from './components/Chat';
 import { AuthProvider, useAuth } from './utils/auth';
 import UserProfile from './components/user-profiles';
-import MainHeader from './components/header';
+import MainHeader from './components/Header';
 
 function PrivateRoute({ component: Component, ...rest }) {
   const { isAuthenticated, requireAuth } = useAuth();
