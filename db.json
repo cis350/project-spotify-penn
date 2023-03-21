@@ -18,14 +18,17 @@
   },
   "friends": [
     {
+      "id": 1,
       "avatar": "https://uchv.princeton.edu/sites/g/files/toruqf2366/files/styles/freeform_750w/public/news/amy_gutmann_5.png?itok=shLQwGMZ",
       "name": "Amy Gutmann"
     },
     {
+      "id": 2,
       "avatar": "https://www.ali.org/media/filer_public_thumbnails/filer_public/1d/71/1d71d7c1-8917-4fc8-9e7e-abd6145c4f98/magill-elizabeth.jpg__1477x800_q85_subsampling-2.jpg",
       "name": "Liz Magill"
     },
     {
+      "id": 3,
       "avatar": "https://variety.com/wp-content/uploads/2022/05/MCDSHRE_EC008.jpg?w=1024",
       "name": "Shrek"
     }
