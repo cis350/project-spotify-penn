@@ -7,12 +7,6 @@
       "password": "password"
     },
     {
-      "id": "a",
-      "firstName": "a",
-      "lastName": "a",
-      "password": "a"
-    },
-    {
       "id": "a.a@a.c",
       "firstName": "a",
       "lastName": "a",
@@ -23,18 +17,6 @@
       "firstName": "maggie",
       "lastName": "schwierking",
       "password": "maggiesucks"
-    },
-    {
-      "id": "c",
-      "firstName": "a",
-      "lastName": "b",
-      "password": "d"
-    },
-    {
-      "id": "lmao",
-      "firstName": "a",
-      "lastName": "a",
-      "password": "lmao"
     }
   ],
   "comments": [

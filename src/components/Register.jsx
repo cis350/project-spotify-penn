@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import '@fontsource/inter';
 import axios from 'axios';
@@ -12,6 +12,8 @@ import {
   PasswordInput,
   Text,
   Paper,
+  Space,
+  Alert,
   Group,
   Checkbox,
   Anchor,
@@ -24,21 +26,24 @@ import {
   Center,
   Image,
 } from '@mantine/core';
+import { IconAlertCircle } from '@tabler/icons-react';
 import logo from '../assets/logo.png';
 
 function Register() {
   const navigate = useNavigate();
+  const [inUse, setInUse] = useState(false);
 
   const form = useForm({
     initialValues: {
-      email: '',
       firstName: '',
       lastName: '',
+      email: '',
       password: '',
-      terms: true,
     },
 
     validate: {
+      firstName: (val) => (val.length <= 1 ? 'First name should include at least 2 characters' : null),
+      lastName: (val) => (val.length <= 1 ? 'Last name should include at least 2 characters' : null),
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) => (val.length <= 6
         ? 'Password should include at least 6 characters'
@@ -46,8 +51,7 @@ function Register() {
     },
   });
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
+  const onSubmitHandler = () => {
     const {
       firstName, lastName, email, password,
     } = form.values;
@@ -71,6 +75,9 @@ function Register() {
       navigate('/login');
     })
       .catch((error) => {
+        if (error.message === 'Request failed with status code 500') {
+          setInUse(true);
+        }
         console.error(error);
       });
   };
@@ -91,7 +98,7 @@ function Register() {
         <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
       </Center>
       <Paper withBorder shadow="md" p={30} mt={20} radius="md">
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={form.onSubmit(() => onSubmitHandler())}>
           <Stack>
             <Group spacing="sm" grow>
               <TextInput
@@ -102,6 +109,7 @@ function Register() {
                 size="sm"
                 value={form.values.firstName}
                 onChange={(event) => form.setFieldValue('firstName', event.currentTarget.value)}
+                error={form.errors.firstName}
                 radius="md"
               />
 
@@ -113,6 +121,7 @@ function Register() {
                 size="sm"
                 value={form.values.lastName}
                 onChange={(event) => form.setFieldValue('lastName', event.currentTarget.value)}
+                error={form.errors.lastName}
                 radius="md"
               />
             </Group>
@@ -149,11 +158,6 @@ function Register() {
               mt="md"
               radius="md"
               size="md"
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#eee',
-                },
-              }}
             >
               Sign Up
             </Button>
@@ -172,6 +176,15 @@ function Register() {
               >
                 Login
               </Link>
+              {inUse
+          && (
+            <>
+              <Space h="md" />
+              <Alert icon={<IconAlertCircle size="1rem" />} title="Invalid Sign-up!" color="red">
+                <Text size={12}>This email is already in use, please log in.</Text>
+              </Alert>
+            </>
+          )}
             </Group>
           </Stack>
         </form>
