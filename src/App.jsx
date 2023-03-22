@@ -11,7 +11,7 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import { AuthProvider, useAuth } from './utils/auth';
-import UserProfile from './components/user-profiles';
+import UserProfile from './components/User-profiles';
 import MainHeader from './components/Header';
 
 function PrivateRoute({ component: Component, ...rest }) {
