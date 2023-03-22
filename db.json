@@ -1,9 +1,28 @@
 {
-  "posts": [
+  "user": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": "admin@gmail.com",
+      "firstName": "admin",
+      "lastName": "admin",
+      "password": "password"
+    },
+    {
+      "id": "a",
+      "firstName": "a",
+      "lastName": "a",
+      "password": "a"
+    },
+    {
+      "id": "a.a@a.c",
+      "firstName": "a",
+      "lastName": "a",
+      "password": "afasdfasdfasdf"
+    },
+    {
+      "id": "maggie@idiot.com",
+      "firstName": "maggie",
+      "lastName": "schwierking",
+      "password": "maggiesucks"
     }
   ],
   "comments": [
@@ -15,5 +34,113 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "friends": [
+    {
+      "id": 1,
+      "avatar": "https://uchv.princeton.edu/sites/g/files/toruqf2366/files/styles/freeform_750w/public/news/amy_gutmann_5.png?itok=shLQwGMZ",
+      "name": "Amy Gutmann"
+    },
+    {
+      "id": 2,
+      "avatar": "https://www.ali.org/media/filer_public_thumbnails/filer_public/1d/71/1d71d7c1-8917-4fc8-9e7e-abd6145c4f98/magill-elizabeth.jpg__1477x800_q85_subsampling-2.jpg",
+      "name": "Liz Magill"
+    },
+    {
+      "id": 3,
+      "avatar": "https://variety.com/wp-content/uploads/2022/05/MCDSHRE_EC008.jpg?w=1024",
+      "name": "Shrek"
+    }
+  ],
+  "conversations": [
+  ],
+  "communities": [
+    {
+      "name": "Community 1"
+    },
+    {
+      "name": "Community 2"
+    },
+    {
+      "name": "Community 3"
+    }
+  ],
+  "playlists": [
+    
+  ],
+  "songs": [
+    {
+      "rank": 1,
+      "title": "abc",
+      "album": "ABC",
+      "jammies": 12,
+      "likes": true
+
+    },
+    {
+      "rank": 2,
+      "title": "def",
+      "album": "DEF",
+      "jammies": 12,
+      "likes": false
+
+    },
+    {
+      "rank": 3,
+      "title": "ghi",
+      "album": "GHI",
+      "jammies": 12,
+      "likes": true
+
+    },
+    {
+      "rank": 4,
+      "title": "jkl",
+      "album": "JKL",
+      "jammies": 12,
+      "likes": true
+
+    },
+    {
+      "rank": 5,
+      "title": "mno",
+      "album": "MNO",
+      "jammies": 12,
+      "likes": false
+
+    }
+
+  ],
+  "artists": [
+    {
+      "rank": 1,
+      "artist": "Olivia Rodrigo",
+      "genre": "Pop",
+      "jammies": 56
+    }, 
+    {
+      "rank": 2,
+      "artist": "Taylor Swift",
+      "genre": "Pop",
+      "jammies": 60
+    },
+    {
+      "rank": 3,
+      "artist": "Kidz Bop",
+      "genre": "Children",
+      "jammies": 1000
+    },
+    {
+      "rank": 4,
+      "artist": "Rapper",
+      "genre": "Rap",
+      "jammies": 49
+    },
+    {
+      "rank": 5,
+      "artist": "Pianist",
+      "genre": "Classical",
+      "jammies": 1
+    }
+  ]
 }
