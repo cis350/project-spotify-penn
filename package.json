@@ -42,6 +42,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.2.0",
     "react-toastify": "^9.1.1",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
@@ -49,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --transformIgnorePatterns \"node_modules/(?!spotify-penn)/\" --env=jsdom",
+    "test": "jest --coverage",
     "eject": "react-scripts eject",
     "type": "module"
   },

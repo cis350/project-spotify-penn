@@ -8,15 +8,15 @@ getUsers.mockResolvedValue({
 
 test('the first name is admin', async () => {
   const data = await getUsers('admin@gmail.com');
-  expect(data.main.firstName).toBe('admin');
+  expect(data.firstName).toBe('admin');
 });
 
 test('the last name is admin', async () => {
   const data = await getUsers('admin@gmail.com');
-  expect(data.main.lastName).toBe('admin');
+  expect(data.lastName).toBe('admin');
 });
 
 test('the password is password', async () => {
   const data = await getUsers('admin@gmail.com');
-  expect(data.main.password).toBe('password');
+  expect(data.password).toBe('password');
 });
