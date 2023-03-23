@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {
-  Navigate, Route, Routes,
+  Navigate, Route, Routes, Router,
 } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
@@ -43,7 +43,6 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/profile" element={<UserProfile />} />
       </Routes>
-
     </>
   );
 }

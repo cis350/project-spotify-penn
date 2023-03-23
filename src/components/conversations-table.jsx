@@ -2,9 +2,15 @@ import {
   Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function ConversationsTable() {
   const [rows, setRows] = useState(null);
+
+  const navigate = useNavigate();
+  const goToChat = () => {
+    navigate('/chat');
+  };
 
   useEffect(() => {
     fetch('http://localhost:8000/conversations')
@@ -32,7 +38,7 @@ export function ConversationsTable() {
           <tr>
             <td>
               <Group spacing="sm" position="center">
-                <Button>
+                <Button onClick={goToChat}>
                   Start a new Conversation
                 </Button>
               </Group>
