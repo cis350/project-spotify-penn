@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Container, Divider, Select, FormControl, MenuItem, FormHelperText} from '@mui/material'; //Link
 
 import LazyTable from '../components/LazyTable';
-const config = require('../config.json');
 //const timeframe = useRef('');
 
 export default function HomePage() {
@@ -80,7 +79,7 @@ export default function HomePage() {
     
   };
   let comp;
-  if (content == 'Song') {
+  if (content === 'Song') {
     comp = <LazyTable route={`http://localhost:8000/songs`} columns = {songColumns}/>;
   } else {
     comp = <LazyTable route={`http://localhost:8000/artists`} columns = {artistColumns}/>
