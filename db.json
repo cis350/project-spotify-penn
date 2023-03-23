@@ -23,6 +23,12 @@
       "firstName": "maggie",
       "lastName": "schwierking",
       "password": "maggiesucks"
+    },
+    {
+      "id": "mschwier@upenn.edu",
+      "firstName": "Maggoe",
+      "lastName": "Schwierking",
+      "password": "hello"
     }
   ],
   "comments": [
@@ -76,11 +82,6 @@
       "desc": "Study jamss"
     },
     {
-      "id": "fdjs",
-      "name": "hi",
-      "desc": "hello"
-    },
-    {
       "id": "432nvsd",
       "name": "hello",
       "desc": "chill"
@@ -91,9 +92,9 @@
       "desc": "agarwal"
     },
     {
-      "id": "sad",
-      "name": "maggie",
-      "desc": "is sad"
+      "id": "vjfsak234",
+      "name": "benjams",
+      "desc": "jams for the ben"
     }
   ]
 }
