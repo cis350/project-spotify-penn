@@ -27,6 +27,6 @@ describe('the api returned correct data for admin@gmail.com', () => {
 
   test('the password is correct', async () => {
     const data = await getUsers();
-    expect(data.firstName).toBe('password');
+    expect(data.password).toBe('password');
   });
 });
