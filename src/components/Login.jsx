@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import '@fontsource/inter';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fontsource/rubik';
 // eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
+
 import {
   Container,
   Title,
@@ -25,10 +26,10 @@ import {
   Center,
 } from '@mantine/core';
 import logo from '../assets/logo.png';
+import { getPassword } from '../api/getData';
 
 function Login() {
   const navigate = useNavigate();
-  // const { login } = useAuth();
 
   const [loginError, setLoginError] = useState(false);
 
@@ -50,28 +51,25 @@ function Login() {
   const handleSubmit = () => {
     const { email, password } = form.values;
 
-    axios.get(`http://localhost:8000/user/${email}`)
-      .then((response) => {
-        const { data } = response;
-        if (Object.keys(data).length === 0) {
-          setLoginError(true);
-          form.reset();
-        } else if (data.password === password) {
-          navigate('/home');
-        } else {
-          setLoginError(true);
-          form.reset();
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+    getPassword(email).then((userData) => {
+      if (Object.keys(userData).length === 0) {
         setLoginError(true);
         form.reset();
-      });
+      } else if (userData.password === password) {
+        navigate('/home');
+      } else {
+        setLoginError(true);
+        form.reset();
+      }
+    }).catch((error) => {
+      console.error(error);
+      setLoginError(true);
+      form.reset();
+    });
   };
 
   return (
-    <Container size={420} my={40}>
+    <Container size={420} my={20}>
       <Title
         align="center"
         size={60}
@@ -90,7 +88,7 @@ function Login() {
 
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
-            size="md"
+            size="sm"
             label="Email"
             placeholder="you@upenn.edu"
             variant="filled"
@@ -101,7 +99,7 @@ function Login() {
             radius="md"
           />
           <PasswordInput
-            size="md"
+            size="sm"
             label="Password"
             placeholder="Your password"
             variant="filled"
@@ -130,7 +128,7 @@ function Login() {
               Forgot password?
             </Link>
           </Group>
-          <Button size="md" type="submit" fullWidth mt="xl" radius="md">
+          <Button size="md" type="submit" fullWidth mt="lg" radius="md">
             Sign in
           </Button>
         </form>

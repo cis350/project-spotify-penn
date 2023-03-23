@@ -27,6 +27,7 @@ import {
   Image,
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
+import { newUser } from '../api/getData';
 import logo from '../assets/logo.png';
 
 function Register() {
@@ -56,34 +57,40 @@ function Register() {
       firstName, lastName, email, password,
     } = form.values;
 
-    axios.post(
-      'http://localhost:8000/user',
-      {
-        id: email,
-        firstName,
-        lastName,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then((response) => {
-      const { data } = response;
-      console.log(data);
-      navigate('/login');
-    })
-      .catch((error) => {
-        if (error.message === 'Request failed with status code 500') {
-          setInUse(true);
-        }
-        console.error(error);
-      });
+    newUser(email, firstName, lastName, password).then(navigate('/login')).catch((error) => {
+      if (error.message === 'Request failed with status code 500') {
+        setInUse(true);
+      }
+      console.error(error);
+    });
+
+  //   axios.post(
+  //     'http://localhost:8000/user',
+  //     {
+  //       id: email,
+  //       firstName,
+  //       lastName,
+  //       password,
+  //     },
+  //     {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     },
+  //   ).then((response) => {
+  //     const { data } = response;
+  //     console.log(data);
+  //     navigate('/login');
+  //   }).catch((error) => {
+  //     if (error.message === 'Request failed with status code 500') {
+  //       setInUse(true);
+  //     }
+  //     console.error(error);
+  //   });
   };
 
   return (
-    <Container size={420} my={40}>
+    <Container size={420} my={20}>
       <Title
         align="center"
         size={60}
@@ -97,7 +104,7 @@ function Register() {
       <Center>
         <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
       </Center>
-      <Paper withBorder shadow="md" p={30} mt={20} radius="md">
+      <Paper withBorder shadow="md" p={30} mt={10} radius="md">
         <form onSubmit={form.onSubmit(() => onSubmitHandler())}>
           <Stack>
             <Group spacing="sm" grow>
@@ -155,7 +162,7 @@ function Register() {
 
             <Button
               type="submit"
-              mt="md"
+              mt="xs"
               radius="md"
               size="md"
             >
