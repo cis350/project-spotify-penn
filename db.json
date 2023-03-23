@@ -23,6 +23,12 @@
       "firstName": "maggie",
       "lastName": "schwierking",
       "password": "maggiesucks"
+    },
+    {
+      "id": "mschwier@upenn.edu",
+      "firstName": "Maggoe",
+      "lastName": "Schwierking",
+      "password": "hello"
     }
   ],
   "comments": [
@@ -52,8 +58,7 @@
       "name": "Shrek"
     }
   ],
-  "conversations": [
-  ],
+  "conversations": [],
   "communities": [
     {
       "name": "Community 1"
@@ -66,6 +71,35 @@
     }
   ],
   "playlists": [
-    
+    {
+      "id": "1",
+      "name": "Playlist 1",
+      "desc": "Hype songs"
+    },
+    {
+      "id": "2",
+      "name": "Playlist 2",
+      "desc": "Study jamss"
+    },
+    {
+      "id": "432nvsd",
+      "name": "hello",
+      "desc": "chill"
+    },
+    {
+      "id": "abhijay",
+      "name": "abhijay",
+      "desc": "agarwal"
+    },
+    {
+      "id": "vjfsak234",
+      "name": "benjams",
+      "desc": "jams for the ben"
+    },
+    {
+      "id": "43visf9vs0j3",
+      "name": "metal is heavy",
+      "desc": "heavy metal"
+    }
   ]
 }
