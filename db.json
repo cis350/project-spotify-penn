@@ -52,7 +52,22 @@
       "name": "Shrek"
     }
   ],
+  "other-users": [
+    {"id": 4,
+    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+    "name": "Student 1"},
+    {"id": 5,
+    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+    "name": "Student 2"},
+    {"id": 6,
+    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+    "name": "Student 3"},
+    {"id": 7,
+    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+    "name": "Student 4"}
+  ],
   "conversations": [
+    
   ],
   "communities": [
     {
