@@ -67,7 +67,7 @@ function MainHeader() {
         <Group position="apart" sx={{ height: '100%' }}>
 
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <a href="/">
+            <a href="/home">
               <Image
                 width={180}
                 height={50}
@@ -77,22 +77,22 @@ function MainHeader() {
               />
             </a>
 
-            <a href="/" className={classes.link}>
+            <a href="/home" className={classes.link}>
               Leaderboard
             </a>
-            <a href="/" className={classes.link}>
+            <a href="/home" className={classes.link}>
               PennMix
             </a>
-            <a href="/" className={classes.link}>
+            <a href="/home" className={classes.link}>
               Community
             </a>
             <a href="/chat" className={classes.link}>
               Chat
             </a>
-            <a href="/" className={classes.link}>
+            <a href="/home" className={classes.link}>
               Vibe
             </a>
-            <a href="/" className={classes.link}>
+            <a href="/home" className={classes.link}>
               New Artists
             </a>
           </Group>
