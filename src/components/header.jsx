@@ -78,7 +78,7 @@ function MainHeader() {
               />
             </a>
 
-            <a href="/home" className={classes.link}>
+            <a href="/leaderboard" className={classes.link}>
               Leaderboard
             </a>
             <a href="/home" className={classes.link}>

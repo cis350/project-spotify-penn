@@ -1,6 +1,6 @@
 import getUsers from '../api/getLoginUser';
 
-jest.mock('../api/getLoginUser.jsx');
+jest.mock('../api/getLoginUser.js');
 
 getUsers.mockResolvedValue({
   id: 'admin@gmail.com', firstName: 'admin', lastName: 'admin', password: 'password',

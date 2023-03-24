@@ -13,7 +13,7 @@ test('the title is abc', async () => {
 
 test('the album is ABC', async () => {
   const data = await getSongs(1);
-  expect(data.title).toBe('ABC');
+  expect(data.album).toBe('ABC');
 });
 
 test('the jammies is right', async () => {
