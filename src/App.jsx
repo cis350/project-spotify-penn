@@ -7,9 +7,9 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import UserProfile from './components/UserProfiles';
-import MainHeader from './components/Header';
+import MainHeader from './components/header';
 import Leaderboard from './components/Leaderboard';
-import UserList from './components/UserList';
+// import UserList from './components/UserList';
 import NewUserProfile from './components/NewUserProfile';
 
 function App() {
