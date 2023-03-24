@@ -3,8 +3,13 @@ import axios from 'axios';
 
 const getPassword = async (username) => {
   const url = `http://localhost:8000/user/${username}`;
-  const res = await axios.get(url); // fetch(location);
-  return res.data;
+  const res = await axios.get(url);
+  const userData = res.data;
+  if (Object.keys(userData).length === 0) {
+    throw new Error('Invalid username');
+  } else {
+    return userData;
+  }
 };
 
 const newUser = async (email, first, last, password) => {

@@ -63,30 +63,6 @@ function Register() {
       }
       console.error(error);
     });
-
-  //   axios.post(
-  //     'http://localhost:8000/user',
-  //     {
-  //       id: email,
-  //       firstName,
-  //       lastName,
-  //       password,
-  //     },
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     },
-  //   ).then((response) => {
-  //     const { data } = response;
-  //     console.log(data);
-  //     navigate('/login');
-  //   }).catch((error) => {
-  //     if (error.message === 'Request failed with status code 500') {
-  //       setInUse(true);
-  //     }
-  //     console.error(error);
-  //   });
   };
 
   return (

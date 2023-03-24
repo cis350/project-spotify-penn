@@ -51,11 +51,25 @@ function Login() {
   const handleSubmit = () => {
     const { email, password } = form.values;
 
+    //   getPassword(email).then((userData) => {
+    //     if (Object.keys(userData).length === 0) {
+    //       setLoginError(true);
+    //       form.reset();
+    //     } else if (userData.password === password) {
+    //       navigate('/home');
+    //     } else {
+    //       setLoginError(true);
+    //       form.reset();
+    //     }
+    //   }).catch((error) => {
+    //     console.error(error);
+    //     setLoginError(true);
+    //     form.reset();
+    //   });
+    // };
+
     getPassword(email).then((userData) => {
-      if (Object.keys(userData).length === 0) {
-        setLoginError(true);
-        form.reset();
-      } else if (userData.password === password) {
+      if (userData.password === password) {
         navigate('/home');
       } else {
         setLoginError(true);
