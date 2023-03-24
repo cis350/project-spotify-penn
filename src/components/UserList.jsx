@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Title, Space,
 } from '@mantine/core';
-import NewFriends from './new-friends-table';
+import NewFriends from './NewFriendsTable';
 
 function UserList() {
   return (

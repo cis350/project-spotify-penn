@@ -3,8 +3,8 @@ import {
   Tabs, Avatar, Group, Title, Space,
 } from '@mantine/core';
 import Friends from './Friends-table';
-import Communities from './Communities-table';
-import Conversations from './Conversations-table';
+import Communities from './CommunitiesTable';
+import Conversations from './ConversationsTable';
 import Playlists from './Playlists-table';
 
 function UserGroup() {
