@@ -1,0 +1,394 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App login page matches snapshot 1`] = `
+Array [
+  <div
+    className="mantine-1avyp1d"
+  >
+    <header
+      className="mantine-Header-root mantine-r9tegj"
+    >
+      <div
+        className="mantine-Group-root mantine-1vdqnc0"
+      >
+        <div
+          className="mantine-Group-root mantine-m4m58g"
+        >
+          <a
+            href="/home"
+          >
+            <div
+              className="mantine-Image-root mantine-yxmaw9"
+              style={
+                Object {
+                  "width": "11.25rem",
+                }
+              }
+            >
+              <figure
+                className="mantine-qenwvq mantine-Image-figure"
+              >
+                <div
+                  className="mantine-1iugybl mantine-Image-imageWrapper"
+                >
+                  <img
+                    alt="logo"
+                    className="mantine-1p3no9p mantine-Image-image"
+                    onError={[Function]}
+                    src="https://drive.google.com/uc?export=view&id=15by11GBK3ZHEukwOi-lQchSMbG9DZxpp"
+                    style={
+                      Object {
+                        "height": "3.125rem",
+                        "objectFit": "contain",
+                        "width": "11.25rem",
+                      }
+                    }
+                  />
+                </div>
+              </figure>
+            </div>
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/home"
+          >
+            Leaderboard
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/home"
+          >
+            PennMix
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/home"
+          >
+            Community
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/chat"
+          >
+            Chat
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/home"
+          >
+            Vibe
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/home"
+          >
+            New Artists
+          </a>
+        </div>
+        <div
+          className="mantine-Group-root mantine-k3ov3c"
+        >
+          <a
+            className="mantine-Avatar-root mantine-ab3kuj"
+            href="http://localhost:/profile"
+            onClick={[Function]}
+          >
+            <img
+              alt="User"
+              className="mantine-9rx0rd mantine-Avatar-image"
+              onError={[Function]}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU"
+            />
+          </a>
+          <button
+            className="mantine-UnstyledButton-root mantine-Button-root mantine-r36qjg"
+            data-button={true}
+            onClick={[Function]}
+            type="button"
+          >
+            <div
+              className="mantine-1wpc1xj mantine-Button-inner"
+            >
+              <span
+                className="mantine-1ryt1ht mantine-Button-label"
+                style={
+                  Object {
+                    "textTransform": undefined,
+                  }
+                }
+              >
+                Log out
+              </span>
+            </div>
+          </button>
+        </div>
+        <button
+          className="mantine-UnstyledButton-root mantine-Burger-root mantine-1ctspuk"
+          onClick={[Function]}
+          type="button"
+        >
+          <div
+            className="mantine-zpoir7 mantine-Burger-burger"
+          />
+        </button>
+      </div>
+    </header>
+  </div>,
+  <div
+    className="mantine-Container-root mantine-r7pakz"
+  >
+    <h1
+      className="mantine-Text-root mantine-Title-root mantine-xb9ex4"
+    >
+      Welcome to
+    </h1>
+    <div
+      className="mantine-Center-root mantine-ojrz4j"
+    >
+      <div
+        className="mantine-Image-root mantine-pqewl1"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <figure
+          className="mantine-qenwvq mantine-Image-figure"
+        >
+          <div
+            className="mantine-1iugybl mantine-Image-imageWrapper"
+          >
+            <img
+              alt="spotify-at-penn-logo"
+              className="mantine-1p3no9p mantine-Image-image"
+              onError={[Function]}
+              src="test-file-stub"
+              style={
+                Object {
+                  "height": "auto",
+                  "objectFit": "cover",
+                  "width": "100%",
+                }
+              }
+            />
+          </div>
+        </figure>
+      </div>
+    </div>
+    <div
+      className="mantine-Paper-root mantine-3hr9oc"
+      data-with-border={true}
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <div
+          className="mantine-InputWrapper-root mantine-TextInput-root mantine-1ejqehl"
+        >
+          <label
+            className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
+            htmlFor="mantine-f4c5a0qrb"
+            id="mantine-f4c5a0qrb-label"
+            onMouseDown={[Function]}
+          >
+            Email
+            <span
+              aria-hidden={true}
+              className="mantine-103svbs mantine-InputWrapper-required mantine-TextInput-required"
+            >
+               *
+            </span>
+          </label>
+          <div
+            className="mantine-Input-wrapper mantine-TextInput-wrapper mantine-7c7vou"
+          >
+            <input
+              aria-invalid={false}
+              className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
+              id="mantine-f4c5a0qrb"
+              onChange={[Function]}
+              placeholder="you@upenn.edu"
+              required={true}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className="mantine-InputWrapper-root mantine-PasswordInput-root mantine-11nf037"
+        >
+          <label
+            className="mantine-InputWrapper-label mantine-PasswordInput-label mantine-1fzet7j"
+            htmlFor="mantine-8gq4xnvur"
+            id="mantine-8gq4xnvur-label"
+            onMouseDown={[Function]}
+          >
+            Password
+            <span
+              aria-hidden={true}
+              className="mantine-103svbs mantine-InputWrapper-required mantine-PasswordInput-required"
+            >
+               *
+            </span>
+          </label>
+          <div
+            className="mantine-Input-wrapper mantine-PasswordInput-wrapper mantine-7c7vou"
+          >
+            <div
+              aria-invalid={false}
+              className="mantine-PasswordInput-input mantine-Input-input mantine-PasswordInput-input mantine-s99vai"
+            >
+              <input
+                className="mantine-9zz0g4 mantine-PasswordInput-innerInput"
+                id="mantine-8gq4xnvur"
+                onChange={[Function]}
+                placeholder="Your password"
+                required={true}
+                type="password"
+                value=""
+              />
+            </div>
+            <div
+              className="mantine-c7k433 mantine-Input-rightSection mantine-PasswordInput-rightSection"
+            >
+              <button
+                aria-hidden={true}
+                className="mantine-UnstyledButton-root mantine-ActionIcon-root mantine-PasswordInput-visibilityToggle mantine-1and1g0"
+                onKeyDown={[Function]}
+                onMouseDown={[Function]}
+                tabIndex={-1}
+                type="button"
+              >
+                <svg
+                  fill="none"
+                  height="0.9375rem"
+                  viewBox="0 0 15 15"
+                  width="0.9375rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M7.5 11C4.80285 11 2.52952 9.62184 1.09622 7.50001C2.52952 5.37816 4.80285 4 7.5 4C10.1971 4 12.4705 5.37816 13.9038 7.50001C12.4705 9.62183 10.1971 11 7.5 11ZM7.5 3C4.30786 3 1.65639 4.70638 0.0760002 7.23501C-0.0253338 7.39715 -0.0253334 7.60288 0.0760014 7.76501C1.65639 10.2936 4.30786 12 7.5 12C10.6921 12 13.3436 10.2936 14.924 7.76501C15.0253 7.60288 15.0253 7.39715 14.924 7.23501C13.3436 4.70638 10.6921 3 7.5 3ZM7.5 9.5C8.60457 9.5 9.5 8.60457 9.5 7.5C9.5 6.39543 8.60457 5.5 7.5 5.5C6.39543 5.5 5.5 6.39543 5.5 7.5C5.5 8.60457 6.39543 9.5 7.5 9.5Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          className="mantine-Group-root mantine-1ycwwjd"
+        >
+          <div
+            className="mantine-Checkbox-root mantine-yxmaw9"
+          >
+            <div
+              className="mantine-14n9mxy mantine-Checkbox-body"
+            >
+              <div
+                className="mantine-1vf457v mantine-Checkbox-inner"
+              >
+                <input
+                  className="mantine-qjqn4g mantine-Checkbox-input"
+                  id="mantine-97iisvd86"
+                  type="checkbox"
+                />
+                <svg
+                  className="___ref-icon mantine-q9qwbl mantine-Checkbox-icon"
+                  fill="none"
+                  viewBox="0 0 10 7"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M4 4.586L1.707 2.293A1 1 0 1 0 .293 3.707l3 3a.997.997 0 0 0 1.414 0l5-5A1 1 0 1 0 8.293.293L4 4.586z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div
+                className="mantine-1svz3tp mantine-Checkbox-labelWrapper"
+              >
+                <label
+                  className="mantine-9gvgd1 mantine-Checkbox-label"
+                  htmlFor="mantine-97iisvd86"
+                >
+                  Remember me
+                </label>
+              </div>
+            </div>
+          </div>
+          <a
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            href="/home"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "#288CE4",
+                "fontFamily": "Rubik",
+                "fontSize": 14,
+                "fontWeight": 400,
+              }
+            }
+          >
+            Forgot password?
+          </a>
+        </div>
+        <button
+          className="mantine-UnstyledButton-root mantine-Button-root mantine-1svejok"
+          data-button={true}
+          type="submit"
+        >
+          <div
+            className="mantine-1wpc1xj mantine-Button-inner"
+          >
+            <span
+              className="mantine-1ryt1ht mantine-Button-label"
+              style={
+                Object {
+                  "textTransform": undefined,
+                }
+              }
+            >
+              Sign in
+            </span>
+          </div>
+        </button>
+      </form>
+      <div
+        className="mantine-Text-root mantine-aujseh"
+      >
+        Don't have an account yet?
+         
+        <a
+          component={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "render": [Function],
+            }
+          }
+          href="/register"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "#288CE4",
+              "fontSize": 14,
+              "fontWeight": 400,
+            }
+          }
+        >
+          Create account.
+        </a>
+      </div>
+    </div>
+  </div>,
+]
+`;

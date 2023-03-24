@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+
+  BrowserRouter,
   Navigate, Route, Routes,
 } from 'react-router-dom';
 import Login from './components/Login';
@@ -11,17 +13,17 @@ import MainHeader from './components/Header';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <MainHeader />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route data-testid="login" path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/profile" element={<UserProfile />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 

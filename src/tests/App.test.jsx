@@ -10,9 +10,9 @@ import renderer from 'react-test-renderer';
 import App from '../App';
 
 test('login page renders', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/login/);
-  expect(linkElement).toBeInTheDocument();
+  const { getByTestId } = render(<App />);
+  const headingElement = getByTestId('login');
+  expect(headingElement).toBeInTheDocument();
 });
 
 test('App login page matches snapshot', () => {
