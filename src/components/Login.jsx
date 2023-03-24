@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
 // import axios from 'axios';
-import '@fontsource/inter';
+// import '@fontsource/inter';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import '@fontsource/rubik';
+// import '@fontsource/rubik';
 // eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
 

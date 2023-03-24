@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
-import '@fontsource/inter';
+// import '@fontsource/inter';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
