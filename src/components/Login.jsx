@@ -10,7 +10,6 @@ import '@fontsource/inter';
 import '@fontsource/rubik';
 // eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
-
 import {
   Container,
   Title,
@@ -26,7 +25,8 @@ import {
   Image,
   Center,
 } from '@mantine/core';
-import logo from '../assets/logo.png';
+import { darkLogo } from '../assets/logos';
+// import logo from '../assets/logo.png';
 import { getPassword } from '../api/getData';
 
 function Login() {
@@ -52,23 +52,6 @@ function Login() {
   const handleSubmit = () => {
     const { email, password } = form.values;
 
-    //   getPassword(email).then((userData) => {
-    //     if (Object.keys(userData).length === 0) {
-    //       setLoginError(true);
-    //       form.reset();
-    //     } else if (userData.password === password) {
-    //       navigate('/home');
-    //     } else {
-    //       setLoginError(true);
-    //       form.reset();
-    //     }
-    //   }).catch((error) => {
-    //     console.error(error);
-    //     setLoginError(true);
-    //     form.reset();
-    //   });
-    // };
-
     getPassword(email).then((userData) => {
       if (userData.password === password) {
         navigate('/home');
@@ -86,6 +69,7 @@ function Login() {
   return (
     <Container size={420} my={20}>
       <Title
+        color="white"
         align="center"
         size={60}
         sx={(theme) => ({
@@ -96,7 +80,7 @@ function Login() {
         Welcome to
       </Title>
       <Center>
-        <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
+        <Image miw={400} src={darkLogo} alt="spotify-at-penn-logo" />
       </Center>
 
       <Paper withBorder shadow="md" p={30} mt={10} radius="md">

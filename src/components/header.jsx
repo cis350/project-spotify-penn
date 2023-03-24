@@ -13,6 +13,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
+import { darkLogo } from '../assets/logos';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -73,7 +74,7 @@ function MainHeader() {
                 width={180}
                 height={50}
                 fit="contain"
-                src="https://drive.google.com/uc?export=view&id=15by11GBK3ZHEukwOi-lQchSMbG9DZxpp"
+                src={darkLogo}
                 alt="logo"
               />
             </a>

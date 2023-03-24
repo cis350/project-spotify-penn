@@ -10,9 +10,6 @@ root.render(
   <BrowserRouter>
     <MantineProvider
       theme={{
-        colors: {
-          'spotify-green': ['#1DB954', '#20D464'],
-        },
         colorScheme: 'dark',
       }}
       withGlobalStyles

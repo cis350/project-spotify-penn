@@ -28,7 +28,7 @@ import {
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
 import { newUser } from '../api/getData';
-import logo from '../assets/logo.png';
+import { darkLogo } from '../assets/logos';
 
 function Register() {
   const navigate = useNavigate();
@@ -68,6 +68,7 @@ function Register() {
   return (
     <Container size={420} my={20}>
       <Title
+        color="white"
         align="center"
         size={60}
         sx={(theme) => ({
@@ -78,7 +79,7 @@ function Register() {
         Welcome to
       </Title>
       <Center>
-        <Image miw={400} src={logo} alt="spotify-at-penn-logo" />
+        <Image miw={400} src={darkLogo} alt="spotify-at-penn-logo" />
       </Center>
       <Paper withBorder shadow="md" p={30} mt={10} radius="md">
         <form onSubmit={form.onSubmit(() => onSubmitHandler())}>
