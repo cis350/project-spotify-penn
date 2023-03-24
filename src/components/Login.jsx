@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';

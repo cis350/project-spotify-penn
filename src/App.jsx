@@ -12,18 +12,47 @@ import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
-    <>
-      <MainHeader />
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route
+        path="/home"
+        element={(
+          <>
+            <MainHeader />
+            <Home />
+          </>
+)}
+      />
+      <Route path="/register" element={(<Register />)} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/chat"
+        element={(
+          <>
+            <MainHeader />
+            <Chat />
+          </>
+)}
+      />
+      <Route
+        path="/profile"
+        element={(
+          <>
+            <MainHeader />
+            <UserProfile />
+          </>
+)}
+      />
+      <Route
+        path="/leaderboard"
+        element={(
+          <>
+            <MainHeader />
+            <Leaderboard />
+          </>
+)}
+      />
+    </Routes>
   );
 }
 

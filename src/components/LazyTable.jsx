@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
-} from '@mui/material';
+  Table, Stack, Paper, Pagination, Select,
+} from '@mantine/core';
 
 export default function LazyTable({
   route, columns, defaultPageSize, rowsPerPageOptions,
@@ -19,51 +20,49 @@ export default function LazyTable({
       .then((resJson) => setData(resJson));
   }, [route, page, pageSize]);
 
-  const handleChangePage = (e, newPage) => {
-    if (newPage < page || data.length === pageSize) {
-      setPage(newPage + 1);
-    }
-  };
+  // const handleChangePage = (newPage) => {
+  //   if (newPage < page || data.length === pageSize) {
+  //     setPage(newPage + 1);
+  //   }
+  // };
 
-  const handleChangePageSize = (e) => {
-    const newPageSize = e.target.value;
-
-    setPageSize(newPageSize);
-    setPage(1);
-  };
+  // const handleChangePageSize = (newPageSize) => {
+  //   setPageSize(newPageSize);
+  //   setPage(1);
+  // };
 
   const defaultRenderCell = (col, row) => <div>{row[col.field]}</div>;
 
+  // const handleChangePageSize = (value) => {
+  //   const newPageSize = value;
+
+  //   setPageSize(newPageSize);
+  //   setPage(1);
+  // };
+
   return (
-    <TableContainer style={{ backgroundColor: 'black' }}>
+    <Paper padding="md" mx={10} my={10} shadow={0}>
       <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((col) => <TableCell key={col.headerName} style={{ color: 'white' }}>{col.headerName}</TableCell>)}
-          </TableRow>
-        </TableHead>
-        <TableBody>
+        <thead>
+          <tr>
+            {columns.map((col) => <th key={col.headerName}>{col.headerName}</th>)}
+          </tr>
+        </thead>
+        <tbody>
           {data.map((row, idx) => (
-            <TableRow key={idx}>
+            <tr key={idx}>
               {
                 columns.map((col) => (
-                  <TableCell key={col.headerName} style={{ color: 'white' }}>
+                  <td key={col.headerName}>
                     {col.renderCell ? col.renderCell(row) : defaultRenderCell(col, row)}
-                  </TableCell>
+                  </td>
                 ))
               }
-            </TableRow>
+            </tr>
           ))}
-        </TableBody>
-        <TablePagination
-          rowsPerPageOptions={rowsPerPageOptions ?? [5, 10, 25]}
-          count={-1}
-          rowsPerPage={pageSize}
-          page={page - 1}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangePageSize}
-        />
+        </tbody>
       </Table>
-    </TableContainer>
+
+    </Paper>
   );
 }

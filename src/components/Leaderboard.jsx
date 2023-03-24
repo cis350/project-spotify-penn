@@ -1,9 +1,8 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
-  Container, Divider, Select, FormControl, MenuItem, FormHelperText,
-} from '@mui/material';
-
+  Center, Container, Paper, Stack, Divider, Select, Button, Group, Title,
+} from '@mantine/core';
 import LazyTable from './LazyTable';
 
 export default function HomePage() {
@@ -29,7 +28,6 @@ export default function HomePage() {
       field: 'likes',
       headerName: 'Like',
     },
-
   ];
 
   const artistColumns = [
@@ -51,35 +49,14 @@ export default function HomePage() {
     },
   ];
 
-  const styles = {
-    selector: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-    },
-  };
-  function handleChange() {
-
-  }
-
-  function setContent1() {
+  const setContent1 = () => {
     setContent('Song');
-  }
-
-  function setContent2() {
-    setContent('Artist');
-  }
-
-  const buttons = {
-    backgroundColor: 'grey',
-    color: 'white',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '50px',
-    fontSize: '16px',
-    left: '100px',
-
   };
+
+  const setContent2 = () => {
+    setContent('Artist');
+  };
+
   let comp;
   if (content === 'Song') {
     comp = <LazyTable route="http://localhost:8000/songs" columns={songColumns} />;
@@ -88,45 +65,41 @@ export default function HomePage() {
   }
 
   return (
-    <Container style={{ backgroundColor: 'black' }}>
-      <h2 style={{ color: 'white', fontSize: '50px' }}>
-        Penn Relays, Music Edition
-      </h2>
-      <div style={styles.selector}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ height: 40 }} />
-          <div style={styles.selector}>
-            <button className="lbOptions" style={buttons} onClick={setContent1}> Song Leaderboard</button>
-            <div style={{ width: 150 }} />
-            <button className="lbOptions" style={buttons} onClick={setContent2}> Artist Leaderboard</button>
-          </div>
-          <div style={{ height: 40 }} />
-        </div>
-        <FormControl
-          className="lbOptions"
-          sx={{
-            m: 1, minWidth: 300, borderRadius: 2, p: 2,
-          }}
-        >
-          <FormHelperText sx={{ color: 'white' }}>Select timeframe</FormHelperText>
-          <Select
-            sx={{ backgroundColor: 'white', color: 'gray' }}
-            defaultValue="7 days"
-            label="Timeframe"
-            onChange={(() => handleChange())}
-          >
-            <MenuItem value={7}>7 days</MenuItem>
-            <MenuItem value={14}>14 days</MenuItem>
-            <MenuItem value={30}>30 days</MenuItem>
-            <MenuItem value={180}>6 months</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+    <Center h="100vh">
+      <Stack>
+        <Title align="center" size={60}>
+          Penn Relays, Music Edition
+        </Title>
 
-      <Divider />
-      {comp}
-      <Divider />
-      <p> Created by Spotify@Penn </p>
-    </Container>
+        <Paper padding="md" shadow="xs">
+
+          <Group
+            mx={55}
+            style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '1rem',
+            }}
+          >
+
+            <Button onClick={setContent1} style={{ marginRight: '1rem' }}>Song Leaderboard</Button>
+            <Button onClick={setContent2}>Artist Leaderboard</Button>
+
+            <Stack>
+              <Select
+                data={[
+                  { value: 7, label: '7 days' },
+                  { value: 14, label: '14 days' },
+                  { value: 30, label: '30 days' },
+                  { value: 180, label: '6 months' },
+                ]}
+                label="Timeframe"
+                searchable={false}
+              />
+            </Stack>
+          </Group>
+          <Divider style={{ marginTop: '1rem', marginBottom: '1rem' }} />
+          {comp}
+        </Paper>
+      </Stack>
+    </Center>
   );
 }

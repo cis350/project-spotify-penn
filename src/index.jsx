@@ -8,7 +8,16 @@ const root = ReactDOMClient.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      theme={{
+        colors: {
+          'spotify-green': ['#1DB954', '#20D464'],
+        },
+        colorScheme: 'dark',
+      }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
       <App />
     </MantineProvider>
   </BrowserRouter>,
