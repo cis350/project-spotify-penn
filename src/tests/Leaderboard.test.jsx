@@ -6,7 +6,7 @@ const mockAxios = new MockAdapter(axios);
 
 describe('the api returned correct song for rank 1', () => {
   mockAxios.onGet().reply(200, {
-    rank: 1, title: "abc", album: "ABC", jammies: 12, likes: true
+    rank: 1, title: 'abc', album: 'ABC', jammies: 12, likes: true,
   });
 
   test('the song title is abc', async () => {

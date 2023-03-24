@@ -73,7 +73,7 @@
       "rank": 1,
       "title": "abc",
       "album": "ABC",
-      "jammies": 12,
+      "jammies": 160,
       "likes": true
 
     },
@@ -81,7 +81,7 @@
       "rank": 2,
       "title": "def",
       "album": "DEF",
-      "jammies": 12,
+      "jammies": 127,
       "likes": false
 
     },
@@ -89,7 +89,7 @@
       "rank": 3,
       "title": "ghi",
       "album": "GHI",
-      "jammies": 12,
+      "jammies": 99,
       "likes": true
 
     },
@@ -97,7 +97,7 @@
       "rank": 4,
       "title": "jkl",
       "album": "JKL",
-      "jammies": 12,
+      "jammies": 56,
       "likes": true
 
     },
@@ -116,13 +116,13 @@
       "rank": 1,
       "artist": "Olivia Rodrigo",
       "genre": "Pop",
-      "jammies": 56
+      "jammies": 5608
     }, 
     {
       "rank": 2,
       "artist": "Taylor Swift",
       "genre": "Pop",
-      "jammies": 60
+      "jammies": 2600
     },
     {
       "rank": 3,
