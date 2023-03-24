@@ -1,16 +1,16 @@
 {
   "user": [
     {
-      "id": "admin@gmail.com",
+      "id": "admin@spotify.penn",
       "firstName": "admin",
       "lastName": "admin",
       "password": "password"
     },
     {
-      "id": "a",
-      "firstName": "a",
-      "lastName": "a",
-      "password": "a"
+      "id": "john.doe@example.com",
+      "firstName": "john",
+      "lastName": "doe",
+      "password": "password"
     },
     {
       "id": "a.a@a.c",

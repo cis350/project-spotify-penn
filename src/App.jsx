@@ -2,12 +2,11 @@ import React from 'react';
 import {
   Navigate, Route, Routes,
 } from 'react-router-dom';
-import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
-import UserProfile from './components/User-profiles';
+import UserProfile from './components/UserProfiles';
 import MainHeader from './components/Header';
 
 function App() {

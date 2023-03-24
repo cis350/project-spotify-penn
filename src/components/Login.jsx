@@ -1,11 +1,15 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
+// import axios from 'axios';
 import '@fontsource/inter';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fontsource/rubik';
 // eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
+
 import {
   Container,
   Title,
@@ -22,10 +26,10 @@ import {
   Center,
 } from '@mantine/core';
 import logo from '../assets/logo.png';
+import { getPassword } from '../api/getData';
 
 function Login() {
   const navigate = useNavigate();
-  // const { login } = useAuth();
 
   const [loginError, setLoginError] = useState(false);
 
@@ -45,24 +49,41 @@ function Login() {
   });
 
   const handleSubmit = () => {
-    const { email } = form.values;
-    const { password } = form.values;
+    const { email, password } = form.values;
 
-    fetch(`http://localhost:8000/user/${email}`).then((response) => response.json()).then((data) => {
-      if (Object.keys(data).length === 0) {
-        setLoginError(true);
-        form.reset();
-      } else if (data.password === password) {
+    //   getPassword(email).then((userData) => {
+    //     if (Object.keys(userData).length === 0) {
+    //       setLoginError(true);
+    //       form.reset();
+    //     } else if (userData.password === password) {
+    //       navigate('/home');
+    //     } else {
+    //       setLoginError(true);
+    //       form.reset();
+    //     }
+    //   }).catch((error) => {
+    //     console.error(error);
+    //     setLoginError(true);
+    //     form.reset();
+    //   });
+    // };
+
+    getPassword(email).then((userData) => {
+      if (userData.password === password) {
         navigate('/home');
       } else {
         setLoginError(true);
         form.reset();
       }
+    }).catch((error) => {
+      console.error(error);
+      setLoginError(true);
+      form.reset();
     });
   };
 
   return (
-    <Container size={420} my={40}>
+    <Container size={420} my={20}>
       <Title
         align="center"
         size={60}
@@ -81,7 +102,7 @@ function Login() {
 
         <form onSubmit={form.onSubmit(() => handleSubmit())}>
           <TextInput
-            size="md"
+            size="sm"
             label="Email"
             placeholder="you@upenn.edu"
             variant="filled"
@@ -92,7 +113,7 @@ function Login() {
             radius="md"
           />
           <PasswordInput
-            size="md"
+            size="sm"
             label="Password"
             placeholder="Your password"
             variant="filled"
@@ -112,7 +133,7 @@ function Login() {
               component={Link}
               to="/home"
               style={{
-                fontFamily: 'Inter',
+                fontFamily: 'Rubik',
                 fontSize: 14,
                 fontWeight: 400,
                 color: '#288CE4',
@@ -121,11 +142,11 @@ function Login() {
               Forgot password?
             </Link>
           </Group>
-          <Button size="md" type="submit" fullWidth mt="xl" radius="md">
+          <Button size="md" type="submit" fullWidth mt="lg" radius="md">
             Sign in
           </Button>
         </form>
-        <Text size="sm" align="center" mt={10}>
+        <Text size={14} align="center" mt={10}>
           Don&#39;t have an account yet?
           {' '}
           <Link
