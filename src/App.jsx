@@ -9,6 +9,8 @@ import Chat from './components/Chat';
 import UserProfile from './components/UserProfiles';
 import MainHeader from './components/Header';
 import Leaderboard from './components/Leaderboard';
+import UserList from './components/UserList';
+import NewUserProfile from './components/NewUserProfile';
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
             <MainHeader />
             <Home />
           </>
-)}
+        )}
       />
       <Route path="/register" element={(<Register />)} />
       <Route path="/login" element={<Login />} />
@@ -32,7 +34,7 @@ function App() {
             <MainHeader />
             <Chat />
           </>
-)}
+        )}
       />
       <Route
         path="/profile"
@@ -41,7 +43,7 @@ function App() {
             <MainHeader />
             <UserProfile />
           </>
-)}
+        )}
       />
       <Route
         path="/leaderboard"
@@ -50,7 +52,16 @@ function App() {
             <MainHeader />
             <Leaderboard />
           </>
-)}
+        )}
+      />
+      <Route
+        path="/profile/:userId"
+        element={(
+          <>
+            <MainHeader />
+            <NewUserProfile />
+          </>
+      )}
       />
     </Routes>
   );
