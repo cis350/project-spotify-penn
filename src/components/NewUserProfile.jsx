@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import {
   Tabs, Avatar, Group, Title, Space, Button,
 } from '@mantine/core';
-import Friends from './Friends-table';
+import Friends from './FriendsTable';
 import Communities from './CommunitiesTable';
 import Conversations from './ConversationsTable';
-import Playlists from './Playlists-table';
+import Playlists from './PlaylistsTable';
 
 function UserGroup() {
   const { userId } = useParams();

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {
   Tabs, Avatar, Group, Title, Space,
 } from '@mantine/core';
-import Friends from './Friends-table';
+import Friends from './FriendsTable';
 import Communities from './CommunitiesTable';
 import Conversations from './ConversationsTable';
-import Playlists from './Playlists-table';
+import Playlists from './PlaylistsTable';
 
 function UserGroup() {
   return (
