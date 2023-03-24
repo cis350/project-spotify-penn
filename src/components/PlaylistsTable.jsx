@@ -2,7 +2,7 @@ import {
   Table, Group, Text, ScrollArea, Center, Stack, Title,
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import AddNewPlaylist from './Add-playlist';
+import AddNewPlaylist from './AddPlaylist';
 
 export function PlaylistTable() {
   const [rows, setRows] = useState(null);
