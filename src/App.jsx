@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Chat from './components/Chat';
 import UserProfile from './components/UserProfiles';
 import MainHeader from './components/Header';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </>
   );
