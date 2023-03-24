@@ -7,9 +7,9 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Chat from './components/Chat';
 import UserProfile from './components/UserProfiles';
-import MainHeader from './components/header';
+import MainHeader from './components/Header';
 import Leaderboard from './components/Leaderboard';
-// import UserList from './components/UserList';
+import UserList from './components/UserList';
 import NewUserProfile from './components/NewUserProfile';
 
 function App() {
@@ -60,6 +60,15 @@ function App() {
           <>
             <MainHeader />
             <NewUserProfile />
+          </>
+      )}
+      />
+      <Route
+        path="/users"
+        element={(
+          <>
+            <MainHeader />
+            <UserList />
           </>
       )}
       />

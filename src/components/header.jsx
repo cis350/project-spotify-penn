@@ -91,7 +91,7 @@ function MainHeader() {
             <a href="/chat" className={classes.link}>
               Chat
             </a>
-            <a href="/home" className={classes.link}>
+            <a href="/users" className={classes.link}>
               Vibe
             </a>
             <a href="/home" className={classes.link}>
