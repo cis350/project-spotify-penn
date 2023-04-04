@@ -52,23 +52,86 @@
       "name": "Shrek"
     }
   ],
-
   "other-users": [
-    {"id": 4,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 1"},
-    {"id": 5,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 2"},
-    {"id": 6,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 3"},
-    {"id": 7,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 4"}
+    {
+      "id": 4,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 1"
+    },
+    {
+      "id": 5,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 2"
+    },
+    {
+      "id": 6,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 3"
+    },
+    {
+      "id": 7,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 4"
+    }
   ],
   "conversations": [],
-
+  "sockets": [
+    {
+      "id": 1,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "messages": [
+        {
+          "text": "helloooooo",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hi",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "messages": []
+    },
+    {
+      "id": 5,
+      "messages": []
+    },
+    {
+      "id": 6,
+      "messages": []
+    }
+  ],
   "communities": [
     {
       "name": "Community 1"
@@ -112,19 +175,6 @@
       "desc": "heavy metal"
     }
   ],
-  "conversations": [
-  ],
-  "communities": [
-    {
-      "name": "Community 1"
-    },
-    {
-      "name": "Community 2"
-    },
-    {
-      "name": "Community 3"
-    }
-  ],
   "songs": [
     {
       "rank": 1,
@@ -132,7 +182,6 @@
       "album": "ABC",
       "jammies": 160,
       "likes": true
-
     },
     {
       "rank": 2,
@@ -140,7 +189,6 @@
       "album": "DEF",
       "jammies": 127,
       "likes": false
-
     },
     {
       "rank": 3,
@@ -148,7 +196,6 @@
       "album": "GHI",
       "jammies": 99,
       "likes": true
-
     },
     {
       "rank": 4,
@@ -156,7 +203,6 @@
       "album": "JKL",
       "jammies": 56,
       "likes": true
-
     },
     {
       "rank": 5,
@@ -164,9 +210,7 @@
       "album": "MNO",
       "jammies": 12,
       "likes": false
-
     }
-
   ],
   "artists": [
     {
@@ -174,7 +218,7 @@
       "artist": "Olivia Rodrigo",
       "genre": "Pop",
       "jammies": 5608
-    }, 
+    },
     {
       "rank": 2,
       "artist": "Taylor Swift",
