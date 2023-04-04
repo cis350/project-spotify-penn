@@ -11,6 +11,7 @@ import MainHeader from './components/Header';
 import Leaderboard from './components/Leaderboard';
 import UserList from './components/UserList';
 import NewUserProfile from './components/NewUserProfile';
+import Communities from './components/Community';
 
 function App() {
   return (
@@ -69,6 +70,15 @@ function App() {
           <>
             <MainHeader />
             <UserList />
+          </>
+      )}
+      />
+      <Route
+        path="/communities"
+        element={(
+          <>
+            <MainHeader />
+            <Communities />
           </>
       )}
       />
