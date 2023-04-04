@@ -19,9 +19,6 @@ function Chat() {
   const [socket, setSocket] = useState(1);
 
   const handleInputChange = (event) => {
-    getMessages(socket).then((arr) => {
-      setMessages(arr);
-    });
     setInputValue(event.target.value);
   };
 
@@ -63,6 +60,20 @@ function Chat() {
       handleSendMessage();
     }
   };
+
+  useEffect(() => {
+    // Get initial (socket 1) messages from the server and display
+    getMessages(1).then((arr) => {
+      setMessages(arr);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Load new messages when socket changes
+    getMessages(socket).then((arr) => {
+      setMessages(arr);
+    });
+  }, [socket]);
 
   useEffect(() => {
     // Scroll to the bottom of the message container after a new message is added
