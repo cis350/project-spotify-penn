@@ -18,10 +18,6 @@ function Chat() {
   const messageContainerRef = useRef(null);
   const [socket, setSocket] = useState(1);
 
-  // const initMessages = getMessages(1).then((arr) => {
-  //   setMessages(arr);
-  // });
-
   const handleInputChange = (event) => {
     getMessages(socket).then((arr) => {
       setMessages(arr);
