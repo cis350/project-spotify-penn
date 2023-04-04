@@ -134,15 +134,27 @@
   ],
   "communities": [
     {
-      "name": "Community 1"
+      "id": 4,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 1"
     },
     {
-      "name": "Community 2"
+      "id": 5,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 2"
     },
     {
-      "name": "Community 3"
+      "id": 6,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 3"
+    },
+    {
+      "id": 7,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 4"
     }
   ],
+  "conversations": [],
   "playlists": [
     {
       "id": "1",
@@ -173,6 +185,38 @@
       "id": "43visf9vs0j3",
       "name": "metal is heavy",
       "desc": "heavy metal"
+    }
+  ], 
+  "communities": [
+    {
+      "name": "ABC",
+      "image": "https://doublejj.com/wp-content/uploads/2018/03/2880x1800-cream-solid-color-background.jpg",
+      "numMember": "2",
+      "desc": "no description"
+    },
+    {
+      "name": "BCD",
+      "image": "http://www.umdchabad.org/new/wp-content/uploads/2018/08/1280x720-coral-pink-solid-color-background-768x432.jpg",
+      "numMember": "3",
+      "desc": "no description"
+    },
+    {
+      "name": "BAES",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg",
+      "numMember": "5",
+      "desc": "no description"
+    },
+    {
+      "name": "CDEF",
+      "image": "https://i.pinimg.com/originals/3d/98/91/3d98914dadfef7058bc98d5736066a21.png",
+      "numMember": "10",
+      "desc": "no description"
+    },
+    {
+      "name": "Community 5",
+      "image": "https://www.solidbackgrounds.com/images/2560x1440/2560x1440-blue-solid-color-background.jpg",
+      "numMember": "6",
+      "desc": "no description"
     }
   ],
   "songs": [
@@ -242,6 +286,17 @@
       "artist": "Pianist",
       "genre": "Classical",
       "jammies": 1
+    }
+  ],
+  "newartistplaylists": [
+    {
+      "artistName": "Dino",
+      "email": "dino@upenn.edu",
+      "spotifyURL": "dino",
+      "playlistName": "The Green Machine",
+      "description": "Dino Beatz",
+      "likes": true,
+      "id": 1
     }
   ]
 }

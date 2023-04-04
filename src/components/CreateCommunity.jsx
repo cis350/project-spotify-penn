@@ -5,78 +5,56 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
+// import axios from 'axios';
+import { newCommunity } from '../api/getCommunities';
 
-export function AddPlaylist(props) {
+function CreateCommunity(props) {
   const form = useForm({
     initialValues: {
-      id: '',
       name: '',
       desc: '',
     },
 
     validate: {
-      id: (val) => (!val.trim() ? 'id cannot be empty' : null),
-      name: (val) => (!val.trim() ? 'name cannot be empty' : null),
-      desc: (val) => (!val.trim() ? 'description cannot be empty' : null),
+      name: (val) => (val.length <= 5 ? 'name must be at least 6 characters' : null),
+      desc: (val) => (val.length <= 0 ? 'description cannot be empty' : null),
     },
   });
 
-  const handleCreatePlaylist = () => {
-    const { id, name, desc } = form.values;
-    axios.post(
-      'http://localhost:8000/playlists',
-      {
-        id,
-        name,
-        desc,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then(() => {
+  const handleCreateCommunity = () => {
+    const { name, desc } = form.values;
+    newCommunity(name, desc).then(() => {
       form.reset();
-      props.onPlaylistCreated();
+      props.onCommunityCreated();
     });
   };
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleCreatePlaylist();
+      handleCreateCommunity();
     }
   };
   return (
     <Popover width={300} trapFocus position="bottom" withArrow shadow="md" onKeyDown={handleKeyDown}>
       <Popover.Target>
-        <Button>Upload New Playlist</Button>
+        <Button ml={400}>Create New Community</Button>
       </Popover.Target>
       <Popover.Dropdown sx={(theme) => ({ background: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white })}>
-        <form onSubmit={form.onSubmit(() => handleCreatePlaylist())}>
+        <form onSubmit={form.onSubmit(() => handleCreateCommunity())}>
           <TextInput
             value={form.values.name}
             error={form.errors.name}
             onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
-            label="Playlist Name"
-            placeholder="Playlist Name"
+            label="Community Name"
+            placeholder="Community Name"
             size="xs"
           />
           <TextInput
             value={form.values.desc}
             error={form.errors.desc}
             onChange={(event) => form.setFieldValue('desc', event.currentTarget.value)}
-            label="Playlist Description"
-            placeholder="chill study vibes"
-            size="xs"
-            mt="xs"
-          />
-          <TextInput
-            onChange={(event) => form.setFieldValue('id', event.currentTarget.value)}
-            value={form.values.id}
-            error={form.errors.id}
-            label="Playlist ID"
-            placeholder="3cEYpjA9oz9GiPac4AsH4n"
+            label="Community Description"
+            placeholder="Describe your community"
             size="xs"
             mt="xs"
           />
@@ -89,4 +67,4 @@ export function AddPlaylist(props) {
   );
 }
 
-export default AddPlaylist;
+export default CreateCommunity;
