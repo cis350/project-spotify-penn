@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test 1`] = `
+Array [
+  <div
+    className="mantine-1cw9ra3"
+  />,
+  <h1
+    className="mantine-Text-root mantine-Title-root mantine-44lm1w"
+  >
+     Users 
+  </h1>,
+  <div
+    className="mantine-Center-root mantine-ojrz4j"
+  >
+    <div
+      className="mantine-ScrollArea-root mantine-1deqy7c"
+      dir="ltr"
+      style={
+        Object {
+          "--radix-scroll-area-corner-height": "0px",
+          "--radix-scroll-area-corner-width": "0px",
+          "position": "relative",
+        }
+      }
+    >
+      <style
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}",
+          }
+        }
+      />
+      <div
+        className="mantine-b6zkvl mantine-ScrollArea-viewport"
+        data-radix-scroll-area-viewport=""
+        style={
+          Object {
+            "overflowX": "scroll",
+            "overflowY": "scroll",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "table",
+              "minWidth": "100%",
+            }
+          }
+        >
+          <table
+            className="mantine-Table-root mantine-z8tlxi"
+          >
+            <tbody />
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="mantine-13xtcol"
+  />,
+]
+`;

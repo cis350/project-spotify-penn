@@ -94,7 +94,7 @@ function MainHeader() {
             <a href="/users" className={classes.link}>
               Vibe
             </a>
-            <a href="/home" className={classes.link}>
+            <a href="/newartists" className={classes.link}>
               New Artists
             </a>
           </Group>
