@@ -33,7 +33,7 @@ export function CommunitiesTable() {
         <tr>
           <td>
             <Group spacing="sm" position="center">
-              <Button>
+              <Button onClick={(() => navigate('/communities'))}>
                 Find Communities
               </Button>
             </Group>
@@ -55,7 +55,7 @@ export function CommunitiesTable() {
             <tbody>{rows}</tbody>
           </Table>
         </ScrollArea>
-        <Button onClick={(() => navigate('/'))}>Add New Community</Button>
+        <Button onClick={(() => navigate('/communities'))}>Add New Community</Button>
       </Stack>
     </Center>
   );

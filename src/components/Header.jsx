@@ -85,7 +85,7 @@ function MainHeader() {
             <a href="/home" className={classes.link}>
               PennMix
             </a>
-            <a href="/home" className={classes.link}>
+            <a href="/communities" className={classes.link}>
               Community
             </a>
             <a href="/chat" className={classes.link}>
