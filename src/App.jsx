@@ -12,6 +12,8 @@ import Leaderboard from './components/Leaderboard';
 import UserList from './components/UserList';
 import NewUserProfile from './components/NewUserProfile';
 import Communities from './components/Community';
+import AddNewPlaylist from './components/AddNewArtistPlaylist';
+import NewArtistsPage from './components/NewArtistsPage';
 
 function App() {
   return (
@@ -81,6 +83,24 @@ function App() {
             <Communities />
           </>
       )}
+      />
+      <Route
+        path="/uploadnewartist"
+        element={(
+          <>
+            <MainHeader />
+            <AddNewPlaylist />
+          </>
+        )}
+      />
+      <Route
+        path="/newartists"
+        element={(
+          <>
+            <MainHeader />
+            <NewArtistsPage />
+          </>
+        )}
       />
     </Routes>
   );

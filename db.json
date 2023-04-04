@@ -52,23 +52,29 @@
       "name": "Shrek"
     }
   ],
-
   "other-users": [
-    {"id": 4,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 1"},
-    {"id": 5,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 2"},
-    {"id": 6,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 3"},
-    {"id": 7,
-    "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    "name": "Student 4"}
+    {
+      "id": 4,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 1"
+    },
+    {
+      "id": 5,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 2"
+    },
+    {
+      "id": 6,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 3"
+    },
+    {
+      "id": 7,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 4"
+    }
   ],
   "conversations": [],
-
   "playlists": [
     {
       "id": "1",
@@ -101,7 +107,6 @@
       "desc": "heavy metal"
     }
   ],
-
   "communities": [
     {
       "name": "ABC",
@@ -134,7 +139,6 @@
       "desc": "no description"
     }
   ],
-
   "songs": [
     {
       "rank": 1,
@@ -142,7 +146,6 @@
       "album": "ABC",
       "jammies": 160,
       "likes": true
-
     },
     {
       "rank": 2,
@@ -150,7 +153,6 @@
       "album": "DEF",
       "jammies": 127,
       "likes": false
-
     },
     {
       "rank": 3,
@@ -158,7 +160,6 @@
       "album": "GHI",
       "jammies": 99,
       "likes": true
-
     },
     {
       "rank": 4,
@@ -166,7 +167,6 @@
       "album": "JKL",
       "jammies": 56,
       "likes": true
-
     },
     {
       "rank": 5,
@@ -174,9 +174,7 @@
       "album": "MNO",
       "jammies": 12,
       "likes": false
-
     }
-
   ],
   "artists": [
     {
@@ -184,7 +182,7 @@
       "artist": "Olivia Rodrigo",
       "genre": "Pop",
       "jammies": 5608
-    }, 
+    },
     {
       "rank": 2,
       "artist": "Taylor Swift",
@@ -208,6 +206,17 @@
       "artist": "Pianist",
       "genre": "Classical",
       "jammies": 1
+    }
+  ],
+  "newartistplaylists": [
+    {
+      "artistName": "Dino",
+      "email": "dino@upenn.edu",
+      "spotifyURL": "dino",
+      "playlistName": "The Green Machine",
+      "description": "Dino Beatz",
+      "likes": true,
+      "id": 1
     }
   ]
 }

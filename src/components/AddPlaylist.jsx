@@ -16,9 +16,9 @@ export function AddPlaylist(props) {
     },
 
     validate: {
-      id: (val) => (val.length <= 1 ? 'id cannot be empty' : null),
-      name: (val) => (val.length <= 1 ? 'name cannot be empty' : null),
-      desc: (val) => (val.length <= 1 ? 'description cannot be empty' : null),
+      id: (val) => (!val.trim() ? 'id cannot be empty' : null),
+      name: (val) => (!val.trim() ? 'name cannot be empty' : null),
+      desc: (val) => (!val.trim() ? 'description cannot be empty' : null),
     },
   });
 
