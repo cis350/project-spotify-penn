@@ -33,4 +33,15 @@ const newUser = async (email, first, last, password) => {
   return res.data;
 };
 
-export { getPassword, newUser };
+const getFirstName = async (email) => {
+  const url = `http://localhost:8000/user/${email}`;
+  const res = await axios.get(url);
+  const userData = res.data;
+  if (Object.keys(userData).length === 0) {
+    throw new Error('Invalid username');
+  } else {
+    return userData.firstName;
+  }
+};
+
+export { getFirstName, getPassword, newUser };

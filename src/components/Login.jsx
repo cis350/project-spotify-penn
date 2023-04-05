@@ -27,7 +27,7 @@ import {
 } from '@mantine/core';
 import { darkLogo } from '../assets/logos';
 // import logo from '../assets/logo.png';
-import { getPassword } from '../api/getData';
+import { getPassword } from '../api/getUserData';
 
 function Login() {
   const navigate = useNavigate();
@@ -54,6 +54,9 @@ function Login() {
 
     getPassword(email).then((userData) => {
       if (userData.password === password) {
+        const sessionId = userData.id;
+        window.sessionStorage.setItem('sessionId', sessionId);
+        console.log(sessionId);
         navigate('/home');
       } else {
         setLoginError(true);

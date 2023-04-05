@@ -75,6 +75,86 @@
     }
   ],
   "conversations": [],
+  "sockets": [
+    {
+      "id": 1,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "messages": [
+        {
+          "text": "helloooooo",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hi",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "messages": []
+    },
+    {
+      "id": 5,
+      "messages": []
+    },
+    {
+      "id": 6,
+      "messages": []
+    }
+  ],
+  "communities": [
+    {
+      "id": 4,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 1"
+    },
+    {
+      "id": 5,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 2"
+    },
+    {
+      "id": 6,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 3"
+    },
+    {
+      "id": 7,
+      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
+      "name": "Student 4"
+    }
+  ],
+  "conversations": [],
   "playlists": [
     {
       "id": "1",
@@ -106,7 +186,7 @@
       "name": "metal is heavy",
       "desc": "heavy metal"
     }
-  ],
+  ], 
   "communities": [
     {
       "name": "ABC",

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { newUser } from '../api/getData';
+import { newUser } from '../api/getUserData';
 
 const mockAxios = new MockAdapter(axios);
 

@@ -27,7 +27,7 @@ import {
   Image,
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { newUser } from '../api/getData';
+import { newUser } from '../api/getUserData';
 import { darkLogo } from '../assets/logos';
 
 function Register() {
