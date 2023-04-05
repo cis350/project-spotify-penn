@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24% </span>
+                <span class="strong">68% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/25</span>
+                <span class='fraction'>17/25</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">70.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/24</span>
+                <span class='fraction'>17/24</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -129,49 +129,49 @@
 <a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -194,22 +194,22 @@
 const getMessages = async (socket) =&gt; {
   const url = `http://localhost:8000/sockets/${socket}`;
   const res = await axios.get(url);
-  const { messages } = <span class="cstat-no" title="statement not covered" >res.data;</span>
-<span class="cstat-no" title="statement not covered" >  return messages;</span>
+  const { messages } = res.data;
+  return messages;
 };
 &nbsp;
-const updateMessages = <span class="fstat-no" title="function not covered" >as</span>ync (socket, newMessages) =&gt; {
-  const data = <span class="cstat-no" title="statement not covered" >{</span>
+const updateMessages = async (socket, newMessages) =&gt; {
+  const data = {
     id: socket,
     messages: newMessages,
   };
-  const options = <span class="cstat-no" title="statement not covered" >{</span>
+  const options = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const url = <span class="cstat-no" title="statement not covered" >`http://localhost:8000/sockets/${socket}`;</span>
-  const res = <span class="cstat-no" title="statement not covered" >await axios.put(</span>
+  const url = `http://localhost:8000/sockets/${socket}`;
+  const res = await axios.post(
     url,
     data,
     options,
@@ -217,24 +217,24 @@ const updateMessages = <span class="fstat-no" title="function not covered" >as</
 <span class="cstat-no" title="statement not covered" >  return res.data;</span>
 };
 &nbsp;
-const newConversation = <span class="fstat-no" title="function not covered" >as</span>ync (socket) =&gt; {
-  const data = <span class="cstat-no" title="statement not covered" >{</span>
+const newConversation = async (socket) =&gt; {
+  const data = {
     id: socket,
     messages: [],
   };
-  const options = <span class="cstat-no" title="statement not covered" >{</span>
+  const options = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const url = <span class="cstat-no" title="statement not covered" >'http://localhost:8000/sockets';</span>
-  const res = <span class="cstat-no" title="statement not covered" >await axios.post(</span>
+  const url = 'http://localhost:8000/sockets';
+  const res = await axios.post(
     url,
     data,
     options,
-  ).catch(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+  ).catch(() =&gt; {
   });
-<span class="cstat-no" title="statement not covered" >  return res.data;</span>
+  return res.data;
 };
 &nbsp;
 const getSockets = <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
@@ -259,7 +259,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-05T04:09:48.513Z
+                at 2023-04-05T15:52:24.492Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

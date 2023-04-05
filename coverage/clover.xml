@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680667788539" clover="3.2.0">
-  <project timestamp="1680667788539" name="All files">
-    <metrics statements="419" coveredstatements="192" conditionals="118" coveredconditionals="19" methods="195" coveredmethods="59" elements="732" coveredelements="270" complexity="0" loc="419" ncloc="419" packages="4" files="37" classes="37"/>
+<coverage generated="1680709944521" clover="3.2.0">
+  <project timestamp="1680709944521" name="All files">
+    <metrics statements="419" coveredstatements="203" conditionals="118" coveredconditionals="19" methods="195" coveredmethods="62" elements="732" coveredelements="284" complexity="0" loc="419" ncloc="419" packages="4" files="37" classes="37"/>
     <package name="src">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="App.jsx" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/App.jsx">
@@ -10,7 +10,7 @@
       </file>
     </package>
     <package name="src.api">
-      <metrics statements="111" coveredstatements="83" conditionals="12" coveredconditionals="8" methods="29" coveredmethods="23"/>
+      <metrics statements="111" coveredstatements="94" conditionals="12" coveredconditionals="8" methods="29" coveredmethods="26"/>
       <file name="getCommunities.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getCommunities.js">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="4" count="4" type="stmt"/>
@@ -101,24 +101,24 @@
         <line num="12" count="1" type="stmt"/>
       </file>
       <file name="messages.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/messages.js">
-        <metrics statements="24" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="1"/>
+        <metrics statements="24" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
         <line num="3" count="4" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="10" count="4" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="29" count="4" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
         <line num="49" count="4" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
