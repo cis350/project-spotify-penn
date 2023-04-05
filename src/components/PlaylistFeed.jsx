@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Table, Group, ScrollArea, Center, Title, Space, Paper, createStyles, rem, Stack, ActionIcon,
 } from '@mantine/core';
-import getPlaylists from '../api/getUserPlaylists';
+import getPlaylists from '../api/userPlaylists';
 import { likes, nolikes } from '../assets/likes';
 import updateLikes from '../api/updateLikesNewArtist';
 

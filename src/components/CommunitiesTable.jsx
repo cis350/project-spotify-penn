@@ -3,14 +3,14 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCommunities } from '../api/getCommunities';
+import { getUserCommunities } from '../api/userCommunities';
 
 export function CommunitiesTable() {
   const [rows, setRows] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCommunities()
+    getUserCommunities()
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

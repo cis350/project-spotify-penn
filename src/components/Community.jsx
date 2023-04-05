@@ -5,9 +5,14 @@ import {
   Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem, Space,
 } from '@mantine/core';
 import CreateNewCommunity from './CreateCommunity';
-import { getCommunities } from '../api/getCommunities';
+import { getCommunities } from '../api/communities';
+import { postNewUserCommunity } from '../api/userCommunities';
 
 const handleSearchClick = () => {
+};
+
+const handleJoinCommunity = (name) => {
+  postNewUserCommunity(name);
 };
 
 const useStyles = createStyles((theme) => ({
@@ -59,7 +64,7 @@ function Card({ item }) {
           {name}
         </Title>
       </div>
-      <Button variant="white" color="dark">
+      <Button variant="white" color="dark" onClick={handleJoinCommunity(name)}>
         Join Community
       </Button>
     </Paper>

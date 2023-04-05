@@ -324,5 +324,47 @@
       "likes": false,
       "id": 3
     }
+  ],
+  "joinedcommunities": [
+    {
+      "name": "mantine-inuraf",
+      "id": 1
+    },
+    {
+      "name": "mantine-inuraf",
+      "id": 2
+    },
+    {
+      "name": "mantine-inuraf",
+      "id": 3
+    },
+    {
+      "name": "mantine-inuraf",
+      "id": 4
+    },
+    {
+      "name": "mantine-inuraf",
+      "id": 5
+    },
+    {
+      "name": "ABC",
+      "id": 6
+    },
+    {
+      "name": "BCD",
+      "id": 7
+    },
+    {
+      "name": "BAES",
+      "id": 8
+    },
+    {
+      "name": "CDEF",
+      "id": 9
+    },
+    {
+      "name": "Community 5",
+      "id": 10
+    }
   ]
 }

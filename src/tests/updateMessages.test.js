@@ -1,29 +1,37 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import { updateMessages } from '../api/messages';
 
-const mockAxios = new MockAdapter(axios);
+jest.mock('axios');
 
-describe('updateMessages function', () => {
-  const socket = 1;
-  const newMessages = [
-    { text: 'hello', sender: 'admin@gmail.com' },
-    { text: 'hi', sender: 'user@gmail.com' },
-    { text: 'hey', sender: 'user2@gmail.com' },
-  ];
-  const data = { id: socket, messages: newMessages };
-  const expectedData = data;
+test('updateMessages should update messages for the given socket', async () => {
+  const mockResponse = { success: true };
+  axios.put.mockResolvedValueOnce({ data: mockResponse });
 
-  test('returns updated data for given socket and messages', async () => {
-    mockAxios.onPut(`http://localhost:8000/sockets/${socket}`).reply(200, data);
-    const res = await updateMessages(socket, newMessages);
-    expect(res).toEqual(expectedData);
-  });
+  const socket = 'ABC123';
+  const newMessages = [{ id: 1, text: 'Hello' }];
+  const result = await updateMessages(socket, newMessages);
 
-  test('handles error if request fails', async () => {
-    mockAxios.onPut(`http://localhost:8000/sockets/${socket}`).reply(500);
-    const res = await updateMessages(socket, newMessages);
-    expect(res).toEqual([]);
-  });
+  expect(result).toEqual(mockResponse);
+
+  expect(axios.put).toHaveBeenCalledWith(
+    `http://localhost:8000/sockets/${socket}`,
+    { id: socket, messages: newMessages },
+    { headers: { 'Content-Type': 'application/json' } },
+  );
+});
+
+test('updateMessages should throw an error if there is a network error', async () => {
+  axios.put.mockRejectedValueOnce(new Error('Network Error'));
+
+  const socket = 'ABC123';
+  const newMessages = [{ id: 1, text: 'Hello' }];
+
+  await expect(updateMessages(socket, newMessages)).rejects.toThrow('Network Error');
+
+  expect(axios.put).toHaveBeenCalledWith(
+    `http://localhost:8000/sockets/${socket}`,
+    { id: socket, messages: newMessages },
+    { headers: { 'Content-Type': 'application/json' } },
+  );
 });

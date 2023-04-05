@@ -28,4 +28,22 @@ const newCommunity = async (name, description) => {
   return res.data;
 };
 
-export { getCommunities, newCommunity };
+const postNewCommunity = async (
+  name,
+  image,
+  numMember,
+  desc,
+) => {
+  const res = await axios.post(
+    'http://localhost:8000/joinedcommunities',
+    {
+      name,
+      image,
+      numMember,
+      desc,
+    },
+  );
+  return res.data;
+};
+
+export { getCommunities, newCommunity, postNewCommunity };

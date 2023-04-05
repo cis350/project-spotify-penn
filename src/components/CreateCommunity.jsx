@@ -5,7 +5,7 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { newCommunity } from '../api/getCommunities';
+import { newCommunity } from '../api/communities';
 
 function CreateCommunity(props) {
   const form = useForm({
