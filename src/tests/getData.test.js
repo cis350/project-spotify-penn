@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getPassword, newUser } from '../api/getData';
+import { getPassword, newUser } from '../api/getUserData';
 
 jest.mock('axios');
 

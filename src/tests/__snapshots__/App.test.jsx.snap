@@ -233,6 +233,12 @@ Array [
           >
             New Artists
           </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
+          </a>
         </div>
         <div
           className="mantine-Group-root mantine-k3ov3c"
@@ -284,78 +290,192 @@ Array [
     </header>
   </div>,
   <h1
-    className="mantine-Text-root mantine-Title-root mantine-xb9ex4"
+    className="mantine-Text-root mantine-Title-root mantine-1bgluw4"
   >
     Chat with friends!
   </h1>,
   <div
-    className="mantine-Paper-root mantine-1639huf"
-    data-with-border={true}
+    className="mantine-Center-root mantine-ojrz4j"
   >
     <div
-      style={
-        Object {
-          "alignContent": "center",
-          "display": "flex",
-          "flexDirection": "column",
-          "maxHeight": "300px",
-          "minHeight": "300px",
-          "overflow": "auto",
-        }
-      }
-    />
-    <div
-      style={
-        Object {
-          "alignItems": "center",
-          "display": "flex",
-        }
-      }
+      className="mantine-Stack-root mantine-caxjnw"
     >
       <div
-        className="mantine-InputWrapper-root mantine-Textarea-root mantine-1ejqehl"
-        style={
-          Object {
-            "flex": "1",
-            "marginRight": "8px",
-          }
-        }
+        className="mantine-InputWrapper-root mantine-NumberInput-root mantine-1ejqehl"
       >
-        <div
-          className="mantine-Input-wrapper mantine-Textarea-wrapper mantine-7c7vou"
+        <label
+          className="mantine-InputWrapper-label mantine-NumberInput-label mantine-1fzet7j"
+          htmlFor="mantine-08i71jh4c"
+          id="mantine-08i71jh4c-label"
+          onMouseDown={[Function]}
         >
-          <textarea
+          Choose your socket
+          <span
+            aria-hidden={true}
+            className="mantine-103svbs mantine-InputWrapper-required mantine-NumberInput-required"
+          >
+             *
+          </span>
+        </label>
+        <div
+          className="mantine-Input-wrapper mantine-NumberInput-wrapper mantine-7c7vou"
+        >
+          <input
             aria-invalid={false}
-            className="mantine-Input-input mantine-Textarea-input mantine-qb7utt"
-            id="mantine-80uoz1i3v"
+            className="mantine-Input-input mantine-NumberInput-input mantine-1dfdtl1"
+            id="mantine-08i71jh4c"
+            inputMode="numeric"
+            max={10}
+            min={1}
+            onBlur={[Function]}
             onChange={[Function]}
             onKeyDown={[Function]}
-            placeholder="Type your message here..."
-            value=""
+            onKeyUp={[Function]}
+            placeholder="Socket Number (1-10)"
+            step={1}
+            type="text"
+            value="1"
           />
+          <div
+            className="mantine-unhde mantine-Input-rightSection mantine-NumberInput-rightSection"
+          >
+            <div
+              className="mantine-1s0kk1f mantine-NumberInput-rightSection"
+            >
+              <button
+                aria-hidden={true}
+                className="mantine-NumberInput-control mantine-NumberInput-controlUp mantine-x0i9fi"
+                disabled={false}
+                onPointerDown={[Function]}
+                onPointerLeave={[Function]}
+                onPointerUp={[Function]}
+                tabIndex={-1}
+                type="button"
+              >
+                <svg
+                  fill="none"
+                  height="0.875rem"
+                  style={
+                    Object {
+                      "transform": "rotate(180deg)",
+                    }
+                  }
+                  viewBox="0 0 15 15"
+                  width="0.875rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <button
+                aria-hidden={true}
+                className="mantine-NumberInput-control mantine-NumberInput-controlDown mantine-1g3thxc"
+                disabled={true}
+                onPointerDown={[Function]}
+                onPointerLeave={[Function]}
+                onPointerUp={[Function]}
+                tabIndex={-1}
+                type="button"
+              >
+                <svg
+                  fill="none"
+                  height="0.875rem"
+                  style={
+                    Object {
+                      "transform": undefined,
+                    }
+                  }
+                  viewBox="0 0 15 15"
+                  width="0.875rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <button
-        className="mantine-UnstyledButton-root mantine-Button-root mantine-143ptlp"
-        data-button={true}
-        onClick={[Function]}
-        type="button"
+      <div
+        className="mantine-Paper-root mantine-lpkcco"
+        data-with-border={true}
       >
         <div
-          className="mantine-1wpc1xj mantine-Button-inner"
+          style={
+            Object {
+              "alignContent": "center",
+              "display": "flex",
+              "flexDirection": "column",
+              "maxHeight": "300px",
+              "minHeight": "300px",
+              "overflow": "auto",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+            }
+          }
         >
-          <span
-            className="mantine-1ryt1ht mantine-Button-label"
+          <div
+            className="mantine-InputWrapper-root mantine-Textarea-root mantine-1ejqehl"
             style={
               Object {
-                "textTransform": undefined,
+                "flex": "1",
+                "marginRight": "8px",
               }
             }
           >
-            Send
-          </span>
+            <div
+              className="mantine-Input-wrapper mantine-Textarea-wrapper mantine-7c7vou"
+            >
+              <textarea
+                aria-invalid={false}
+                className="mantine-Input-input mantine-Textarea-input mantine-qb7utt"
+                id="mantine-kq13p1x9a"
+                onChange={[Function]}
+                onKeyDown={[Function]}
+                placeholder="Type your message here..."
+                value=""
+              />
+            </div>
+          </div>
+          <button
+            className="mantine-UnstyledButton-root mantine-Button-root mantine-143ptlp"
+            data-button={true}
+            onClick={[Function]}
+            type="button"
+          >
+            <div
+              className="mantine-1wpc1xj mantine-Button-inner"
+            >
+              <span
+                className="mantine-1ryt1ht mantine-Button-label"
+                style={
+                  Object {
+                    "textTransform": undefined,
+                  }
+                }
+              >
+                Send
+              </span>
+            </div>
+          </button>
         </div>
-      </button>
+      </div>
     </div>
   </div>,
 ]
@@ -444,6 +564,12 @@ Array [
             href="/newartists"
           >
             New Artists
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
           </a>
         </div>
         <div
@@ -547,12 +673,12 @@ Array [
       className="mantine-1cw9ra3"
     />
     <button
-      aria-controls="mantine-nzfuyiq59-dropdown"
+      aria-controls="mantine-iyyxxlihn-dropdown"
       aria-expanded={false}
       aria-haspopup="dialog"
       className="mantine-UnstyledButton-root mantine-Button-root mantine-1bv0gga"
       data-button={true}
-      id="mantine-nzfuyiq59-target"
+      id="mantine-iyyxxlihn-target"
       onClick={[Function]}
       onKeyDown={[Function]}
       type="button"
@@ -704,8 +830,8 @@ exports[`renders login page correctly 1`] = `
       >
         <label
           className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-          htmlFor="mantine-vxbrburqm"
-          id="mantine-vxbrburqm-label"
+          htmlFor="mantine-ytgftcqif"
+          id="mantine-ytgftcqif-label"
           onMouseDown={[Function]}
         >
           Email
@@ -722,7 +848,7 @@ exports[`renders login page correctly 1`] = `
           <input
             aria-invalid={false}
             className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-            id="mantine-vxbrburqm"
+            id="mantine-ytgftcqif"
             onChange={[Function]}
             placeholder="you@upenn.edu"
             required={true}
@@ -736,8 +862,8 @@ exports[`renders login page correctly 1`] = `
       >
         <label
           className="mantine-InputWrapper-label mantine-PasswordInput-label mantine-1fzet7j"
-          htmlFor="mantine-f6vi7nclv"
-          id="mantine-f6vi7nclv-label"
+          htmlFor="mantine-ufwvfxakn"
+          id="mantine-ufwvfxakn-label"
           onMouseDown={[Function]}
         >
           Password
@@ -757,7 +883,7 @@ exports[`renders login page correctly 1`] = `
           >
             <input
               className="mantine-9zz0g4 mantine-PasswordInput-innerInput"
-              id="mantine-f6vi7nclv"
+              id="mantine-ufwvfxakn"
               onChange={[Function]}
               placeholder="Your password"
               required={true}
@@ -808,7 +934,7 @@ exports[`renders login page correctly 1`] = `
             >
               <input
                 className="mantine-qjqn4g mantine-Checkbox-input"
-                id="mantine-bhzmpq57f"
+                id="mantine-fmqofb2vy"
                 type="checkbox"
               />
               <svg
@@ -830,7 +956,7 @@ exports[`renders login page correctly 1`] = `
             >
               <label
                 className="mantine-9gvgd1 mantine-Checkbox-label"
-                htmlFor="mantine-bhzmpq57f"
+                htmlFor="mantine-fmqofb2vy"
               >
                 Remember me
               </label>
@@ -991,6 +1117,12 @@ Array [
             href="/newartists"
           >
             New Artists
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
           </a>
         </div>
         <div
@@ -1207,6 +1339,12 @@ Array [
           >
             New Artists
           </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
+          </a>
         </div>
         <div
           className="mantine-Group-root mantine-k3ov3c"
@@ -1290,11 +1428,11 @@ Array [
       role="tablist"
     >
       <button
-        aria-controls="mantine-n71tgutfz-panel-Playlists"
+        aria-controls="mantine-kclpqjdum-panel-Playlists"
         aria-selected={true}
         className="mantine-UnstyledButton-root mantine-Tabs-tab mantine-1hher0m"
         data-active={true}
-        id="mantine-n71tgutfz-tab-Playlists"
+        id="mantine-kclpqjdum-tab-Playlists"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="tab"
@@ -1308,10 +1446,10 @@ Array [
         </span>
       </button>
       <button
-        aria-controls="mantine-n71tgutfz-panel-Friends"
+        aria-controls="mantine-kclpqjdum-panel-Friends"
         aria-selected={false}
         className="mantine-UnstyledButton-root mantine-Tabs-tab mantine-1hher0m"
-        id="mantine-n71tgutfz-tab-Friends"
+        id="mantine-kclpqjdum-tab-Friends"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="tab"
@@ -1325,10 +1463,10 @@ Array [
         </span>
       </button>
       <button
-        aria-controls="mantine-n71tgutfz-panel-Conversations"
+        aria-controls="mantine-kclpqjdum-panel-Conversations"
         aria-selected={false}
         className="mantine-UnstyledButton-root mantine-Tabs-tab mantine-1hher0m"
-        id="mantine-n71tgutfz-tab-Conversations"
+        id="mantine-kclpqjdum-tab-Conversations"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="tab"
@@ -1342,10 +1480,10 @@ Array [
         </span>
       </button>
       <button
-        aria-controls="mantine-n71tgutfz-panel-Communities"
+        aria-controls="mantine-kclpqjdum-panel-Communities"
         aria-selected={false}
         className="mantine-UnstyledButton-root mantine-Tabs-tab mantine-1hher0m"
-        id="mantine-n71tgutfz-tab-Communities"
+        id="mantine-kclpqjdum-tab-Communities"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="tab"
@@ -1360,9 +1498,9 @@ Array [
       </button>
     </div>
     <div
-      aria-labelledby="mantine-n71tgutfz-tab-Playlists"
+      aria-labelledby="mantine-kclpqjdum-tab-Playlists"
       className="mantine-Tabs-panel mantine-35mi2b"
-      id="mantine-n71tgutfz-panel-Playlists"
+      id="mantine-kclpqjdum-panel-Playlists"
       role="tabpanel"
     >
       <div
@@ -1421,12 +1559,12 @@ Array [
             </div>
           </h1>
           <button
-            aria-controls="mantine-4weq5i7d7-dropdown"
+            aria-controls="mantine-lybc0mn6p-dropdown"
             aria-expanded={false}
             aria-haspopup="dialog"
             className="mantine-UnstyledButton-root mantine-Button-root mantine-143ptlp"
             data-button={true}
-            id="mantine-4weq5i7d7-target"
+            id="mantine-lybc0mn6p-target"
             onClick={[Function]}
             onKeyDown={[Function]}
             type="button"
@@ -1450,9 +1588,9 @@ Array [
       </div>
     </div>
     <div
-      aria-labelledby="mantine-n71tgutfz-tab-Friends"
+      aria-labelledby="mantine-kclpqjdum-tab-Friends"
       className="mantine-Tabs-panel mantine-18ozoug"
-      id="mantine-n71tgutfz-panel-Friends"
+      id="mantine-kclpqjdum-panel-Friends"
       role="tabpanel"
     >
       <div
@@ -1516,9 +1654,9 @@ Array [
       </div>
     </div>
     <div
-      aria-labelledby="mantine-n71tgutfz-tab-Conversations"
+      aria-labelledby="mantine-kclpqjdum-tab-Conversations"
       className="mantine-Tabs-panel mantine-18ozoug"
-      id="mantine-n71tgutfz-panel-Conversations"
+      id="mantine-kclpqjdum-panel-Conversations"
       role="tabpanel"
     >
       <div
@@ -1582,9 +1720,9 @@ Array [
       </div>
     </div>
     <div
-      aria-labelledby="mantine-n71tgutfz-tab-Communities"
+      aria-labelledby="mantine-kclpqjdum-tab-Communities"
       className="mantine-Tabs-panel mantine-18ozoug"
-      id="mantine-n71tgutfz-panel-Communities"
+      id="mantine-kclpqjdum-panel-Communities"
       role="tabpanel"
     >
       <div
@@ -1737,8 +1875,8 @@ exports[`renders register page correctly 1`] = `
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-c31qsy39t"
-              id="mantine-c31qsy39t-label"
+              htmlFor="mantine-p6ooj4qow"
+              id="mantine-p6ooj4qow-label"
               onMouseDown={[Function]}
             >
               First Name
@@ -1755,7 +1893,7 @@ exports[`renders register page correctly 1`] = `
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-c31qsy39t"
+                id="mantine-p6ooj4qow"
                 onChange={[Function]}
                 placeholder="First name"
                 required={true}
@@ -1769,8 +1907,8 @@ exports[`renders register page correctly 1`] = `
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-jfgjbwegp"
-              id="mantine-jfgjbwegp-label"
+              htmlFor="mantine-3jjrsnwyo"
+              id="mantine-3jjrsnwyo-label"
               onMouseDown={[Function]}
             >
               Last Name
@@ -1787,7 +1925,7 @@ exports[`renders register page correctly 1`] = `
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-jfgjbwegp"
+                id="mantine-3jjrsnwyo"
                 onChange={[Function]}
                 placeholder="Last name"
                 required={true}
@@ -1802,8 +1940,8 @@ exports[`renders register page correctly 1`] = `
         >
           <label
             className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-            htmlFor="mantine-kfex8jzdi"
-            id="mantine-kfex8jzdi-label"
+            htmlFor="mantine-8k5mcwn4i"
+            id="mantine-8k5mcwn4i-label"
             onMouseDown={[Function]}
           >
             Email
@@ -1820,7 +1958,7 @@ exports[`renders register page correctly 1`] = `
             <input
               aria-invalid={false}
               className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-              id="mantine-kfex8jzdi"
+              id="mantine-8k5mcwn4i"
               onChange={[Function]}
               placeholder="example@example.com"
               required={true}
@@ -1834,8 +1972,8 @@ exports[`renders register page correctly 1`] = `
         >
           <label
             className="mantine-InputWrapper-label mantine-PasswordInput-label mantine-1fzet7j"
-            htmlFor="mantine-s2t5p9wp0"
-            id="mantine-s2t5p9wp0-label"
+            htmlFor="mantine-bzxpv1a8u"
+            id="mantine-bzxpv1a8u-label"
             onMouseDown={[Function]}
           >
             Password
@@ -1855,7 +1993,7 @@ exports[`renders register page correctly 1`] = `
             >
               <input
                 className="mantine-9zz0g4 mantine-PasswordInput-innerInput"
-                id="mantine-s2t5p9wp0"
+                id="mantine-bzxpv1a8u"
                 onChange={[Function]}
                 placeholder="Your password"
                 required={true}
@@ -2036,6 +2174,12 @@ Array [
           >
             New Artists
           </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
+          </a>
         </div>
         <div
           className="mantine-Group-root mantine-k3ov3c"
@@ -2109,8 +2253,8 @@ Array [
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-0om5hyz9i"
-              id="mantine-0om5hyz9i-label"
+              htmlFor="mantine-fb9ghojfx"
+              id="mantine-fb9ghojfx-label"
               onMouseDown={[Function]}
             >
               Artist Name
@@ -2127,7 +2271,7 @@ Array [
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-0om5hyz9i"
+                id="mantine-fb9ghojfx"
                 onChange={[Function]}
                 placeholder="Artist name"
                 required={true}
@@ -2141,8 +2285,8 @@ Array [
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-7pmjxm1tb"
-              id="mantine-7pmjxm1tb-label"
+              htmlFor="mantine-glr7a0pmq"
+              id="mantine-glr7a0pmq-label"
               onMouseDown={[Function]}
             >
               Email
@@ -2159,7 +2303,7 @@ Array [
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-7pmjxm1tb"
+                id="mantine-glr7a0pmq"
                 onChange={[Function]}
                 placeholder="example@upenn.edu"
                 required={true}
@@ -2173,8 +2317,8 @@ Array [
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-sbtfoxzvk"
-              id="mantine-sbtfoxzvk-label"
+              htmlFor="mantine-97cgeqii9"
+              id="mantine-97cgeqii9-label"
               onMouseDown={[Function]}
             >
               Spotify Playlist URL
@@ -2191,7 +2335,7 @@ Array [
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-sbtfoxzvk"
+                id="mantine-97cgeqii9"
                 onChange={[Function]}
                 placeholder="https://open.spotify.com/playlist/7A4x0PAsV8mQhmcKMYqoh1?si=8116bbd893c84e17&pt=3d25df74e576bbae1f93019beb71cea0"
                 required={true}
@@ -2205,8 +2349,8 @@ Array [
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-tqe1urz8w"
-              id="mantine-tqe1urz8w-label"
+              htmlFor="mantine-6x8oq7k7i"
+              id="mantine-6x8oq7k7i-label"
               onMouseDown={[Function]}
             >
               Playlist Name
@@ -2223,7 +2367,7 @@ Array [
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-tqe1urz8w"
+                id="mantine-6x8oq7k7i"
                 onChange={[Function]}
                 placeholder="Rainy Daze"
                 required={true}
@@ -2237,8 +2381,8 @@ Array [
           >
             <label
               className="mantine-InputWrapper-label mantine-TextInput-label mantine-1fzet7j"
-              htmlFor="mantine-hc42cy36p"
-              id="mantine-hc42cy36p-label"
+              htmlFor="mantine-l611gjndd"
+              id="mantine-l611gjndd-label"
               onMouseDown={[Function]}
             >
               Playlist Description
@@ -2255,7 +2399,7 @@ Array [
               <input
                 aria-invalid={false}
                 className="mantine-Input-input mantine-TextInput-input mantine-ax01a0"
-                id="mantine-hc42cy36p"
+                id="mantine-l611gjndd"
                 onChange={[Function]}
                 placeholder="the daze when it rains"
                 required={true}
@@ -2374,6 +2518,12 @@ Array [
             href="/newartists"
           >
             New Artists
+          </a>
+          <a
+            className="mantine-1pmmtd9"
+            href="/playlistfeed"
+          >
+            Playlist Feed
           </a>
         </div>
         <div

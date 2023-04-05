@@ -1,4 +1,4 @@
-import { newUser } from '../api/getData';
+import { newUser } from '../api/getUserData';
 
 jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({
