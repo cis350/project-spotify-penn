@@ -3,6 +3,7 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import getConversations from '../api/getConversations';
 
 export function ConversationsTable() {
   const [rows, setRows] = useState(null);
@@ -13,7 +14,7 @@ export function ConversationsTable() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8000/conversations')
+    getConversations()
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

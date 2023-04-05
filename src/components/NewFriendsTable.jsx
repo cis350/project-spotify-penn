@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import {
   Avatar, Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
-import getOtherUsers from '../api/getUsers';
+import { getOtherUsers } from '../api/getUsers';
 
 export function FriendsTable() {
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
     getOtherUsers()
-      .then((data) => {
+      .then((res) => res.json()).then((data) => {
         if (data.length === 0) {
           throw new Error('empty data');
         }

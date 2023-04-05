@@ -2,17 +2,27 @@ import {
   Avatar, Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import getFriends from '../api/getFriends';
 
 export function FriendsTable() {
-  const [rows, setRows] = useState(null);
+  const [rows, setRows] = useState([]);
+  const navigate = useNavigate();
+  const goToVibes = () => {
+    navigate('/users');
+  };
 
   useEffect(() => {
-    fetch('http://localhost:8000/friends')
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const res = await getFriends();
+        const data = await res.json();
+
         if (data.length === 0) {
           throw new Error('empty data');
         }
+
         setRows(
           data.map((item) => (
             <tr key={item.name}>
@@ -27,18 +37,20 @@ export function FriendsTable() {
             </tr>
           )),
         );
-      })
-      .catch(() => setRows(
-        <tr>
-          <td>
-            <Group spacing="sm" position="center">
-              <Button>
-                Find Friends
-              </Button>
-            </Group>
-          </td>
-        </tr>,
-      ));
+      } catch (error) {
+        setRows(
+          <tr>
+            <td>
+              <Group spacing="sm" position="center">
+                <Button onClick={goToVibes}>Find Friends</Button>
+              </Group>
+            </td>
+          </tr>,
+        );
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

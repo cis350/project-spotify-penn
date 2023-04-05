@@ -19,7 +19,7 @@ import { PlaylistFeed } from './components/PlaylistFeed';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route
         path="/home"
         element={(

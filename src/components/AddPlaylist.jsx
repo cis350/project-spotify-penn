@@ -5,7 +5,7 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
+import { postNewPlaylist } from '../api/userPlaylists';
 
 export function AddPlaylist(props) {
   const form = useForm({
@@ -24,19 +24,7 @@ export function AddPlaylist(props) {
 
   const handleCreatePlaylist = () => {
     const { id, name, desc } = form.values;
-    axios.post(
-      'http://localhost:8000/playlists',
-      {
-        id,
-        name,
-        desc,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    ).then(() => {
+    postNewPlaylist(id, name, desc).then(() => {
       form.reset();
       props.onPlaylistCreated();
     });
@@ -48,7 +36,7 @@ export function AddPlaylist(props) {
     }
   };
   return (
-    <Popover width={300} trapFocus position="bottom" withArrow shadow="md" onKeyDown={handleKeyDown}>
+    <Popover width={300} trapFocus position="bottom" withArrow shadow="md" onKeyDown={handleKeyDown} closeOnClickOutside closeOnEscape>
       <Popover.Target>
         <Button>Upload New Playlist</Button>
       </Popover.Target>

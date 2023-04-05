@@ -1,6 +1,6 @@
-import getPlaylists from '../api/getUserPlaylists';
+import { getPlaylists } from '../api/userPlaylists';
 
-jest.mock('../api/getUserPlaylists.js');
+jest.mock('../api/userPlaylists.js');
 
 getPlaylists.mockResolvedValue(
   [

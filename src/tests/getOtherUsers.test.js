@@ -1,14 +1,14 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import getOtherUsers from '../api/getUsers';
+import { getOtherUsers } from '../api/getUsers';
 
 const mockAxios = new MockAdapter(axios);
 
 describe('the api returned correct communities', () => {
   mockAxios.onGet().reply(200, {
     id: 5,
-    avatar: "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-    name: "Student 2",
+    avatar: 'https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max',
+    name: 'Student 2',
   });
 
   test('id being 5', async () => {
@@ -20,10 +20,9 @@ describe('the api returned correct communities', () => {
     const data = await getOtherUsers();
     expect(data.avatar).not.toBeNull();
   });
-  
+
   test('test student name', async () => {
     const data = await getOtherUsers();
-    expect(data.name).toBe("Student 2");
+    expect(data.name).toBe('Student 2');
   });
-
 });

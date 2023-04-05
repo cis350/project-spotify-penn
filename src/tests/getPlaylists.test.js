@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import getPlaylists from '../api/getUserPlaylists';
+import { getPlaylists } from '../api/userPlaylists';
 
 const mockAxios = new MockAdapter(axios);
 

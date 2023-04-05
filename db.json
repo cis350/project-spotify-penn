@@ -221,6 +221,15 @@
       "spotifyURL": "dino",
       "playlistName": "The Green Machine",
       "description": "Dino Beatz",
+      "likes": false,
+      "id": 1
+    },
+    {
+      "artistName": "Mags",
+      "email": "mags@upenn.edu",
+      "spotifyURL": "fda",
+      "playlistName": "Rainy Daze",
+      "description": "for the days when it rains",
       "likes": true,
       "id": 1
     },

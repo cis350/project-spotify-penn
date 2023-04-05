@@ -1,34 +1,46 @@
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { getCommunities } from '../api/getCommunities';
+import { getCommunities, newCommunity } from '../api/getCommunities';
 
-const mockAxios = new MockAdapter(axios);
+jest.mock('axios');
 
-describe('the api returned correct communities', () => {
-  mockAxios.onGet().reply(200, {
-    name: "ABC",
-    image: "https://doublejj.com/wp-content/uploads/2018/03/2880x1800-cream-solid-color-background.jpg",
-    numMember: "2",
-    desc: "no description"
+describe('getCommunities', () => {
+  it('fetches successfully data from an API', async () => {
+    const data = [{ name: 'Community 1' }, { name: 'Community 2' }];
+    axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
+    await expect(getCommunities()).resolves.toEqual(data);
   });
 
-  test('Community name is ABC', async () => {
-    const data = await getCommunities();
-    expect(data.name).toBe('ABC');
+  it('throws an error when no data is returned', async () => {
+    const errorMessage = 'Request failed with status code 404';
+    axios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)));
+    await expect(getCommunities()).rejects.toThrow(errorMessage);
+  });
+});
+
+describe('newCommunity', () => {
+  it('sends post request and returns data', async () => {
+    const data = { name: 'Community 3', description: 'This is the third community' };
+    axios.post.mockImplementationOnce(() => Promise.resolve({ data }));
+    await expect(newCommunity(data.name, data.description)).resolves.toEqual(data);
+    expect(axios.post).toHaveBeenCalledWith(
+      'http://localhost:8000/communities',
+      {
+        name: data.name,
+        image: 'https://cdn.vox-cdn.com/thumbor/rUje72-KDI-XYKbKnvYxov-ueyQ=/0x0:1000x655/1400x1050/filters:focal(420x248:580x408):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/48671171/shutterstock_114033616.0.jpg',
+        numMember: '1',
+        description: data.description,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
   });
 
-  test('image is correct', async () => {
-    const data = await getSongs();
-    expect(data.image).toBe('https://doublejj.com/wp-content/uploads/2018/03/2880x1800-cream-solid-color-background.jpg');
-  });
-
-  test('the number of members', async () => {
-    const data = await getSongs();
-    expect(data.numMember).toBe("2");
-  });
-
-  test('test description is not empty', async () => {
-    const data = await getSongs();
-    expect(data.desc).not.toBeNull();
+  it('throws an error when post request fails', async () => {
+    const errorMessage = 'Request failed with status code 500';
+    axios.post.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)));
+    await expect(newCommunity('Community 3', 'This is the third community')).rejects.toThrow(errorMessage);
   });
 });

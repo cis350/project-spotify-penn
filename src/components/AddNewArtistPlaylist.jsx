@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
-import '@fontsource/inter';
+
 import {
   TextInput,
   Paper,

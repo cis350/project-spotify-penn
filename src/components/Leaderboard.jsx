@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
-  Center, Container, Paper, Stack, Divider, Select, Button, Group, Title,
+  Center, Paper, Stack, Divider, Select, Button, Group, Title,
 } from '@mantine/core';
 import LazyTable from './LazyTable';
 
