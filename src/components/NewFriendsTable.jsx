@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {
   Avatar, Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
-import getOtherUsers from '../api/getUsers';
+import { getOtherUsers } from '../api/getUsers';
 
 export function FriendsTable() {
   const [rows, setRows] = useState(null);

@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from '@mantine/carousel';
 import PropTypes from 'prop-types';
-// import { useMediaQuery } from '@mantine/hooks';
 import {
   Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem,
 } from '@mantine/core';
 import CreateNewCommunity from './CreateCommunity';
 import { getCommunities } from '../api/getCommunities';
 
-// const [currName, setName] = useState('');
-// const [carousel, setCarousel] = useState(null);
-
 const handleSearchClick = () => {
-  // console.log(`Searching for "${searchQuery}"...`);
 };
 
 const useStyles = createStyles((theme) => ({

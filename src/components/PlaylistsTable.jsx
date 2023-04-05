@@ -3,12 +3,13 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import AddNewPlaylist from './AddPlaylist';
+import getPlaylists from '../api/getUserPlaylists';
 
 export function PlaylistTable() {
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/playlists')
+    getPlaylists()
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

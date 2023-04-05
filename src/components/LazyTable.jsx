@@ -1,18 +1,17 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
-  Table, Stack, Paper, Pagination, Select,
+  Table, Paper,
 } from '@mantine/core';
 
 export default function LazyTable({
-  route, columns, defaultPageSize, rowsPerPageOptions,
+  route, columns, defaultPageSize,
 }) {
   const [data, setData] = useState([]);
 
-  const [page, setPage] = useState(1); // 1 indexed
-  const [pageSize, setPageSize] = useState(defaultPageSize ?? 10);
+  const [page] = useState(1); // 1 indexed
+  const [pageSize] = useState(defaultPageSize ?? 10);
 
   useEffect(() => {
     fetch(`${route}?page=${page}&page_size=${pageSize}`)
@@ -20,25 +19,7 @@ export default function LazyTable({
       .then((resJson) => setData(resJson));
   }, [route, page, pageSize]);
 
-  // const handleChangePage = (newPage) => {
-  //   if (newPage < page || data.length === pageSize) {
-  //     setPage(newPage + 1);
-  //   }
-  // };
-
-  // const handleChangePageSize = (newPageSize) => {
-  //   setPageSize(newPageSize);
-  //   setPage(1);
-  // };
-
   const defaultRenderCell = (col, row) => <div>{row[col.field]}</div>;
-
-  // const handleChangePageSize = (value) => {
-  //   const newPageSize = value;
-
-  //   setPageSize(newPageSize);
-  //   setPage(1);
-  // };
 
   return (
     <Paper padding="md" mx={10} my={10} shadow={0}>

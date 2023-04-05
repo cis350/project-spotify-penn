@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  Center, Stack, Title,
+  Title,
 } from '@mantine/core';
 import Feed from './NewArtistsFeed';
 

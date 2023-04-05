@@ -1,43 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1679622904220" clover="3.2.0">
-  <project timestamp="1679622904220" name="All files">
-    <metrics statements="25" coveredstatements="24" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5" elements="32" coveredelements="30" complexity="0" loc="25" ncloc="25" packages="1" files="4" classes="4"/>
-    <file name="getData.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getData.js">
-      <metrics statements="13" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
-      <line num="4" count="3" type="stmt"/>
-      <line num="5" count="4" type="stmt"/>
-      <line num="6" count="4" type="stmt"/>
-      <line num="7" count="2" type="stmt"/>
-      <line num="8" count="2" type="cond" truecount="1" falsecount="1"/>
-      <line num="9" count="0" type="stmt"/>
-      <line num="11" count="2" type="stmt"/>
-      <line num="15" count="3" type="stmt"/>
-      <line num="16" count="8" type="stmt"/>
-      <line num="22" count="8" type="stmt"/>
-      <line num="27" count="8" type="stmt"/>
-      <line num="28" count="8" type="stmt"/>
-      <line num="33" count="6" type="stmt"/>
-    </file>
-    <file name="getLeaderboardSongs.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getLeaderboardSongs.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="4" count="4" type="stmt"/>
-      <line num="5" count="4" type="stmt"/>
-      <line num="6" count="4" type="stmt"/>
-    </file>
-    <file name="getLoginUser.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getLoginUser.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="4" count="4" type="stmt"/>
-      <line num="5" count="4" type="stmt"/>
-      <line num="6" count="4" type="stmt"/>
-    </file>
-    <file name="getUserPlaylists.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getUserPlaylists.js">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="4" count="4" type="stmt"/>
-      <line num="5" count="4" type="stmt"/>
-      <line num="6" count="4" type="stmt"/>
-    </file>
+<coverage generated="1680656184850" clover="3.2.0">
+  <project timestamp="1680656184850" name="All files">
+    <metrics statements="56" coveredstatements="34" conditionals="16" coveredconditionals="2" methods="17" coveredmethods="7" elements="89" coveredelements="43" complexity="0" loc="56" ncloc="56" packages="3" files="7" classes="7"/>
+    <package name="api">
+      <metrics statements="35" coveredstatements="31" conditionals="4" coveredconditionals="2" methods="7" coveredmethods="6"/>
+      <file name="getData.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getData.js">
+        <metrics statements="13" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="27" count="8" type="stmt"/>
+        <line num="28" count="8" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+      </file>
+      <file name="getLeaderboardSongs.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getLeaderboardSongs.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+      </file>
+      <file name="getLoginUser.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getLoginUser.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+      </file>
+      <file name="getUserPlaylists.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getUserPlaylists.js">
+        <metrics statements="7" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+      </file>
+      <file name="getUsers.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/api/getUsers.js">
+        <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="logos.js" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/assets/logos.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components">
+      <metrics statements="19" coveredstatements="1" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="1"/>
+      <file name="Login.jsx" path="/Users/maggieschwierking/Desktop/project-spotify-penn/src/components/Login.jsx">
+        <metrics statements="19" coveredstatements="1" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="1"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

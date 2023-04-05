@@ -2,12 +2,13 @@ import {
   Avatar, Table, Group, Text, ScrollArea, Center, Button,
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
+import getFriends from '../api/getFriends';
 
 export function FriendsTable() {
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/friends')
+    getFriends()
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

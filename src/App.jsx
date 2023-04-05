@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Navigate, Route, Routes,
+  Navigate, Route, Router,
 } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -17,7 +17,7 @@ import NewArtistsPage from './components/NewArtistsPage';
 
 function App() {
   return (
-    <Routes>
+    <Router>
       <Route path="/" element={<Navigate to="/login" />} />
       <Route
         path="/home"
@@ -102,7 +102,7 @@ function App() {
           </>
         )}
       />
-    </Routes>
+    </Router>
   );
 }
 

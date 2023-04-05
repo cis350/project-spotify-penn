@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * @jest-environment jsdom
  */
@@ -9,6 +10,15 @@ import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
 
 import UserList from '../components/UserList';
+
+class ResizeObserver {
+  observe() {}
+
+  unobserve() {}
+
+  disconnect() {}
+}
+window.ResizeObserver = ResizeObserver;
 
 describe('Component rendering tests', () => {
   test('test that a user list is in the document', () => {

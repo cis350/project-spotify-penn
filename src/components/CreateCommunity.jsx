@@ -1,11 +1,10 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-// import axios from 'axios';
 import { newCommunity } from '../api/getCommunities';
 
 function CreateCommunity(props) {

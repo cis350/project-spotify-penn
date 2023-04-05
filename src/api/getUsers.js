@@ -7,4 +7,8 @@ const getOtherUsers = async () => {
   return res.data;
 };
 
-export default getOtherUsers;
+const getOtherUsersID = async (userId) => {
+  const res = await axios.get(`http://localhost:8000/other-users/${userId}`);
+  return res.data;
+};
+export { getOtherUsers, getOtherUsersID };

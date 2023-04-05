@@ -1,14 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
-// import axios from 'axios';
-import '@fontsource/inter';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@fontsource/rubik';
-// eslint-disable-next-line no-unused-vars
 import { IconAlertCircle } from '@tabler/icons-react';
 import {
   Container,
@@ -26,7 +18,6 @@ import {
   Center,
 } from '@mantine/core';
 import { darkLogo } from '../assets/logos';
-// import logo from '../assets/logo.png';
 import { getPassword } from '../api/getData';
 
 function Login() {
@@ -59,8 +50,7 @@ function Login() {
         setLoginError(true);
         form.reset();
       }
-    }).catch((error) => {
-      console.error(error);
+    }).catch(() => {
       setLoginError(true);
       form.reset();
     });

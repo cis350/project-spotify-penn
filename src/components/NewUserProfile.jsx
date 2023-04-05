@@ -7,6 +7,7 @@ import Friends from './FriendsTable';
 import Communities from './CommunitiesTable';
 import Conversations from './ConversationsTable';
 import Playlists from './PlaylistsTable';
+import { getOtherUsersID } from '../api/getUsers';
 
 function UserGroup() {
   const { userId } = useParams();
@@ -14,7 +15,7 @@ function UserGroup() {
   const [friendState, setFriendState] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/other-users/${userId}`)
+    getOtherUsersID(userId)
       .then((res) => res.json())
       .then((resJson) => setUserData(resJson));
   }, [userId]);

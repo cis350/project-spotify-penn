@@ -1,10 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
-import '@fontsource/inter';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 import {
@@ -15,11 +10,7 @@ import {
   Space,
   Alert,
   Group,
-  Checkbox,
-  Anchor,
-  Box,
   Stack,
-  Grid,
   Button,
   Container,
   Title,
@@ -61,7 +52,6 @@ function Register() {
       if (error.message === 'Request failed with status code 500') {
         setInUse(true);
       }
-      console.error(error);
     });
   };
 
