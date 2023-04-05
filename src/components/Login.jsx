@@ -18,7 +18,7 @@ import {
   Center,
 } from '@mantine/core';
 import { darkLogo } from '../assets/logos';
-import { getPassword } from '../api/getData';
+import { getPassword } from '../api/getUserData';
 
 function Login() {
   const navigate = useNavigate();
