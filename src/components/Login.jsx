@@ -47,7 +47,6 @@ function Login() {
       if (userData.password === password) {
         const sessionId = userData.id;
         window.sessionStorage.setItem('sessionId', sessionId);
-        console.log(sessionId);
         navigate('/home');
       } else {
         setLoginError(true);
