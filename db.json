@@ -75,6 +75,63 @@
     }
   ],
   "conversations": [],
+  "sockets": [
+    {
+      "id": 1,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "messages": [
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "messages": [
+        {
+          "text": "helloooooo",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hello",
+          "sender": "admin@gmail.com"
+        },
+        {
+          "text": "hi",
+          "sender": "admin@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "messages": []
+    },
+    {
+      "id": 5,
+      "messages": []
+    },
+    {
+      "id": 6,
+      "messages": []
+    }
+  ],
   "playlists": [
     {
       "id": "1",
