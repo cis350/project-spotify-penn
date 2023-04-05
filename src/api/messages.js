@@ -41,8 +41,7 @@ const newConversation = async (socket) => {
     url,
     data,
     options,
-  ).catch((error) => {
-    console.error(error.message);
+  ).catch(() => {
   });
   return res.data;
 };
@@ -54,7 +53,7 @@ const getSockets = async () => {
     const res = await axios.get(url);
     sockets = res.data.map((socket) => socket.id);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
   return sockets;
 };

@@ -230,17 +230,17 @@
       "spotifyURL": "fda",
       "playlistName": "Rainy Daze",
       "description": "for the days when it rains",
-      "likes": true,
-      "id": 1
+      "likes": false,
+      "id": 2
     },
     {
-      "artistName": "Stela",
-      "email": "stelar@sas.upenn.edu",
-      "spotifyURL": "blah",
-      "playlistName": "blah blah",
-      "description": "blah blah",
-      "likes": true,
-      "id": 2
+      "artistName": "maggie",
+      "email": "mags@upenn.edu",
+      "spotifyURL": "fdsa",
+      "playlistName": "maggie's main",
+      "description": "sad, happy, etc.",
+      "likes": false,
+      "id": 3
     }
   ]
 }
