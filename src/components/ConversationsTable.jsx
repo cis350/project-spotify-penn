@@ -14,7 +14,7 @@ export function ConversationsTable() {
   };
 
   useEffect(() => {
-    getConversations
+    getConversations()
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -199,7 +199,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,11 +243,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -319,7 +319,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 import { darkLogo } from '../assets/logos';
 &nbsp;
-const useStyles = createStyles(<span class="fstat-no" title="function not covered" >(t</span>heme) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+const useStyles = createStyles((theme) =&gt; ({
   link: {
     display: 'flex',
     alignItems: 'center',
@@ -327,7 +327,7 @@ const useStyles = createStyles(<span class="fstat-no" title="function not covere
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    color: theme.colorScheme === 'dark' ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.white </span>: theme.black,
     fontWeight: 500,
     fontSize: theme.fontSizes.sm,
 &nbsp;
@@ -339,7 +339,7 @@ const useStyles = createStyles(<span class="fstat-no" title="function not covere
     },
 &nbsp;
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.colors.dark[6] </span>: theme.colors.gray[0],
     }),
   },
 &nbsp;
@@ -349,7 +349,7 @@ const useStyles = createStyles(<span class="fstat-no" title="function not covere
     borderRadius: theme.radius.md,
 &nbsp;
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.colors.dark[7] </span>: theme.colors.gray[0],
     }),
 &nbsp;
     '&amp;:active': theme.activeStyles,
@@ -362,12 +362,12 @@ const useStyles = createStyles(<span class="fstat-no" title="function not covere
   },
 }));
 &nbsp;
-function <span class="fstat-no" title="function not covered" >MainHeader(</span>) {
-  const [drawerOpened, { toggle: toggleDrawer }] = <span class="cstat-no" title="statement not covered" >useDisclosure(false);</span>
-  const { classes } = <span class="cstat-no" title="statement not covered" >useStyles();</span>
-  const navigate = <span class="cstat-no" title="statement not covered" >useNavigate();</span>
+function MainHeader() {
+  const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
+  const { classes } = useStyles();
+  const navigate = useNavigate();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;Box&gt;
       &lt;Header height={60} px="md"&gt;
         &lt;Group position="apart" sx={{ height: '100%' }}&gt;
@@ -430,7 +430,7 @@ export default MainHeader;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-05T00:53:55.207Z
+                at 2023-04-05T03:34:14.712Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

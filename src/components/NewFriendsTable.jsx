@@ -10,7 +10,7 @@ export function FriendsTable() {
 
   useEffect(() => {
     getOtherUsers()
-      .then((data) => {
+      .then((res) => res.json()).then((data) => {
         if (data.length === 0) {
           throw new Error('empty data');
         }

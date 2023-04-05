@@ -9,4 +9,5 @@ module.exports = {
       '<rootDir>/src/mocks/fileMock.js',
     '\\.(css|less)$': '<rootDir>/src/mocks/styleMock.js',
   },
+  testEnvironment: 'jsdom',
 };

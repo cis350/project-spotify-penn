@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from '@mantine/carousel';
 import PropTypes from 'prop-types';
 import {
-  Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem,
+  Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem, Space,
 } from '@mantine/core';
 import CreateNewCommunity from './CreateCommunity';
 import { getCommunities } from '../api/getCommunities';
@@ -127,9 +127,10 @@ export function Community() {
           Search
         </Button>
       </Flex>
+      <Space h="xl" />
 
       <CreateNewCommunity onCommunityCreated={handleCreateCommunity} />
-
+      <Space h={50} />
       <Carousel
         slideSize="25%"
         breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 2 }]}

@@ -32,13 +32,7 @@ export function CommunitiesTable() {
       })
       .catch(() => setRows(
         <tr>
-          <td>
-            <Group spacing="sm" position="center">
-              <Button onClick={(() => navigate('/communities'))}>
-                Find Communities
-              </Button>
-            </Group>
-          </td>
+          <td />
         </tr>,
       ));
   }, []);
