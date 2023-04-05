@@ -1,6 +1,7 @@
 module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.js?$': 'babel-jest',
   },
   transformIgnorePatterns: ['node_modules/(?!@?axios)'],
   automock: false,

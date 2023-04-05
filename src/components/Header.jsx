@@ -96,6 +96,9 @@ function MainHeader() {
             <a href="/newartists" className={classes.link}>
               New Artists
             </a>
+            <a href="/playlistfeed" className={classes.link}>
+              Playlist Feed
+            </a>
           </Group>
           <Group className={classes.hiddenMobile}>
             <Avatar
