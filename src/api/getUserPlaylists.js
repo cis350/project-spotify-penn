@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getPlaylists = async () => {
-  const url = 'https://localhost:8000/playlists';
+  const url = 'http://localhost:8000/playlists';
   const res = await axios.get(url);
   const { data } = res;
   if (data.length === 0) {
