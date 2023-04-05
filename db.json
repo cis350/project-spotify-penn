@@ -75,118 +75,44 @@
     }
   ],
   "conversations": [],
-  "sockets": [
-    {
-      "id": 1,
-      "messages": [
-        {
-          "text": "hello",
-          "sender": "admin@gmail.com"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "messages": [
-        {
-          "text": "hello",
-          "sender": "admin@gmail.com"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "messages": [
-        {
-          "text": "helloooooo",
-          "sender": "admin@gmail.com"
-        },
-        {
-          "text": "hello",
-          "sender": "admin@gmail.com"
-        },
-        {
-          "text": "hello",
-          "sender": "admin@gmail.com"
-        },
-        {
-          "text": "hello",
-          "sender": "admin@gmail.com"
-        },
-        {
-          "text": "hi",
-          "sender": "admin@gmail.com"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "messages": []
-    },
-    {
-      "id": 5,
-      "messages": []
-    },
-    {
-      "id": 6,
-      "messages": []
-    }
-  ],
-  "communities": [
-    {
-      "id": 4,
-      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-      "name": "Student 1"
-    },
-    {
-      "id": 5,
-      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-      "name": "Student 2"
-    },
-    {
-      "id": 6,
-      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-      "name": "Student 3"
-    },
-    {
-      "id": 7,
-      "avatar": "https://images.nightcafe.studio//assets/profile.png?tr=w-1600,c-at_max",
-      "name": "Student 4"
-    }
-  ],
-  "conversations": [],
   "playlists": [
     {
       "id": "1",
       "name": "Playlist 1",
-      "desc": "Hype songs"
+      "desc": "Hype songs",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     },
     {
       "id": "2",
       "name": "Playlist 2",
-      "desc": "Study jamss"
+      "desc": "Study jamss",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     },
     {
       "id": "432nvsd",
       "name": "hello",
-      "desc": "chill"
+      "desc": "chill",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     },
     {
       "id": "abhijay",
       "name": "abhijay",
-      "desc": "agarwal"
+      "desc": "agarwal",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     },
     {
       "id": "vjfsak234",
       "name": "benjams",
-      "desc": "jams for the ben"
+      "desc": "jams for the ben",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     },
     {
       "id": "43visf9vs0j3",
       "name": "metal is heavy",
-      "desc": "heavy metal"
+      "desc": "heavy metal",
+      "image": "https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg"
     }
-  ], 
+  ],
   "communities": [
     {
       "name": "ABC",
@@ -304,6 +230,15 @@
       "spotifyURL": "fda",
       "playlistName": "Rainy Daze",
       "description": "for the days when it rains",
+      "likes": true,
+      "id": 1
+    },
+    {
+      "artistName": "Stela",
+      "email": "stelar@sas.upenn.edu",
+      "spotifyURL": "blah",
+      "playlistName": "blah blah",
+      "description": "blah blah",
       "likes": true,
       "id": 2
     }

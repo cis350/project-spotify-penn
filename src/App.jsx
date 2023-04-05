@@ -14,6 +14,7 @@ import NewUserProfile from './components/NewUserProfile';
 import Communities from './components/Community';
 import AddNewPlaylist from './components/AddNewArtistPlaylist';
 import NewArtistsPage from './components/NewArtistsPage';
+import { PlaylistFeed } from './components/PlaylistFeed';
 
 function App() {
   return (
@@ -102,6 +103,16 @@ function App() {
           </>
         )}
       />
+      <Route
+        path="/playlistfeed"
+        element={(
+          <>
+            <MainHeader />
+            <PlaylistFeed />
+          </>
+        )}
+      />
+
     </Routes>
   );
 }
