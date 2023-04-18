@@ -45,8 +45,16 @@ const getAllUsers = async () => {
   return users;
 };
 
+const addUser = async (newUser) => {
+  // get the db
+  const db = await getDB();
+  const result = await db.collection('students').insertOne(newUser);
+  return result.insertedId;
+};
+
 module.exports = {
   connect,
   close,
   getAllUsers,
+  addUser,
 };
