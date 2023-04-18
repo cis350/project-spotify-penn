@@ -77,7 +77,18 @@ function Login() {
       if (userData.password === password) {
         const sessionId = userData.id;
         window.sessionStorage.setItem('sessionId', sessionId);
-        navigate(url);
+        window.location = url;
+        const searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has('error')) {
+          const error = searchParams.get('error');
+          console.error(`Authentication failed: ${error}`);
+          navigate('/login');
+        } else {
+          const { hash } = window.location;
+          const accessToken = hash.substring(hash.indexOf('=') + 1, hash.indexOf('&'));
+          console.log(`Access token: ${accessToken}`);
+          window.sessionStorage.setItem('accessToken', accessToken);
+        }
       } else {
         setLoginError(true);
         form.reset();
