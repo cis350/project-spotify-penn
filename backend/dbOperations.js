@@ -24,20 +24,29 @@ const connect = async () => {
 };
 
 const close = async () => {
-  try {
-    await mongoConnection.close();
-    console.log('closed connection to DB');
-    return null;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
+  await mongoConnection.close();
 };
 
-connect();
+// connect to mongoDb and return the database
 
-// eslint-disable-next-line no-undef
-modules.exports = {
+const getDB = async () => {
+  // test if already connected
+  if (!mongoConnection) {
+    await connect();
+  }
+  return mongoConnection.db('spotify');
+};
+
+/* get all the users */
+const getAllUsers = async () => {
+  const db = await getDB();
+  const users = await db.collection('users').find({}).toArray();
+  console.log('users', JSON.stringify(users));
+  return users;
+};
+
+module.exports = {
   connect,
   close,
+  getAllUsers,
 };
