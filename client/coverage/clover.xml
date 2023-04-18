@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1681236902624" clover="3.2.0">
+  <project timestamp="1681236902624" name="All files">
+    <metrics statements="104" coveredstatements="78" conditionals="10" coveredconditionals="8" methods="28" coveredmethods="21" elements="142" coveredelements="107" complexity="0" loc="104" ncloc="104" packages="1" files="11" classes="11"/>
+    <file name="getCommunities.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getCommunities.js">
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="6" count="2" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="11" count="7" type="stmt"/>
+      <line num="17" count="7" type="stmt"/>
+      <line num="22" count="7" type="stmt"/>
+      <line num="23" count="7" type="stmt"/>
+      <line num="28" count="6" type="stmt"/>
+    </file>
+    <file name="getConversations.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getConversations.js">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="4" count="2" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+    </file>
+    <file name="getFriends.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getFriends.js">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="4" count="2" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+    </file>
+    <file name="getLeaderboardSongs.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getLeaderboardSongs.js">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="4" count="4" type="stmt"/>
+      <line num="5" count="4" type="stmt"/>
+      <line num="6" count="4" type="stmt"/>
+    </file>
+    <file name="getLoginUser.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getLoginUser.js">
+      <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="6" count="2" type="stmt"/>
+      <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+    </file>
+    <file name="getUserData.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getUserData.js">
+      <metrics statements="20" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="2"/>
+      <line num="4" count="4" type="stmt"/>
+      <line num="5" count="6" type="stmt"/>
+      <line num="6" count="6" type="stmt"/>
+      <line num="7" count="4" type="stmt"/>
+      <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="11" count="3" type="stmt"/>
+      <line num="15" count="4" type="stmt"/>
+      <line num="16" count="9" type="stmt"/>
+      <line num="22" count="9" type="stmt"/>
+      <line num="27" count="9" type="stmt"/>
+      <line num="28" count="9" type="stmt"/>
+      <line num="33" count="7" type="stmt"/>
+      <line num="36" count="4" type="stmt"/>
+      <line num="37" count="0" type="stmt"/>
+      <line num="38" count="0" type="stmt"/>
+      <line num="39" count="0" type="stmt"/>
+      <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="41" count="0" type="stmt"/>
+      <line num="43" count="0" type="stmt"/>
+    </file>
+    <file name="getUsers.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/getUsers.js">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="6" type="stmt"/>
+      <line num="6" count="6" type="stmt"/>
+      <line num="7" count="5" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+    </file>
+    <file name="messages.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/messages.js">
+      <metrics statements="24" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="0" type="stmt"/>
+      <line num="5" count="0" type="stmt"/>
+      <line num="6" count="0" type="stmt"/>
+      <line num="7" count="0" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="11" count="0" type="stmt"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="20" count="0" type="stmt"/>
+      <line num="21" count="0" type="stmt"/>
+      <line num="26" count="0" type="stmt"/>
+      <line num="29" count="3" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="34" count="0" type="stmt"/>
+      <line num="39" count="0" type="stmt"/>
+      <line num="40" count="0" type="stmt"/>
+      <line num="46" count="0" type="stmt"/>
+      <line num="49" count="3" type="stmt"/>
+      <line num="50" count="0" type="stmt"/>
+      <line num="51" count="0" type="stmt"/>
+      <line num="52" count="0" type="stmt"/>
+      <line num="53" count="0" type="stmt"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="58" count="0" type="stmt"/>
+    </file>
+    <file name="newArtistPlaylists.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/newArtistPlaylists.js">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="2" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+      <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+    </file>
+    <file name="updateLikesNewArtist.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/updateLikesNewArtist.js">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+    </file>
+    <file name="userPlaylists.js" path="/Users/abhijay_agarwal/Desktop/project-spotify-penn/src/api/userPlaylists.js">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="6" type="stmt"/>
+      <line num="5" count="6" type="stmt"/>
+      <line num="7" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="10" count="5" type="stmt"/>
+      <line num="14" count="3" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
