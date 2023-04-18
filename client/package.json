@@ -51,7 +51,6 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "jest --coverage",
-        "eject": "react-scripts eject",
         "db": "npx json-server -w db.json -p 8000"
     },
     "browserslist": {
