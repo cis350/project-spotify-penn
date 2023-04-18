@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { newCommunity } from '../api/communities';
+import { newCommunity } from '../api/getCommunities';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -11,7 +11,7 @@ describe('newUser', () => {
     const numMember = '1';
     const desc = 'this is the second testing community';
     const expectedData = {
-      name, image, numMember, desc,
+      name: name, image: image, numMember: numMember, desc: desc,
     };
     mockAxios.onPost('http://localhost:8000/communities').reply(200, expectedData);
     const data = await newCommunity(name, desc);

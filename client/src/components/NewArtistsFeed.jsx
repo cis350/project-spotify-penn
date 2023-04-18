@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getNewArtistPlaylists } from '../api/newArtistPlaylists';
 import { likes, nolikes } from '../assets/likes';
-import { updateLikesNewArtist } from '../api/updateLikes';
+import updateLikes from '../api/updateLikesNewArtist';
 
 export function ArtistsFeed() {
   const [rows, setRows] = useState(true);
@@ -14,7 +14,7 @@ export function ArtistsFeed() {
 
   function handleClick(item) {
     try {
-      updateLikesNewArtist(item).then(() => {
+      updateLikes(item).then(() => {
         setReload(!reload);
       });
     } catch (error) { /* do nothing */ }

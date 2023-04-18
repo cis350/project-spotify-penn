@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 // import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  Table, Group, ScrollArea, Center, Title, Space, Paper, createStyles, rem, Stack,
+  Table, Group, ScrollArea, Center, Title, Space, Paper, createStyles, rem, Stack, ActionIcon,
 } from '@mantine/core';
-import { getPlaylists } from '../api/userPlaylists';
+import getPlaylists from '../api/getUserPlaylists';
+import { likes, nolikes } from '../assets/likes';
+import updateLikes from '../api/updateLikesNewArtist';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -40,6 +42,15 @@ function Card({ item }) {
   const { classes } = useStyles();
   //   const { image, name, numMember } = item;
   const { image, name } = item;
+  const [reload, setReload] = useState(false);
+
+  function handleClick(itm) {
+    try {
+      updateLikes(itm).then(() => {
+        setReload(!reload);
+      });
+    } catch (error) { /* do nothing */ }
+  }
 
   return (
     <Paper
@@ -57,6 +68,9 @@ function Card({ item }) {
           {name}
         </Title>
       </div>
+      <ActionIcon onClick={() => handleClick(item)} size="xs">
+        <img src={item.likes ? likes : nolikes} alt="Likes" />
+      </ActionIcon>
     </Paper>
   );
 }

@@ -1,12 +1,12 @@
-import { newCommunity } from '../api/communities';
+import { newCommunity } from "../api/getCommunities";
 
 jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({
     data: {
-      name: 'Test Community',
+      name: 'Test Community', 
       image: 'https://cdn.vox-cdn.com/thumbor/rUje72-KDI-XYKbKnvYxov-ueyQ=/0x0:1000x655/1400x1050/filters:focal(420x248:580x408):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/48671171/shutterstock_114033616.0.jpg',
-      numMember: '1',
-      desc: 'testing testing testing',
+      numMember: '1', 
+      desc: 'testing testing testing'
     },
   })),
 }));

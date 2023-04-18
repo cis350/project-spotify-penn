@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCommunities, newCommunity } from '../api/communities';
+import { getCommunities, newCommunity } from '../api/getCommunities';
 
 jest.mock('axios');
 

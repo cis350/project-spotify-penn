@@ -1,40 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
-import { newConversation, getSockets } from '../api/messages';
+import MockAdapter from 'axios-mock-adapter';
+import newConversation from '../api/messages';
 
-jest.mock('axios');
+const mockAxios = new MockAdapter(axios);
 
-test('newConversation should create a new conversation for the given socket', async () => {
-  // Mock the axios post request
-  const mockResponse = { success: true };
-  axios.post.mockResolvedValueOnce({ data: mockResponse });
+describe('newConversation function', () => {
+  const socket = 1;
+  const data = { id: socket, messages: [] };
+  const expectedData = data;
 
-  // Call the function with a socket
-  const socket = 'ABC123';
-  const result = await newConversation(socket);
+  test('returns new conversation for given socket', async () => {
+    mockAxios.onPost('http://localhost:8000/sockets').reply(200, data);
+    const res = await newConversation(socket);
+    expect(res).toEqual(expectedData);
+  });
 
-  // Check the result is the expected value
-  expect(result).toEqual(mockResponse);
-
-  // Check the axios.post request was called with the correct URL, data and options
-  expect(axios.post).toHaveBeenCalledWith(
-    'http://localhost:8000/sockets',
-    { id: socket, messages: [] },
-    { headers: { 'Content-Type': 'application/json' } },
-  );
-});
-
-test('getSockets should return an array of socket ids', async () => {
-  // Mock the axios get request
-  const mockResponse = [{ id: 'ABC123' }, { id: 'DEF456' }];
-  axios.get.mockResolvedValueOnce({ data: mockResponse });
-
-  // Call the function
-  const result = await getSockets();
-
-  // Check the result is the expected value
-  expect(result).toEqual(['ABC123', 'DEF456']);
-
-  // Check the axios.get request was called with the correct URL
-  expect(axios.get).toHaveBeenCalledWith('http://localhost:8000/sockets');
+  test('handles error if request fails', async () => {
+    mockAxios.onPost('http://localhost:8000/sockets').reply(500);
+    const res = await newConversation(socket);
+    expect(res).toEqual([]);
+  });
 });

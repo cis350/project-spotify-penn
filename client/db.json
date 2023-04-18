@@ -116,10 +116,6 @@
         {
           "text": "hi",
           "sender": "admin@gmail.com"
-        },
-        {
-          "text": "hi",
-          "sender": null
         }
       ]
     },
@@ -133,27 +129,6 @@
     },
     {
       "id": 6,
-      "messages": [
-        {
-          "text": "what's up!",
-          "sender": null
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "messages": []
-    },
-    {
-      "id": 8,
-      "messages": []
-    },
-    {
-      "id": 9,
-      "messages": []
-    },
-    {
-      "id": 10,
       "messages": []
     }
   ],
@@ -323,88 +298,6 @@
       "description": "sad, happy, etc.",
       "likes": false,
       "id": 3
-    }
-  ],
-  "joinedcommunities": [
-    {
-      "name": "mantine-inuraf",
-      "id": 1
-    },
-    {
-      "name": "mantine-inuraf",
-      "id": 2
-    },
-    {
-      "name": "mantine-inuraf",
-      "id": 3
-    },
-    {
-      "name": "mantine-inuraf",
-      "id": 4
-    },
-    {
-      "name": "mantine-inuraf",
-      "id": 5
-    },
-    {
-      "name": "ABC",
-      "id": 6
-    },
-    {
-      "name": "BCD",
-      "id": 7
-    },
-    {
-      "name": "BAES",
-      "id": 8
-    },
-    {
-      "name": "CDEF",
-      "id": 9
-    },
-    {
-      "name": "Community 5",
-      "id": 10
-    },
-    {
-      "name": "ABC",
-      "id": 11
-    },
-    {
-      "name": "BCD",
-      "id": 12
-    },
-    {
-      "name": "BAES",
-      "id": 13
-    },
-    {
-      "name": "CDEF",
-      "id": 14
-    },
-    {
-      "name": "Community 5",
-      "id": 15
-    },
-    {
-      "name": "ABC",
-      "id": 16
-    },
-    {
-      "name": "BCD",
-      "id": 17
-    },
-    {
-      "name": "BAES",
-      "id": 18
-    },
-    {
-      "name": "CDEF",
-      "id": 19
-    },
-    {
-      "name": "Community 5",
-      "id": 20
     }
   ]
 }
