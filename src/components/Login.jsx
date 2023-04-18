@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
@@ -17,11 +18,40 @@ import {
   Image,
   Center,
 } from '@mantine/core';
+// import SpotifyWebApi from 'spotify-web-api-js';
 import { darkLogo } from '../assets/logos';
 import { getPassword } from '../api/getUserData';
 
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 function Login() {
   const navigate = useNavigate();
+
+  const clientId = '8a1688a9dcda4c06b6de6b77453d3f68';
+  const redirectUri = 'http://localhost:3000/home';
+
+  const state = generateRandomString(16);
+
+  localStorage.setItem('stateKey', state);
+  const scope = 'user-read-private user-read-email';
+
+  let url = 'https://accounts.spotify.com/authorize';
+  url += '?response_type=token';
+  url += `&client_id=${encodeURIComponent(clientId)}`;
+  url += `&scope=${encodeURIComponent(scope)}`;
+  url += `&redirect_uri=${encodeURIComponent(redirectUri)}`;
+  url += `&state=${encodeURIComponent(state)}`;
+
+  // const spotifyApi = new SpotifyWebApi();
+  // const redirectUri = 'http://localhost:3000/callback';
 
   const [loginError, setLoginError] = useState(false);
 
@@ -47,7 +77,7 @@ function Login() {
       if (userData.password === password) {
         const sessionId = userData.id;
         window.sessionStorage.setItem('sessionId', sessionId);
-        navigate('/home');
+        navigate(url);
       } else {
         setLoginError(true);
         form.reset();
