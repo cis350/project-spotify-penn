@@ -101,4 +101,23 @@ webapp.post('/newartists', async (req, res) => {
   }
 });
 
+
+webapp.get('/playlists', async (req, res) => {
+  try {
+    console.log("Called get playlists")
+    // get the data from the db
+    const results = await db.getPlaylists();
+    if (results === undefined) {
+      res.status(404).json({ error: 'No Playlists found' });
+      return;
+    }
+    // send the response with the appropriate status code
+    res.status(200).json(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'there was a server error' });
+  }
+});
+
+
 module.exports = webapp;

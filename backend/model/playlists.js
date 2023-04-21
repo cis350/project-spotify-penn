@@ -1,10 +1,6 @@
-/**
- * this file contains all the CRUD operations from swaggerHub.
- */
-
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
+const uri = 'mongodb+srv://stela:stelarosa@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
 const mongoClient = new MongoClient(uri)
 
@@ -22,12 +18,7 @@ const connect = async () => {
   }
 };
 
-const close = async () => {
-  await mongoConnection.close();
-};
-
 // connect to mongoDb and return the database
-
 const getDB = async () => {
   // test if already connected
   if (!mongoConnection) {
@@ -35,6 +26,7 @@ const getDB = async () => {
   }
   return mongoConnection.db('spotify');
 };
+  
 
 const getPlaylists = async () => {
   // get the db
@@ -45,8 +37,5 @@ const getPlaylists = async () => {
 
 
 module.exports = {
-  connect,
-  close,
-  getDB,
-  getPlaylists,
+  getPlaylists
 };
