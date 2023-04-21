@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +42,12 @@ function addNewArtistPlaylist() {
 
     try {
       postNewArtistPlaylist(id, artistName, email, spotifyURL, playlistName, description);
-    } catch (error) { return; }
+      console.log(`Uploaded playlist: ${playlistName}`);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return;
+    }
     navigate('/newartists');
   };
 
