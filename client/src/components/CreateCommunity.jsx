@@ -58,7 +58,9 @@ function CreateCommunity(props) {
             mt="xs"
           />
           <Center>
-            <Button mt={10} type="submit">Submit</Button>
+            <Button mt={10} type="submit">
+              Submit
+            </Button>
           </Center>
         </form>
       </Popover.Dropdown>
