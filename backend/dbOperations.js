@@ -3,11 +3,11 @@
  * this file contains all the CRUD operations from swaggerHub.
  */
 
-const { mongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://abhijay:abhijayagarwal@spotifypenn.kfju1o3.mongodb.net/?retryWrites=true&w=majority';
-
+const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
+const mongoClient = new MongoClient(uri)
 
 const connect = async () => {
   try {
@@ -31,6 +31,7 @@ const close = async () => {
 
 const getDB = async () => {
   // test if already connected
+  console.log(mongoConnection);
   if (!mongoConnection) {
     await connect();
   }
@@ -48,13 +49,29 @@ const getAllUsers = async () => {
 const addUser = async (newUser) => {
   // get the db
   const db = await getDB();
-  const result = await db.collection('students').insertOne(newUser);
+  const result = await db.collection('users').insertOne(newUser);
   return result.insertedId;
 };
+
+/** get all the communities */
+const getCommunities = async () => {
+  const db = await getDB();
+  const result = await db.collection('communities').find({}).toArray();
+  console.log('communities', JSON.stringify(result));
+  return result;
+}
+
+const addCommunity = async (newCommunity) => {
+  const db = await getDB();
+  const result = await db.collection('communities').insertOne(newCommunity);
+  return result.insertedId;
+}
 
 module.exports = {
   connect,
   close,
   getAllUsers,
   addUser,
+  getCommunities,
+  addCommunity,
 };

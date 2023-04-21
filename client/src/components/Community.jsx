@@ -42,6 +42,7 @@ const useStyles = createStyles((theme) => ({
 function Card({ item }) {
   const { classes } = useStyles();
   const { image, name, numMember } = item;
+  const [joinStatus, setJoinStatus] = useState(false);
 
   return (
     <Paper
@@ -59,8 +60,8 @@ function Card({ item }) {
           {name}
         </Title>
       </div>
-      <Button variant="white" color="dark">
-        Join Community
+      <Button variant="white" color="dark" onClick={() => setJoinStatus(!joinStatus)}>
+        {joinStatus ? 'Joined' : 'Join Community'}
       </Button>
     </Paper>
   );
@@ -85,17 +86,16 @@ export function Community() {
   useEffect(() => {
     getCommunities()
       .then((data) => {
-        if (data.length === 0) {
+        if (data.data.length === 0) {
           throw new Error('empty data');
         }
         setCarousel(
-          data.filter((item) => item.name.startsWith(currName)).map((item) => (
+          data.data.filter((item) => item.name.startsWith(currName)).map((item) => (
             <Carousel.Slide key={item.name}>
               <Card item={item} />
             </Carousel.Slide>
           )),
         );
-        // console.log(carousel);
       })
       .catch(() => setCarousel(
         <tr>

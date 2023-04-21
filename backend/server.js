@@ -1,4 +1,5 @@
 const express = require('express');
+const rawBody = require('raw-body');
 
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
@@ -17,7 +18,7 @@ const db = require('./dbOperations');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
-  resp.json({ messge: 'hello CIS3500 friends!!! You have dreamy eyes' });
+  resp.json({ messge: 'This is spotify at Penn' });
 });
 
 webapp.get('/users', async (req, resp) => {
@@ -46,3 +47,37 @@ webapp.get('/users/:id', async (req, res) => {
     res.status(404).json({ message: 'there was error' });
   }
 });
+
+webapp.get('/communities', async (req, res) => {
+  try {
+    const results = await db.getCommunities();
+    if (results === undefined) {
+      res.status(404).json({ error: 'no communities exist'});
+      return;
+    }
+    res.status(200).json({ data: results });
+  } catch (err) {
+    res.status(404).json({ message: 'error in retrieving communities'});
+  }
+});
+
+webapp.post('/communities', async (req, res) => {
+  try{
+    const buffer = await rawBody(req);
+    const payload = JSON.parse(buffer.toString());
+    const { name, image, numMember, description } = payload;
+    const newCommunity = {
+        name: name,
+        image: image,
+        numMember: numMember,
+        description: description,
+    }
+    const result = await db.addCommunity(newCommunity);
+    res.status(201).json({data: {id: result}});
+
+  }catch(err){
+    res.status(400).json({message: 'There was an error'});
+  }
+});
+
+module.exports = webapp;
