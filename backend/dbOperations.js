@@ -36,8 +36,17 @@ const getDB = async () => {
   return mongoConnection.db('spotify');
 };
 
+const getPlaylists = async () => {
+  // get the db
+  const db = await getDB();
+  const playlists = await db.collection('playlists').find({}).toArray();
+  return playlists;
+};
+
+
 module.exports = {
   connect,
   close,
-  getDB
+  getDB,
+  getPlaylists,
 };
