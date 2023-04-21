@@ -1,7 +1,3 @@
-/**
- * this file contains all the CRUD operations from swaggerHub.
- */
-
 const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
@@ -22,22 +18,32 @@ const connect = async () => {
   }
 };
 
-const close = async () => {
-  await mongoConnection.close();
-};
-
 // connect to mongoDb and return the database
 
 const getDB = async () => {
   // test if already connected
+  console.log(mongoConnection);
   if (!mongoConnection) {
     await connect();
   }
   return mongoConnection.db('spotify');
 };
 
+/** get all the communities */
+const getCommunities = async () => {
+    const db = await getDB();
+    const result = await db.collection('communities').find({}).toArray();
+    console.log('communities', JSON.stringify(result));
+    return result;
+  }
+  
+const addCommunity = async (newCommunity) => {
+    const db = await getDB();
+    const result = await db.collection('communities').insertOne(newCommunity);
+    return result.insertedId;
+}
+
 module.exports = {
-  connect,
-  close,
-  getDB
-};
+    getCommunities,
+    addCommunity
+  };
