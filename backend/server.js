@@ -1,4 +1,5 @@
 const express = require('express');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const rawBody = require('raw-body');
 
 // import the cors -cross origin resource sharing- module
@@ -35,7 +36,7 @@ webapp.get('/users', async (req, resp) => {
 webapp.post('/users', async (req, res) => {
   try {
     const userData = req.body;
-    const result = await addUser(userData);
+    const result = await db.addUser(userData);
     res.status(201).json({ message: 'User added successfully', data: result });
   } catch (err) {
     res.status(400).json({ message: 'Error adding user', error: err });
@@ -77,7 +78,7 @@ webapp.post('/communities', async (req, res) => {
 
 webapp.get('/newartists', async (req, res) => {
   try {
-    const results = await getAllNewArtistPlaylist();
+    const results = await db.getAllNewArtistPlaylist();
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
@@ -99,7 +100,7 @@ webapp.post('/newartists', async (req, res) => {
   }
 
   try {
-    const results = await addNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await db.addNewArtistPlaylist(id, name, url, playlist, desc);
     res.status(201).json({ message: 'new artist playlist added', data: results });
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });

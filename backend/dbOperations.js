@@ -4,7 +4,7 @@
 
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
+const uri = 'mongodb+srv://abhijay:abhijayagarwal@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
 const mongoClient = new MongoClient(uri);
 
@@ -70,6 +70,16 @@ const getPlaylists = async () => {
   const playlists = await db.collection('playlists').find({}).toArray();
   return playlists;
 };
+
+// (async () => {
+//   try {
+//     const connection = await connect();
+//     return connection;
+//   } catch (error) {
+//     console.error('Error connecting to the database:', error);
+//     return null;
+//   }
+// })();
 
 module.exports = {
   connect,
