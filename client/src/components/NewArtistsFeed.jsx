@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Table, Group, Text, ScrollArea, Center, Button, Stack, ActionIcon,
 } from '@mantine/core';
@@ -17,12 +18,13 @@ export function ArtistsFeed() {
       updateLikes(item).then(() => {
         setReload(!reload);
       });
-    } catch (error) { /* do nothing */ }
+    } catch (error) { console.log(error); }
   }
 
   useEffect(() => {
-    try {
-      getNewArtistPlaylists().then((data) => {
+    getNewArtistPlaylists()
+      .then((data) => {
+        // Set the rows with the fetched data
         setRows(
           data.reverse().map((item) => (
             <tr key={item.name}>
@@ -47,20 +49,12 @@ export function ArtistsFeed() {
             </tr>
           )),
         );
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching new artist playlists:', error);
+        // Handle the error, e.g., set an error message in the state to be displayed
       });
-    } catch (e) {
-      setRows(
-        <tr>
-          <td>
-            <Group spacing={50} position="center">
-              <Button onClick={() => navigate('/uploadnewartist')}>
-                Upload My Music
-              </Button>
-            </Group>
-          </td>
-        </tr>,
-      );
-    }
   }, [reload]);
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-plusplus */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';

@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
 /**
  * this file contains all the CRUD operations from swaggerHub.
  */
 
-const { mongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://abhijay:abhijayagarwal@spotifypenn.kfju1o3.mongodb.net/?retryWrites=true&w=majority';
-
+const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
+const mongoClient = new MongoClient(uri);
 
 const connect = async () => {
   try {
@@ -65,6 +64,12 @@ const getPassword = async (id) => {
   const user = await db.collection('users').findOne({ _id: id });
   return user.password;
 };
+const getPlaylists = async () => {
+  // get the db
+  const db = await getDB();
+  const playlists = await db.collection('playlists').find({}).toArray();
+  return playlists;
+};
 
 module.exports = {
   connect,
@@ -73,4 +78,6 @@ module.exports = {
   getUser,
   addUser,
   getPassword,
+  getDB,
+  getPlaylists,
 };
