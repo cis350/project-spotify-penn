@@ -23,7 +23,7 @@ webapp.get('/', (req, resp) => {
 webapp.get('/users', async (req, resp) => {
   try {
     // get the data from the DB
-    const students = await db.getStudents();
+    const students = await db.getUsers();
     // send response
     resp.status(200).json({ data: students });
   } catch (err) {
@@ -35,7 +35,7 @@ webapp.get('/users', async (req, resp) => {
 webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
-    const results = await db.getStudent(req.params.id);
+    const results = await db.getUser(req.params.id);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown student' });
       return;

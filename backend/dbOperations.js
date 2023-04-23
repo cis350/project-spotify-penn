@@ -38,23 +38,39 @@ const getDB = async () => {
 };
 
 /* get all the users */
-const getAllUsers = async () => {
+const getUsers = async () => {
   const db = await getDB();
   const users = await db.collection('users').find({}).toArray();
   console.log('users', JSON.stringify(users));
   return users;
 };
 
+/* get a user by id */
+const getUser = async (id) => {
+  const db = await getDB();
+  const user = await db.collection('users').findOne({ _id: id });
+  return user;
+};
+
+/* add a new user */
 const addUser = async (newUser) => {
   // get the db
   const db = await getDB();
-  const result = await db.collection('students').insertOne(newUser);
+  const result = await db.collection('users').insertOne(newUser);
   return result.insertedId;
+};
+
+const getPassword = async (id) => {
+  const db = await getDB();
+  const user = await db.collection('users').findOne({ _id: id });
+  return user.password;
 };
 
 module.exports = {
   connect,
   close,
-  getAllUsers,
+  getUsers,
+  getUser,
   addUser,
+  getPassword,
 };
