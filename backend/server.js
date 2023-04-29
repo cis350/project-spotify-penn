@@ -11,6 +11,8 @@ const webapp = express();
 // enable cors
 webapp.use(cors());
 
+webapp.use(express.json());
+
 // configure express to parse request bodies
 webapp.use(express.urlencoded({ extended: true }));
 
@@ -19,15 +21,15 @@ const db = require('./dbOperations');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
-  resp.json({ messge: 'This is spotify at Penn' });
+  resp.json({ message: 'This is spotify at Penn' });
 });
 
 webapp.get('/users', async (req, resp) => {
   try {
     // get the data from the DB
-    const students = await db.getUsers();
+    const users = await db.getUsers();
+    resp.status(200).json(users);
     // send response
-    resp.status(200).json({ data: students });
   } catch (err) {
     resp.status(400).json({ message: 'There was an error' });
   }
@@ -50,7 +52,7 @@ webapp.get('/communities', async (req, res) => {
       res.status(404).json({ error: 'no communities exist' });
       return;
     }
-    res.status(200).json({ data: results });
+    res.status(200).json(results);
   } catch (err) {
     res.status(404).json({ message: 'error in retrieving communities' });
   }
@@ -83,7 +85,7 @@ webapp.get('/newartists', async (req, res) => {
       res.status(404).json({ error: 'no new artists' });
       return;
     }
-    res.status(200).json({ data: results });
+    res.status(200).json(results);
   } catch (err) {
     res.status(404).json({ message: 'there was an error' });
   }
@@ -101,7 +103,7 @@ webapp.post('/newartists', async (req, res) => {
 
   try {
     const results = await db.addNewArtistPlaylist(id, name, url, playlist, desc);
-    res.status(201).json({ message: 'new artist playlist added', data: results });
+    res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
   }
@@ -127,16 +129,83 @@ webapp.get('/playlists', async (req, res) => {
 webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
-    console.log('HELLO');
     const results = await db.getUser(req.params.id);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown student' });
-      return;
+    } else {
+      res.status(200).json(results);
     }
-    // send the response with the appropriate status code
-    res.status(200).json({ data: results });
   } catch (err) {
-    res.status(404).json({ message: 'there was error' });
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
+webapp.put('/sockets/:socket', async (req, res) => {
+  try {
+    const socketId = parseInt(req.params.socket, 10);
+    const document = req.body;
+    const result = await db.updateMessages(socketId, document);
+    if (result === undefined) {
+      res.status(404).json({ error: 'unknown socket' });
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
+webapp.get('/sockets/:socket', async (req, res) => {
+  try {
+    // get the data from the db
+    const socketId = parseInt(req.params.socket, 10);
+    const results = await db.getMessages(socketId);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown socket' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
+webapp.get('/sockets', async (req, res) => {
+  try {
+    // get the data from the db
+    const results = await db.getSockets();
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown socket' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
+webapp.post('/sockets', async (req, res) => {
+  try {
+    const document = req.body;
+    console.log(document);
+    const result = await db.newConversation(document);
+    if (result === undefined) {
+      res.status(404).json({ error: 'unknown socket' });
+    } else {
+      res.status(201).json(result);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
   }
 });
 
