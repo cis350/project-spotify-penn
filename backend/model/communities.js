@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
-const mongoClient = new MongoClient(uri)
+const mongoClient = new MongoClient(uri);
 
 const connect = async () => {
   try {
@@ -31,19 +31,19 @@ const getDB = async () => {
 
 /** get all the communities */
 const getCommunities = async () => {
-    const db = await getDB();
-    const result = await db.collection('communities').find({}).toArray();
-    console.log('communities', JSON.stringify(result));
-    return result;
-  }
-  
+  const db = await getDB();
+  const result = await db.collection('communities').find({}).toArray();
+  console.log('communities', JSON.stringify(result));
+  return result;
+};
+
 const addCommunity = async (newCommunity) => {
-    const db = await getDB();
-    const result = await db.collection('communities').insertOne(newCommunity);
-    return result.insertedId;
-}
+  const db = await getDB();
+  const result = await db.collection('communities').insertOne(newCommunity);
+  return result.insertedId;
+};
 
 module.exports = {
-    getCommunities,
-    addCommunity
-  };
+  getCommunities,
+  addCommunity,
+};

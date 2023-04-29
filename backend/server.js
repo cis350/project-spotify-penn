@@ -127,6 +127,7 @@ webapp.get('/playlists', async (req, res) => {
 webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
+    console.log('HELLO');
     const results = await db.getUser(req.params.id);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown student' });

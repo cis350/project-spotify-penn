@@ -44,10 +44,10 @@ const getUsers = async () => {
   return users;
 };
 
-/* get a user by id */
-const getUser = async (id) => {
+/* get a user by email */
+const getUser = async (email) => {
   const db = await getDB();
-  const user = await db.collection('users').findOne({ _id: id });
+  const user = await db.collection('users').findOne({ id: email });
   return user;
 };
 

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const getPassword = async (username) => {
-  const url = `http://localhost:8000/user/${username}`;
+  const url = `http://localhost:8000/users/${username}`;
   const res = await axios.get(url);
   const userData = res.data;
   if (Object.keys(userData).length === 0) {

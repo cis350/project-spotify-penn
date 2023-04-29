@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://stela:stelarosa@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
-const mongoClient = new MongoClient(uri)
+const mongoClient = new MongoClient(uri);
 
 const connect = async () => {
   try {
@@ -26,7 +26,6 @@ const getDB = async () => {
   }
   return mongoConnection.db('spotify');
 };
-  
 
 const getPlaylists = async () => {
   // get the db
@@ -35,7 +34,6 @@ const getPlaylists = async () => {
   return playlists;
 };
 
-
 module.exports = {
-  getPlaylists
+  getPlaylists,
 };
