@@ -1,9 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 
 const getMessages = async (socket) => {
   const url = `http://localhost:8000/sockets/${socket}`;
   const res = await axios.get(url);
-  const { messages } = res.data;
+  const messages = res.data;
   return messages;
 };
 
@@ -28,7 +29,7 @@ const updateMessages = async (socket, newMessages) => {
 
 const newConversation = async (socket) => {
   const data = {
-    id: socket,
+    _id: socket,
     messages: [],
   };
   const options = {
@@ -41,7 +42,8 @@ const newConversation = async (socket) => {
     url,
     data,
     options,
-  ).catch(() => {
+  ).catch((err) => {
+    console.error(err);
   });
   return res.data;
 };
@@ -51,7 +53,8 @@ const getSockets = async () => {
   let sockets = [];
   try {
     const res = await axios.get(url);
-    sockets = res.data.map((socket) => socket.id);
+    console.log(res.data);
+    sockets = res.data.map((socket) => socket._id);
   } catch (error) {
     // console.error(error);
   }

@@ -11,7 +11,10 @@ let mongoConnection;
 
 const connect = async () => {
   try {
-    const mongoConnection = await mongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoConnection = await mongoClient.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+    );
     console.log('connected to DB', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
@@ -19,7 +22,6 @@ const connect = async () => {
     return err;
   }
 };
-
 
 const close = async () => {
   await mongoConnection.close();

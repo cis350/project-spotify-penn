@@ -4,6 +4,7 @@ import axios from 'axios';
 const getCommunities = async () => {
   const url = 'http://localhost:8000/communities';
   const res = await axios.get(url);
+  console.log(res.data);
   return res.data;
 };
 

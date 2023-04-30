@@ -24,6 +24,7 @@ function Chat() {
 
   const handleSocketChange = (n) => {
     getSockets().then((sockets) => {
+      console.log(sockets.includes(n));
       if (sockets.includes(n)) {
         setSocket(n);
         getMessages(socket).then((arr) => {

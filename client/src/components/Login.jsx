@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
 import { IconAlertCircle } from '@tabler/icons-react';
+// import the rubik font
+import '@fontsource/rubik';
 import {
   Container,
   Title,
@@ -19,7 +22,7 @@ import {
   Image,
   Center,
 } from '@mantine/core';
-// import SpotifyWebApi from 'spotify-web-api-js';
+
 import { darkLogo } from '../assets/logos';
 import { getPassword } from '../api/getUserData';
 
@@ -50,6 +53,7 @@ function Login() {
   url += `&scope=${encodeURIComponent(scope)}`;
   url += `&redirect_uri=${encodeURIComponent(redirectUri)}`;
   url += `&state=${encodeURIComponent(state)}`;
+  url += '&show_dialog=true';
 
   // const spotifyApi = new SpotifyWebApi();
   // const redirectUri = 'http://localhost:3000/callback';
@@ -73,23 +77,11 @@ function Login() {
 
   const handleSubmit = () => {
     const { email, password } = form.values;
-
     getPassword(email).then((userData) => {
       if (userData.password === password) {
         const sessionId = userData.id;
         window.sessionStorage.setItem('sessionId', sessionId);
         window.location = url;
-        const searchParams = new URLSearchParams(window.location.search);
-        if (searchParams.has('error')) {
-          const error = searchParams.get('error');
-          console.error(`Authentication failed: ${error}`);
-          navigate('/login');
-        } else {
-          const { hash } = window.location;
-          const accessToken = hash.substring(hash.indexOf('=') + 1, hash.indexOf('&'));
-          console.log(`Access token: ${accessToken}`);
-          window.sessionStorage.setItem('accessToken', accessToken);
-        }
       } else {
         setLoginError(true);
         form.reset();
@@ -184,7 +176,9 @@ function Login() {
           && (
             <>
               <Space h="md" />
-              <Alert icon={<IconAlertCircle size="1rem" />} title="Invalid Login!" color="red" />
+              <Alert icon={<IconAlertCircle size="1rem" />} title="Invalid Login!" color="red">
+                Please try again
+              </Alert>
             </>
           )}
       </Paper>
