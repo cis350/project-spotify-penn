@@ -100,7 +100,7 @@ export function Community() {
       .catch(() => setCarousel(
         <tr>
           <td>
-            <text> </text>
+            <Text> </Text>
           </td>
         </tr>,
       ));
