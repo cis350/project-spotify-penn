@@ -71,6 +71,19 @@ const getPlaylists = async () => {
   return playlists;
 };
 
+const getCommunities = async () => {
+  const db = await getDB();
+  const result = await db.collection('communities').find({}).toArray();
+  console.log('communities', JSON.stringify(result));
+  return result;
+}
+
+const addCommunity = async (newCommunity) => {
+  const db = await getDB();
+  const result = await db.collection('communities').insertOne(newCommunity);
+  return result.insertedId;
+}
+
 // (async () => {
 //   try {
 //     const connection = await connect();
@@ -90,4 +103,6 @@ module.exports = {
   getPassword,
   getDB,
   getPlaylists,
+  getCommunities,
+  addCommunity
 };
