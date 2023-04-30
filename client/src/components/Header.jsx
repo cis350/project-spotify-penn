@@ -62,6 +62,10 @@ function MainHeader() {
   const { classes } = useStyles();
   const navigate = useNavigate();
 
+  function clearAccessToken() {
+    window.sessionStorage.removeItem('accessToken');
+  }
+
   return (
     <Box>
       <Header height={60} px="md">
@@ -110,7 +114,7 @@ function MainHeader() {
               alt="User"
               radius="xl"
             />
-            <Button color="dark" onClick={(() => navigate('/login'))}>Log out</Button>
+            <Button color="dark" onClick={(() => { clearAccessToken(); navigate('/login'); })}>Log out</Button>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

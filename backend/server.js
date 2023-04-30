@@ -210,4 +210,20 @@ webapp.post('/sockets', async (req, res) => {
   }
 });
 
+webapp.get('/communities', async (req, res) => {
+  try {
+    // get the data from the db
+    const results = await db.getCommunities();
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown community' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
 module.exports = webapp;
