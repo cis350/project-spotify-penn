@@ -11,12 +11,13 @@ const webapp = express();
 // enable cors
 webapp.use(cors());
 
+// enable json body parsing
 webapp.use(express.json());
 
 // configure express to parse request bodies
 webapp.use(express.urlencoded({ extended: true }));
 
-// import the db function
+// import the db functions
 const db = require('./dbOperations');
 
 // root endpoint route
