@@ -83,7 +83,7 @@ webapp.post('/communities', async (req, res) => {
   }
 });
 
-webapp.get('/newartists', async (req, res) => {
+webapp.get('/newartistplaylists', async (req, res) => {
   try {
     const results = await dbNewArtist.getAllNewArtistPlaylist();
     if (results === undefined) {
@@ -96,7 +96,7 @@ webapp.get('/newartists', async (req, res) => {
   }
 });
 
-webapp.post('/newartists', async (req, res) => {
+webapp.post('/newartistplaylists', async (req, res) => {
   const {
     id, name, url, playlist, desc,
   } = req.body;
