@@ -86,11 +86,11 @@ export function Community() {
   useEffect(() => {
     getCommunities()
       .then((data) => {
-        if (data.data.length === 0) {
+        if (data.length === 0) {
           throw new Error('empty data');
         }
         setCarousel(
-          data.data.filter((item) => item.name.startsWith(currName)).map((item) => (
+          data.filter((item) => item.name.startsWith(currName)).map((item) => (
             <Carousel.Slide key={item.name}>
               <Card item={item} />
             </Carousel.Slide>
