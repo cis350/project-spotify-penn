@@ -27,7 +27,7 @@ const getDB = async () => {
   return mongoConnection.db('spotify');
 };
 
-async function addNewArtistPlaylist(id, name, url, playlist, desc) {
+async function postNewArtistPlaylist(id, name, url, playlist, desc) {
   const db = await getDB();
   const result = await db.collection('newArtists').insertOne({
     _id: id,
@@ -41,7 +41,7 @@ async function addNewArtistPlaylist(id, name, url, playlist, desc) {
   return result.insertedId;
 }
 
-async function getAllNewArtistPlaylist() {
+async function getNewArtistPlaylists() {
   try {
     // get the db
     const db = await getDB();
@@ -67,7 +67,7 @@ async function updateNewArtistLikes(item) {
 }
 
 module.exports = {
-  addNewArtistPlaylist,
-  getAllNewArtistPlaylist,
+  getNewArtistPlaylists,
+  postNewArtistPlaylist,
   updateNewArtistLikes
 };

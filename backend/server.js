@@ -85,7 +85,7 @@ webapp.post('/communities', async (req, res) => {
 
 webapp.get('/newartistplaylists', async (req, res) => {
   try {
-    const results = await dbNewArtist.getAllNewArtistPlaylist();
+    const results = await dbNewArtist.getNewArtistPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
@@ -107,7 +107,7 @@ webapp.post('/newartistplaylists', async (req, res) => {
   }
 
   try {
-    const results = await dbNewArtist.addNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await dbNewArtist.postNewArtistPlaylist(id, name, url, playlist, desc);
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
