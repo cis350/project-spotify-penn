@@ -10,7 +10,7 @@ const connect = async () => {
       uri,
       { useNewUrlParser: true, useUnifiedTopology: true },
     );
-    console.log('connected to DB', mongoConnection.db().databaseName);
+    console.log('connected to DB - playlists', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
     console.log(err);
