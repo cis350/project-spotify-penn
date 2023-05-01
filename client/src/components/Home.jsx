@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import React, { useEffect, useState } from 'react';
 import { Title, Center, Button } from '@mantine/core';
 import SpotifyWebApi from 'spotify-web-api-js';

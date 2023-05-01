@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
+/* eslint-disable no-console */
+
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Button, Textarea, Avatar, Badge, Title, Paper, Container, Center, Stack, NumberInput,
