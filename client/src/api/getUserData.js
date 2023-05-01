@@ -16,8 +16,8 @@ const getPassword = async (username) => {
 const newUser = async (email, first, last, password) => {
   const data = {
     id: email,
-    first,
-    last,
+    firstName: first,
+    lastName: last,
     password,
   };
   const options = {

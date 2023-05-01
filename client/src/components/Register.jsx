@@ -18,7 +18,7 @@ import {
   Image,
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { newUser, getPassword } from '../api/getUserData';
+import { newUser } from '../api/getUserData';
 import { darkLogo } from '../assets/logos';
 
 function Register() {
@@ -48,10 +48,10 @@ function Register() {
       firstName, lastName, email, password,
     } = form.values;
 
-    if (getPassword(email) !== null) {
-      setInUse(true);
-      return;
-    }
+    // if (getPassword(email) !== null) {
+    //   setInUse(true);
+    //   return;
+    // }
 
     newUser(email, firstName, lastName, password).then(navigate('/login')).catch((error) => {
       if (error.message === 'Request failed with status code 500') {

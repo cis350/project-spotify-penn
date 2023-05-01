@@ -72,19 +72,6 @@ const getPlaylists = async () => {
   return playlists;
 };
 
-const getCommunities = async () => {
-  const db = await getDB();
-  const result = await db.collection('communities').find({}).toArray();
-  console.log('communities', JSON.stringify(result));
-  return result;
-}
-
-const addCommunity = async (newCommunity) => {
-  const db = await getDB();
-  const result = await db.collection('communities').insertOne(newCommunity);
-  return result.insertedId;
-}
-
 // (async () => {
 //   try {
 //     const connection = await connect();
@@ -111,7 +98,6 @@ const addCommunity = async (newCommunity) => {
 
 const newConversation = async (document) => {
   const db = await getDB();
-  // console.log('doc', document);
   const result = await db.collection('sockets').insertOne(document);
   return result.insertedId;
 };
@@ -153,6 +139,4 @@ module.exports = {
   newConversation,
   getDB,
   getPlaylists,
-  getCommunities,
-  addCommunity
 };
