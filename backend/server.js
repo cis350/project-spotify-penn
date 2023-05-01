@@ -114,6 +114,20 @@ webapp.post('/newartistplaylists', async (req, res) => {
   }
 });
 
+webapp.put('newartistplaylists/:_id', async (req, res) => {
+  try {
+    console.log('change likes');
+    const results = await dbNewArtist.updateNewArtistLikes();
+    if (results === undefined) {
+      res.status(404).json({ error: 'Playlist not found'} );
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+})
+
 webapp.get('/playlists', async (req, res) => {
   try {
     console.log('Called get playlists');

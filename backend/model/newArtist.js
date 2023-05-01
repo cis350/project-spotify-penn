@@ -55,12 +55,11 @@ async function getAllNewArtistPlaylist() {
   return null;
 }
 
-async function updateNewArtistLikes(id) {
+async function updateNewArtistLikes(item) {
   try {
     const db = await getDB();
-    const item = db.newArtists.find({_id: id});
     const itemlikes = !item.likes;
-    const res = await db.collection('newArtists').updateOne({_id: id}, {likes: itemlikes });
+    const res = await db.collection('newArtists').updateOne({_id: item._id}, {likes: itemlikes });
     return res.data;
   } catch (err) {
     console.log(`error: ${err.message}`);
