@@ -87,7 +87,7 @@ webapp.get('/newartistplaylists', async (req, res) => {
   try {
     const results = await dbNewArtist.getNewArtistPlaylists();
     if (results === undefined) {
-      res.status(404).json({ error: 'no new artists' });
+      res.status(400).json({ error: 'no new artists' });
       return;
     }
     res.status(200).json(results);

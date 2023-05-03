@@ -45,10 +45,17 @@ async function getNewArtistPlaylists() {
   try {
     // get the db
     const db = await getDB();
-    const result = await db.collection('newArtists');
-    // print the result
-    console.log(`New Artist Playlists: ${JSON.stringify(result.playlistName)}`);
-    return result;
+    const newArtistsCollection = await db.collection('newArtists');
+    
+    // Query the collection to get all documents
+    const allDocuments = await newArtistsCollection.find().toArray();
+
+    // Iterate through the documents and print the playlistName
+    allDocuments.forEach((doc) => {
+      console.log(`New Artist Playlists: ${JSON.stringify(doc.playlistName)}`);
+    });
+
+    return allDocuments;
   } catch (err) {
     console.log(`error: ${err.message}`);
   }
