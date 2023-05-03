@@ -18,7 +18,11 @@ webapp.use(express.json());
 webapp.use(express.urlencoded({ extended: true }));
 
 // import the db functions
-const db = require('./dbOperations');
+const dbChat = require('./model/chat');
+const dbCommunities = require('./model/communities');
+const dbNewArtist = require('./model/newArtist');
+const dbPlaylists = require('./model/playlists');
+const dbUsers = require('./model/users');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -28,7 +32,7 @@ webapp.get('/', (req, resp) => {
 webapp.get('/users', async (req, resp) => {
   try {
     // get the data from the DB
-    const users = await db.getUsers();
+    const users = await dbUsers.getUsers();
     resp.status(200).json(users);
     // send response
   } catch (err) {
@@ -39,7 +43,7 @@ webapp.get('/users', async (req, resp) => {
 webapp.post('/users', async (req, res) => {
   try {
     const userData = req.body;
-    const result = await db.addUser(userData);
+    const result = await dbUsers.addUser(userData);
     res.status(201).json({ message: 'User added successfully', data: result });
   } catch (err) {
     res.status(400).json({ message: 'Error adding user', error: err });
@@ -48,7 +52,7 @@ webapp.post('/users', async (req, res) => {
 
 webapp.get('/communities', async (req, res) => {
   try {
-    const results = await db.getCommunities();
+    const results = await dbCommunities.getCommunities();
     if (results === undefined) {
       res.status(404).json({ error: 'no communities exist' });
       return;
@@ -72,16 +76,16 @@ webapp.post('/communities', async (req, res) => {
       numMember,
       description,
     };
-    const result = await db.addCommunity(newCommunity);
+    const result = await dbCommunities.addCommunity(newCommunity);
     res.status(201).json({ data: { id: result } });
   } catch (err) {
     res.status(400).json({ message: 'There was an error' });
   }
 });
 
-webapp.get('/newartists', async (req, res) => {
+webapp.get('/newartistplaylists', async (req, res) => {
   try {
-    const results = await db.getAllNewArtistPlaylist();
+    const results = await dbNewArtist.getNewArtistPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
@@ -92,7 +96,7 @@ webapp.get('/newartists', async (req, res) => {
   }
 });
 
-webapp.post('/newartists', async (req, res) => {
+webapp.post('/newartistplaylists', async (req, res) => {
   const {
     id, name, url, playlist, desc,
   } = req.body;
@@ -103,18 +107,32 @@ webapp.post('/newartists', async (req, res) => {
   }
 
   try {
-    const results = await db.addNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await dbNewArtist.postNewArtistPlaylist(id, name, url, playlist, desc);
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
   }
 });
 
+webapp.put('newartistplaylists/:_id', async (req, res) => {
+  try {
+    console.log('change likes');
+    const results = await dbNewArtist.updateNewArtistLikes();
+    if (results === undefined) {
+      res.status(404).json({ error: 'Playlist not found'} );
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+})
+
 webapp.get('/playlists', async (req, res) => {
   try {
     console.log('Called get playlists');
     // get the data from the db
-    const results = await db.getPlaylists();
+    const results = await dbPlaylists.getPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'No Playlists found' });
       return;
@@ -130,7 +148,7 @@ webapp.get('/playlists', async (req, res) => {
 webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
-    const results = await db.getUser(req.params.id);
+    const results = await dbUsers.getUser(req.params.id);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown student' });
     } else {
@@ -147,7 +165,7 @@ webapp.put('/sockets/:socket', async (req, res) => {
   try {
     const socketId = parseInt(req.params.socket, 10);
     const document = req.body;
-    const result = await db.updateMessages(socketId, document);
+    const result = await dbChat.updateMessages(socketId, document);
     if (result === undefined) {
       res.status(404).json({ error: 'unknown socket' });
     } else {
@@ -164,7 +182,7 @@ webapp.get('/sockets/:socket', async (req, res) => {
   try {
     // get the data from the db
     const socketId = parseInt(req.params.socket, 10);
-    const results = await db.getMessages(socketId);
+    const results = await dbChat.getMessages(socketId);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown socket' });
     } else {
@@ -180,7 +198,7 @@ webapp.get('/sockets/:socket', async (req, res) => {
 webapp.get('/sockets', async (req, res) => {
   try {
     // get the data from the db
-    const results = await db.getSockets();
+    const results = await dbChat.getSockets();
     if (results === undefined) {
       res.status(404).json({ error: 'unknown socket' });
     } else {
@@ -197,7 +215,7 @@ webapp.post('/sockets', async (req, res) => {
   try {
     const document = req.body;
     console.log(document);
-    const result = await db.newConversation(document);
+    const result = await dbChat.newConversation(document);
     if (result === undefined) {
       res.status(404).json({ error: 'unknown socket' });
     } else {
@@ -213,7 +231,7 @@ webapp.post('/sockets', async (req, res) => {
 webapp.get('/communities', async (req, res) => {
   try {
     // get the data from the db
-    const results = await db.getCommunities();
+    const results = await dbCommunities.getCommunities();
     if (results === undefined) {
       res.status(404).json({ error: 'unknown community' });
     } else {

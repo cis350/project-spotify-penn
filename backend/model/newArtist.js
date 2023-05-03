@@ -10,7 +10,7 @@ const connect = async () => {
       uri,
       { useNewUrlParser: true, useUnifiedTopology: true },
     );
-    console.log('connected to DB', mongoConnection.db().databaseName);
+    console.log('connected to DB - new artists', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
     console.log(err);
@@ -27,7 +27,7 @@ const getDB = async () => {
   return mongoConnection.db('spotify');
 };
 
-async function addNewArtistPlaylist(id, name, url, playlist, desc) {
+async function postNewArtistPlaylist(id, name, url, playlist, desc) {
   const db = await getDB();
   const result = await db.collection('newArtists').insertOne({
     _id: id,
@@ -41,7 +41,7 @@ async function addNewArtistPlaylist(id, name, url, playlist, desc) {
   return result.insertedId;
 }
 
-async function getAllNewArtistPlaylist() {
+async function getNewArtistPlaylists() {
   try {
     // get the db
     const db = await getDB();
@@ -55,7 +55,19 @@ async function getAllNewArtistPlaylist() {
   return null;
 }
 
+async function updateNewArtistLikes(item) {
+  try {
+    const db = await getDB();
+    const itemlikes = !item.likes;
+    const res = await db.collection('newArtists').updateOne({_id: item._id}, {likes: itemlikes });
+    return res.data;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
 module.exports = {
-  addNewArtistPlaylist,
-  getAllNewArtistPlaylist,
+  getNewArtistPlaylists,
+  postNewArtistPlaylist,
+  updateNewArtistLikes
 };

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 import axios from 'axios';
 
 const getCommunities = async () => {
