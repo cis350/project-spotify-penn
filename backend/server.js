@@ -1,4 +1,10 @@
 const express = require('express');
+
+const fs = require('fs');
+
+const formidable = require('formidable');
+
+const s3 = require('./s3Operations');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const rawBody = require('raw-body');
 
@@ -64,21 +70,58 @@ webapp.get('/communities', async (req, res) => {
 });
 
 webapp.post('/communities', async (req, res) => {
+  console.log('hit POST /communities');
   try {
-    const buffer = await rawBody(req);
-    const payload = JSON.parse(buffer.toString());
-    const {
-      name, image, numMember, description,
-    } = payload;
-    const newCommunity = {
-      name,
-      image,
-      numMember,
-      description,
-    };
-    const result = await dbCommunities.addCommunity(newCommunity);
-    res.status(201).json({ data: { id: result } });
+    const form = formidable({multiples: false});
+    form.parse(req, (err, fields, files) => {
+
+    console.log('form:');
+    console.log(form);
+    console.log('fields:');
+    console.log(fields);
+
+    if(err){
+        console.log('error', err.message);
+       res.status(404).json({ error: err.message });
+    }
+    let cacheBuffer = Buffer.alloc(0);
+
+    console.log('files:');
+    console.log(files);
+
+    // create a stream from the virtual path of the uploaded file
+    const fStream = fs.createReadStream(files.File_0.filepath);
+
+
+    fStream.on('data', (chunk) => {
+        // fill the buffer with data from the uploaded file
+        cacheBuffer = Buffer.concat([cacheBuffer, chunk]);
+      });
+
+      fStream.on('end', async () => {
+        // send buffer to AWS
+        console.log('sending to aws');
+        const s3URL =  await s3.uploadFile(cacheBuffer, files.File_0.newFilename);
+        console.log('end', cacheBuffer.length);
+
+        // You can store the URL in mongoDB with the rest of the data
+        // send a response to the client
+        // res.status(201).json({ message: `files uploaded at ${s3URL}` });
+        
+        const newCommunity = {
+          name: fields.name,
+          image: s3URL,
+          numMember: fields.numMember,
+          description: fields.desc
+        };
+
+        const result = await dbCommunities.addCommunity(newCommunity);
+        res.status(201).json({ data: { id: result } });
+    
+      });
+    });
   } catch (err) {
+    console.log(err)
     res.status(400).json({ message: 'There was an error' });
   }
 });
