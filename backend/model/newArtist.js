@@ -55,7 +55,7 @@ async function getNewArtistPlaylists() {
   return null;
 }
 
-async function updateNewArtistLikes(item) {
+async function toggleNewArtistLikes(item) {
   try {
     const db = await getDB();
     const itemlikes = !item.likes;
@@ -69,5 +69,5 @@ async function updateNewArtistLikes(item) {
 module.exports = {
   getNewArtistPlaylists,
   postNewArtistPlaylist,
-  updateNewArtistLikes
+  toggleNewArtistLikes
 };

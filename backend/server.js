@@ -120,7 +120,7 @@ webapp.post('/newartistplaylists', async (req, res) => {
 webapp.put('newartistplaylists/:_id', async (req, res) => {
   try {
     console.log('change likes');
-    const results = await dbNewArtist.updateNewArtistLikes();
+    const results = await dbNewArtist.toggleNewArtistLikes();
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found'} );
       return;
