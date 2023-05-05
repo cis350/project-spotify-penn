@@ -45,7 +45,7 @@ async function getNewArtistPlaylists() {
   try {
     // get the db
     const db = await getDB();
-    const result = await db.collection('newArtists');
+    const result = await db.collection('newArtists').find({}).toArray();
     // print the result
     console.log(`New Artist Playlists: ${JSON.stringify(result.playlistName)}`);
     return result;
@@ -55,7 +55,7 @@ async function getNewArtistPlaylists() {
   return null;
 }
 
-async function updateNewArtistLikes(item) {
+async function toggleNewArtistLikes(item) {
   try {
     const db = await getDB();
     const itemlikes = !item.likes;
@@ -69,5 +69,5 @@ async function updateNewArtistLikes(item) {
 module.exports = {
   getNewArtistPlaylists,
   postNewArtistPlaylist,
-  updateNewArtistLikes
+  toggleNewArtistLikes
 };

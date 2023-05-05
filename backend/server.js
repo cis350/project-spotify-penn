@@ -127,14 +127,18 @@ webapp.post('/communities', async (req, res) => {
 });
 
 webapp.get('/newartistplaylists', async (req, res) => {
+  console.log("hit GET /newartistplaylists");
   try {
     const results = await dbNewArtist.getNewArtistPlaylists();
+    console.log("Results:");
+    console.log(results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
+    console.log(err);
     res.status(404).json({ message: 'there was an error' });
   }
 });
@@ -160,7 +164,7 @@ webapp.post('/newartistplaylists', async (req, res) => {
 webapp.put('newartistplaylists/:_id', async (req, res) => {
   try {
     console.log('change likes');
-    const results = await dbNewArtist.updateNewArtistLikes();
+    const results = await dbNewArtist.toggleNewArtistLikes();
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found'} );
       return;
