@@ -4,12 +4,12 @@ const fs = require('fs');
 
 const formidable = require('formidable');
 
-const s3 = require('./s3Operations');
 // eslint-disable-next-line import/no-extraneous-dependencies
-const rawBody = require('raw-body');
+// const rawBody = require('raw-body');
 
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
+const s3 = require('./s3Operations');
 
 // create a new express app
 const webapp = express();
@@ -72,28 +72,26 @@ webapp.get('/communities', async (req, res) => {
 webapp.post('/communities', async (req, res) => {
   console.log('hit POST /communities');
   try {
-    const form = formidable({multiples: false});
+    const form = formidable({ multiples: false });
     form.parse(req, (err, fields, files) => {
+      console.log('form:');
+      console.log(form);
+      console.log('fields:');
+      console.log(fields);
 
-    console.log('form:');
-    console.log(form);
-    console.log('fields:');
-    console.log(fields);
-
-    if(err){
+      if (err) {
         console.log('error', err.message);
-       res.status(404).json({ error: err.message });
-    }
-    let cacheBuffer = Buffer.alloc(0);
+        res.status(404).json({ error: err.message });
+      }
+      let cacheBuffer = Buffer.alloc(0);
 
-    console.log('files:');
-    console.log(files);
+      console.log('files:');
+      console.log(files);
 
-    // create a stream from the virtual path of the uploaded file
-    const fStream = fs.createReadStream(files.File_0.filepath);
+      // create a stream from the virtual path of the uploaded file
+      const fStream = fs.createReadStream(files.File_0.filepath);
 
-
-    fStream.on('data', (chunk) => {
+      fStream.on('data', (chunk) => {
         // fill the buffer with data from the uploaded file
         cacheBuffer = Buffer.concat([cacheBuffer, chunk]);
       });
@@ -101,36 +99,35 @@ webapp.post('/communities', async (req, res) => {
       fStream.on('end', async () => {
         // send buffer to AWS
         console.log('sending to aws');
-        const s3URL =  await s3.uploadFile(cacheBuffer, files.File_0.newFilename);
+        const s3URL = await s3.uploadFile(cacheBuffer, files.File_0.newFilename);
         console.log('end', cacheBuffer.length);
 
         // You can store the URL in mongoDB with the rest of the data
         // send a response to the client
         // res.status(201).json({ message: `files uploaded at ${s3URL}` });
-        
+
         const newCommunity = {
           name: fields.name,
           image: s3URL,
           numMember: fields.numMember,
-          description: fields.desc
+          description: fields.desc,
         };
 
         const result = await dbCommunities.addCommunity(newCommunity);
         res.status(201).json({ data: { id: result } });
-    
       });
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(400).json({ message: 'There was an error' });
   }
 });
 
 webapp.get('/newartistplaylists', async (req, res) => {
-  console.log("hit GET /newartistplaylists");
+  console.log('hit GET /newartistplaylists');
   try {
     const results = await dbNewArtist.getNewArtistPlaylists();
-    console.log("Results:");
+    console.log('Results:');
     console.log(results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
@@ -166,14 +163,14 @@ webapp.put('newartistplaylists/:_id', async (req, res) => {
     console.log('change likes');
     const results = await dbNewArtist.toggleNewArtistLikes();
     if (results === undefined) {
-      res.status(404).json({ error: 'Playlist not found'} );
+      res.status(404).json({ error: 'Playlist not found' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ message: 'server error' });
   }
-})
+});
 
 webapp.get('/playlists', async (req, res) => {
   try {

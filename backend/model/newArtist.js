@@ -1,15 +1,13 @@
+/* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
 let mongoConnection;
-const mongoClient = new MongoClient(uri);
+const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connect = async () => {
   try {
-    mongoConnection = await mongoClient.connect(
-      uri,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-    );
+    mongoConnection = await mongoClient.connect();
     console.log('connected to DB - new artists', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
@@ -59,15 +57,16 @@ async function toggleNewArtistLikes(item) {
   try {
     const db = await getDB();
     const itemlikes = !item.likes;
-    const res = await db.collection('newArtists').updateOne({_id: item._id}, {likes: itemlikes });
+    const res = await db.collection('newArtists').updateOne({ _id: item._id }, { likes: itemlikes });
     return res.data;
   } catch (err) {
     console.log(`error: ${err.message}`);
   }
+  return null;
 }
 
 module.exports = {
   getNewArtistPlaylists,
   postNewArtistPlaylist,
-  toggleNewArtistLikes
+  toggleNewArtistLikes,
 };

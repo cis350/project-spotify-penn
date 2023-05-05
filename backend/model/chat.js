@@ -1,15 +1,13 @@
-const { mongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
 
 let mongoConnection;
+const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connect = async () => {
   try {
-    mongoConnection = await mongoClient.connect(
-      uri,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-    );
+    mongoConnection = await mongoClient.connect();
     console.log('connected to DB - chat', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
@@ -67,5 +65,5 @@ module.exports = {
   newConversation,
   getMessages,
   getSockets,
-  updateMessages
-}
+  updateMessages,
+};

@@ -3,18 +3,16 @@
  * this file contains all the CRUD operations from swaggerHub.
  */
 
-const { mongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
 
 let mongoConnection;
+const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connect = async () => {
   try {
-    mongoConnection = await mongoClient.connect(
-      uri,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-    );
+    mongoConnection = await mongoClient.connect();
     console.log('connected to DB - users', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
@@ -67,11 +65,21 @@ const getPassword = async (id) => {
   return user.password;
 };
 
+(async () => {
+  try {
+    const connection = await connect();
+    return connection;
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+    return null;
+  }
+})();
+
 module.exports = {
   connect,
   close,
   getUsers,
   getUser,
   addUser,
-  getPassword
+  getPassword,
 };
