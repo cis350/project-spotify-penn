@@ -1,34 +1,68 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useState } from 'react';
+// import React from 'react';
 import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useNavigate } from 'react-router-dom';
-import { newCommunity } from '../api/getCommunities';
+// import { newCommunity } from '../api/getCommunities';
+import uploadFile from '../api/upload';
 
 function CreateCommunity(props) {
-  const navigate = useNavigate();
+  const [files, setFiles] = useState();
+  // const [fileDir, setFileDir] = useState('');
+
+  // event handler for file selection
+  const updateFile = (evt) => {
+    setFiles(evt.target.files);
+  };
+  // const handleUpload = async () => {
+  //   // upload the file
+  //   const formData = new FormData();
+  //   formData.append('File_0', files);
+  //   uploadFile(formData); // add file dir here
+  // };
+
   const form = useForm({
     initialValues: {
       name: '',
+      image: '',
       desc: '',
     },
 
     validate: {
-      name: (val) => (val.length <= 5 ? 'name must be at least 6 characters' : null),
+      name: (val) => (val.length <= 5 && val.length >= 13 ? 'name must be at least 6 characters but not more than 12 characters' : null),
       desc: (val) => (val.length <= 0 ? 'description cannot be empty' : null),
     },
   });
 
   const handleCreateCommunity = () => {
-    const { name, desc } = form.values;
-    newCommunity(name, desc).then(() => {
+    const { name, image, desc } = form.values;
+    console.log(name);
+    console.log(image);
+    console.log(desc);
+    console.log(files);
+
+    console.log(files[0]);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('desc', desc);
+    formData.append('numMember', 1);
+    formData.append('File_0', files[0]);
+
+    // add file dir here
+    uploadFile(formData).then(() => {
       form.reset();
       props.onCommunityCreated();
     });
-    navigate('/communities');
+    
+    // set fileDir here -- insert whatever function that returns the aws link here.
+    // newCommunity(name, image, desc).then(() => {
+    //   form.reset();
+    //   props.onCommunityCreated();
+    // });
   };
 
   const handleKeyDown = (event) => {
@@ -60,6 +94,21 @@ function CreateCommunity(props) {
             size="xs"
             mt="xs"
           />
+          <div>
+            <input
+              id="upld"
+              value={form.values.image}
+              type="file"
+              name="someFiles"
+              onChange={(e) => {
+                console.log('adding file');
+                form.setFieldValue('image', e.currentTarget.value);
+                updateFile(e);
+                // setFiles(evt.target.files);
+                // handleUpload();
+              }}
+            />
+          </div>
           <Center>
             <Button mt={10} type="submit">
               Submit
