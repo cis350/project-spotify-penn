@@ -5,9 +5,11 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useNavigate } from 'react-router-dom';
 import { newCommunity } from '../api/getCommunities';
 
 function CreateCommunity(props) {
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       name: '',
@@ -26,6 +28,7 @@ function CreateCommunity(props) {
       form.reset();
       props.onCommunityCreated();
     });
+    navigate('/communities');
   };
 
   const handleKeyDown = (event) => {

@@ -64,34 +64,37 @@ webapp.get('/communities', async (req, res) => {
 });
 
 webapp.post('/communities', async (req, res) => {
+  console.log("received POST /communities");
   try {
-    const buffer = await rawBody(req);
-    const payload = JSON.parse(buffer.toString());
-    const {
-      name, image, numMember, description,
-    } = payload;
     const newCommunity = {
-      name,
-      image,
-      numMember,
-      description,
+      name: req.body.name,
+      image: req.body.image,
+      numMember: req.body.numMember,
+      description: req.body.description,
     };
+    console.log("POST /communities received:");
+    console.log(newCommunity);
     const result = await dbCommunities.addCommunity(newCommunity);
     res.status(201).json({ data: { id: result } });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: 'There was an error' });
   }
 });
 
 webapp.get('/newartistplaylists', async (req, res) => {
+  console.log("hit GET /newartistplaylists");
   try {
     const results = await dbNewArtist.getNewArtistPlaylists();
+    console.log("Results:");
+    console.log(results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
+    console.log(err);
     res.status(404).json({ message: 'there was an error' });
   }
 });

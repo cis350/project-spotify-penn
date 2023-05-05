@@ -45,7 +45,7 @@ async function getNewArtistPlaylists() {
   try {
     // get the db
     const db = await getDB();
-    const result = await db.collection('newArtists');
+    const result = await db.collection('newArtists').find({}).toArray();
     // print the result
     console.log(`New Artist Playlists: ${JSON.stringify(result.playlistName)}`);
     return result;
