@@ -4,9 +4,8 @@ import {
 } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getNewArtistPlaylists } from '../api/newArtistPlaylists';
+import { getNewArtistPlaylists, toggleNewArtistLikes } from '../api/newArtistPlaylists';
 import { likes, nolikes } from '../assets/likes';
-import updateLikes from '../api/updateLikesNewArtist';
 
 export function ArtistsFeed() {
   const [rows, setRows] = useState(true);
@@ -15,7 +14,7 @@ export function ArtistsFeed() {
 
   function handleClick(item) {
     try {
-      updateLikes(item).then(() => {
+      toggleNewArtistLikes(item).then(() => {
         setReload(!reload);
       });
     } catch (error) { console.log(error); }

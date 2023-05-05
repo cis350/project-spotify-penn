@@ -36,6 +36,7 @@ async function postNewArtistPlaylist(id, name, url, playlist, desc) {
     playlistName: playlist,
     description: desc,
     likes: false,
+    users_likes: [currentUserId],
   });
   console.log(`Uploaded playlist: ${result.insertedId}`);
   return result.insertedId;
@@ -55,12 +56,31 @@ async function getNewArtistPlaylists() {
   return null;
 }
 
-async function toggleNewArtistLikes(item) {
+async function toggleNewArtistLikes(item_id, user_id) {
   try {
+    // currentUserId needs to defined using the sessions
     const db = await getDB();
-    const itemlikes = !item.likes;
-    const res = await db.collection('newArtists').updateOne({_id: item._id}, {likes: itemlikes });
-    return res.data;
+    const playlist = await db.collection('newArtists').findOne({_id: item_id});
+    const users = playlist.users_likes;
+    const found = users.some(user => user.equals(user_id));
+
+    // add user from the userlist if not found
+    if (!found) {
+      users.push(user_id);
+      const res = await db.collection('newArtists').updateOne(
+        { _id: item._id },
+        { $set: { users_likes: users } }
+      );
+      return res.data;
+    } else {
+      // remove user otherwise
+      const res = await db.collection('newArtists').updateOne(
+        { _id: item._id },
+        { $pull: { users_likes: user_id } }
+      );
+      return res.data;
+
+    }
   } catch (err) {
     console.log(`error: ${err.message}`);
   }

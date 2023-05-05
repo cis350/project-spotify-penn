@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import {
   Table, Group, ScrollArea, Center, Title, Space, Paper, createStyles, rem, Stack, ActionIcon,
 } from '@mantine/core';
-import getPlaylists from '../api/getUserPlaylists';
+import { getPlaylists, togglePlaylistLikes } from '../api/getAllPlaylists';
 import { likes, nolikes } from '../assets/likes';
-import updateLikes from '../api/updateLikesNewArtist';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -46,7 +45,7 @@ function Card({ item }) {
 
   function handleClick(itm) {
     try {
-      updateLikes(itm).then(() => {
+      togglePlaylistLikes(itm).then(() => {
         setReload(!reload);
       });
     } catch (error) { /* do nothing */ }
