@@ -45,7 +45,16 @@ function Login() {
   const state = generateRandomString(16);
 
   localStorage.setItem('stateKey', state);
-  const scope = 'user-read-private user-read-email user-library-read';
+
+  const imageScope = 'ugc-image-upload';
+  const spotifyConnectScope = 'user-read-playback-state user-modify-playback-state user-read-currently-playing';
+  const playbackScope = 'app-remote-control streaming';
+  const playlistsScope = 'playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
+  const followScope = 'user-follow-modify user-follow-read';
+  const listeningHistoryScope = 'user-read-playback-position user-top-read user-read-recently-played';
+  const libraryScope = 'user-library-modify user-library-read';
+  const usersScope = 'user-read-email user-read-private';
+  const scope = `${imageScope} ${spotifyConnectScope} ${playbackScope} ${playlistsScope} ${followScope} ${listeningHistoryScope} ${libraryScope} ${usersScope}`;
 
   let url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
