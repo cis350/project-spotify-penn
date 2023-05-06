@@ -205,6 +205,21 @@ webapp.get('/users/:id', async (req, res) => {
   }
 });
 
+webapp.put('/users/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.updateUser(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown user' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
 webapp.put('/sockets/:socket', async (req, res) => {
   try {
     const socketId = parseInt(req.params.socket, 10);

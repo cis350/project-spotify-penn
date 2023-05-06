@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
-const getPassword = async (username) => {
+const getUserData = async (username) => {
   const url = `http://localhost:8000/users/${username}`;
   const res = await axios.get(url);
   const userData = res.data;
@@ -16,10 +16,11 @@ const getPassword = async (username) => {
 
 const newUser = async (email, first, last, password) => {
   const data = {
-    id: email,
+    _id: email,
     firstName: first,
     lastName: last,
     password,
+    new: true,
   };
   const options = {
     headers: {
@@ -46,4 +47,4 @@ const getFirstName = async (email) => {
   }
 };
 
-export { getFirstName, getPassword, newUser };
+export { getFirstName, getUserData, newUser };

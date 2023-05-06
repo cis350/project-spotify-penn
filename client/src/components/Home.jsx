@@ -32,6 +32,9 @@ function Home() {
     spotifyApi.getMe().then((data) => {
       console.log(data);
     });
+    spotifyApi.getMySavedTracks().then((data) => {
+      console.log(data);
+    });
   };
 
   useEffect(() => {
@@ -52,7 +55,7 @@ function Home() {
           >
             Welcome to Spotify@Penn!
           </Title>
-          <Button onClick={getSpotifyData(accessToken)}>
+          <Button onClick={() => getSpotifyData(accessToken)}>
             Get Spotify Data
           </Button>
 

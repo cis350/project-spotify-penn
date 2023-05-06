@@ -46,7 +46,7 @@ const getUsers = async () => {
 /* get a user by email */
 const getUser = async (email) => {
   const db = await getDB();
-  const user = await db.collection('users').findOne({ id: email });
+  const user = await db.collection('users').findOne({ _id: email });
   return user;
 };
 
@@ -65,15 +65,24 @@ const getPassword = async (id) => {
   return user.password;
 };
 
-(async () => {
+const updateUser = async (id) => {
+  const db = await getDB();
+
   try {
-    const connection = await connect();
-    return connection;
+    const result = await db.collection('users').updateOne(
+      { _id: id },
+      { $set: { new: false } },
+    );
+
+    if (result.matchedCount === 0) {
+      throw new Error(`User with ID ${id} not found`);
+    }
+
+    console.log(`Successfully updated user with ID ${id}`);
   } catch (error) {
-    console.error('Error connecting to the database:', error);
-    return null;
+    console.error(`Error updating user with ID ${id}:`, error.message);
   }
-})();
+};
 
 module.exports = {
   connect,
@@ -81,5 +90,6 @@ module.exports = {
   getUsers,
   getUser,
   addUser,
+  updateUser,
   getPassword,
 };

@@ -24,9 +24,9 @@ import {
 } from '@mantine/core';
 
 import { darkLogo } from '../assets/logos';
-import { getPassword } from '../api/getUserData';
+import { getUserData } from '../api/getUserData';
 
-function generateRandomString(length) {
+const generateRandomString = (length) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -34,7 +34,7 @@ function generateRandomString(length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
 function Login() {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ function Login() {
   const state = generateRandomString(16);
 
   localStorage.setItem('stateKey', state);
-  const scope = 'user-read-private user-read-email';
+  const scope = 'user-read-private user-read-email user-library-read';
 
   let url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
@@ -54,9 +54,6 @@ function Login() {
   url += `&redirect_uri=${encodeURIComponent(redirectUri)}`;
   url += `&state=${encodeURIComponent(state)}`;
   url += '&show_dialog=true';
-
-  // const spotifyApi = new SpotifyWebApi();
-  // const redirectUri = 'http://localhost:3000/callback';
 
   const [loginError, setLoginError] = useState(false);
 
@@ -77,7 +74,7 @@ function Login() {
 
   const handleSubmit = () => {
     const { email, password } = form.values;
-    getPassword(email).then((userData) => {
+    getUserData(email).then((userData) => {
       if (userData.password === password) {
         const sessionId = userData.id;
         window.sessionStorage.setItem('sessionId', sessionId);

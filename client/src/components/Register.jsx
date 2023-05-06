@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { Link, useNavigate } from 'react-router-dom';
+import '@fontsource/rubik';
 
 import {
   TextInput,
