@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';
 import { IconAlertCircle } from '@tabler/icons-react';
@@ -66,6 +67,11 @@ function Login() {
 
   const [loginError, setLoginError] = useState(false);
 
+  useEffect(() => {
+    window.sessionStorage.removeItem('sessionId');
+    window.sessionStorage.removeItem('accessToken');
+  }, []);
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -85,7 +91,7 @@ function Login() {
     const { email, password } = form.values;
     getUserData(email).then((userData) => {
       if (userData.password === password) {
-        const sessionId = userData.id;
+        const sessionId = userData._id;
         window.sessionStorage.setItem('sessionId', sessionId);
         window.location = url;
       } else {

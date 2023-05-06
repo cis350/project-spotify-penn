@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Title, Center, Button } from '@mantine/core';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { useNavigate } from 'react-router-dom';
+import { setSongs } from '../api/getSpotify';
 
 function Home() {
   const [auth, setAuth] = useState(false);
@@ -32,7 +33,21 @@ function Home() {
     spotifyApi.getMe().then((data) => {
       console.log(data);
     });
-    spotifyApi.getMySavedTracks().then((data) => {
+    spotifyApi.getMyTopArtists().then((data) => {
+      console.log(data);
+    });
+    spotifyApi.getMyTopTracks().then((data) => {
+      console.log(window.sessionStorage.getItem('sessionId'));
+      const userId = window.sessionStorage.getItem('sessionId');
+      setSongs(userId, token, data.items);
+    });
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const getSongs = (token) => {
+    const spotifyApi = new SpotifyWebApi();
+    spotifyApi.setAccessToken(token);
+    spotifyApi.getMyTopTracks().then((data) => {
       console.log(data);
     });
   };

@@ -4,21 +4,23 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Button, Textarea, Avatar, Badge, Title, Paper, Container, Center, Stack, NumberInput,
+  Tooltip, Button, Textarea, Avatar, Badge, Title, Paper, Container, Center, Stack, NumberInput,
 } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import {
   getMessages, getSockets, newConversation, updateMessages,
-} from '../api/messages';
+} from '../api/getMessages';
 import { getFirstName } from '../api/getUserData';
 
 function Chat() {
   const currentUser = window.sessionStorage.getItem('sessionId');
   const [userInitial, setUserInitial] = useState('');
-  const userName = getFirstName(currentUser).then((name) => setUserInitial(name[0].toUpperCase()));
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const messageContainerRef = useRef(null);
   const [socket, setSocket] = useState(1);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -65,9 +67,16 @@ function Chat() {
   };
 
   useEffect(() => {
+    if (window.sessionStorage.getItem('sessionId') === null || window.sessionStorage.getItem('accessToken') === null) {
+      navigate('/login');
+    }
     // Get initial (socket 1) messages from the server and display
     getMessages(1).then((arr) => {
       setMessages(arr);
+    });
+    getFirstName(currentUser).then((name) => {
+      console.log(name);
+      setUserInitial(name[0].toUpperCase());
     });
   }, []);
 
@@ -104,7 +113,7 @@ function Chat() {
             min={1}
             max={10}
             placeholder="Socket Number (1-10)"
-            label="Choose your socket"
+            label="Choose your chat room"
             value={socket}
             onChange={handleSocketChange}
             withAsterisk
@@ -131,13 +140,21 @@ function Chat() {
                   }}
                 >
                   {message.sender !== currentUser && (
-                  <Avatar style={{ marginRight: '8px' }}>U</Avatar>
+                    <Tooltip label={message.sender} position="left">
+                      <Avatar style={{ marginRight: '8px' }}>
+                        {message.sender[0].toUpperCase()}
+                      </Avatar>
+                    </Tooltip>
                   )}
                   <Badge color={message.sender === currentUser ? 'gray' : 'teal'}>
                     {message.text}
                   </Badge>
                   {message.sender === currentUser && (
-                  <Avatar style={{ marginLeft: '8px' }}>{userInitial}</Avatar>
+                    <Tooltip label={message.sender} position="right">
+                      <Avatar style={{ marginLeft: '8px' }}>
+                        {userInitial}
+                      </Avatar>
+                    </Tooltip>
                   )}
                 </div>
               ))}

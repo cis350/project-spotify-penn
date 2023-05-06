@@ -29,6 +29,7 @@ const dbCommunities = require('./model/communities');
 const dbNewArtist = require('./model/newArtist');
 const dbPlaylists = require('./model/playlists');
 const dbUsers = require('./model/users');
+const dbSpotify = require('./model/spotify');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -293,6 +294,24 @@ webapp.get('/communities', async (req, res) => {
     const results = await dbCommunities.getCommunities();
     if (results === undefined) {
       res.status(404).json({ error: 'unknown community' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
+webapp.put('/songs/:id', async (req, res) => {
+  try {
+    const { songs } = req.body;
+    console.log(songs);
+    console.log(req.params.id);
+    const results = await dbSpotify.setUserSongs(req.params.id, songs);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown song' });
     } else {
       res.status(200).json(results);
     }

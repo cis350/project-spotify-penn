@@ -21,6 +21,7 @@ const newUser = async (email, first, last, password) => {
     lastName: last,
     password,
     new: true,
+    songs: [],
   };
   const options = {
     headers: {
