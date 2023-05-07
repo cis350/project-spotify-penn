@@ -345,4 +345,61 @@ webapp.get('/songs', async (req, res) => {
   }
 });
 
+webapp.get('/users/:id/playlists', async (req, res) => {
+  try {
+    const results = await dbUsers.getPlaylists(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'no such user' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({message: 'server error' });
+  }
+})
+
+webapp.post('/users/:id/playlsits', async (req, res) => {
+  const {
+    id, playlistid, name, desc
+  } = req.body;
+
+  if (!id || !name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbUsers.postPlaylists(id, playlistid, name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
+  }
+})
+
+webapp.get('/users/:id/friends', async (req, res) => {
+  try {
+    const results = await dbUsers.getFriends(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'no such user' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({message: 'server error' });
+  }
+})
+
+webapp.get('/users/:id/communities', async (req, res) => {
+  try {
+    const results = await dbUsers.getCommmunities(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'no such user' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({message: 'server error' });
+  }
+})
+
 module.exports = webapp;

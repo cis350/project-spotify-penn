@@ -2,7 +2,12 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
+const setHeaders = () => {
+  axios.defaults.headers.common.Authorization = sessionStorage.getItem('sessionId');
+};
+
 const getUserData = async (username) => {
+  setHeaders();
   const url = `http://localhost:8000/users/${username}`;
   const res = await axios.get(url);
   const userData = res.data;
@@ -13,6 +18,7 @@ const getUserData = async (username) => {
 };
 
 const newUser = async (email, first, last, password) => {
+  setHeaders();
   const data = {
     _id: email,
     firstName: first,
@@ -39,6 +45,7 @@ const newUser = async (email, first, last, password) => {
 };
 
 const getFirstName = async (email) => {
+  setHeaders();
   const url = `http://localhost:8000/users/${email}`;
   const res = await axios.get(url);
   const userData = res.data;
@@ -50,6 +57,7 @@ const getFirstName = async (email) => {
 };
 
 const getFullName = async (email) => {
+  setHeaders();
   const url = `http://localhost:8000/users/${email}`;
   const res = await axios.get(url);
   const userData = res.data;

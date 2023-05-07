@@ -3,7 +3,7 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCommunities } from '../api/getCommunities';
+import { getCommunities } from '../api/getUserCommunities';
 
 export function CommunitiesTable() {
   const [rows, setRows] = useState(null);

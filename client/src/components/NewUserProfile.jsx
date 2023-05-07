@@ -5,7 +5,6 @@ import {
 } from '@mantine/core';
 import Friends from './FriendsTable';
 import Communities from './CommunitiesTable';
-import Conversations from './ConversationsTable';
 import Playlists from './PlaylistsTable';
 import { getOtherUsersID } from '../api/getUsers';
 
@@ -43,19 +42,15 @@ function NewUserProfile() {
       <Space h="40px" />
       <Tabs value={activeTab} onTabChange={setActiveTab}>
         <Tabs.List>
-          <Tabs.Tab value="Playlists">Playlist tab</Tabs.Tab>
-          <Tabs.Tab value="Friends">Friends tab</Tabs.Tab>
-          <Tabs.Tab value="Conversations">Conversations tab</Tabs.Tab>
-          <Tabs.Tab value="Communities">Communities tab</Tabs.Tab>
+          <Tabs.Tab value="Playlists">Playlists</Tabs.Tab>
+          <Tabs.Tab value="Friends">Friends</Tabs.Tab>
+          <Tabs.Tab value="Communities">Communities</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="Playlists">
           <Playlists />
         </Tabs.Panel>
         <Tabs.Panel value="Friends">
           <Friends />
-        </Tabs.Panel>
-        <Tabs.Panel value="Conversations">
-          <Conversations />
         </Tabs.Panel>
         <Tabs.Panel value="Communities">
           <Communities />

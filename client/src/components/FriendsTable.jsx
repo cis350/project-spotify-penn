@@ -4,7 +4,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import getFriends from '../api/getFriends';
+import getFriends from '../api/getUserFriends';
 
 export function FriendsTable() {
   const [rows, setRows] = useState([]);

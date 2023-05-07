@@ -1,11 +1,24 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 
+import { getUserData } from './getUserData';
+
+const setHeaders = () => {
+  axios.defaults.headers.common.Authorization = sessionStorage.getItem('sessionId');
+};
+
 const getCommunities = async () => {
-  const url = 'http://localhost:8000/communities';
-  const res = await axios.get(url);
-  console.log(res.data);
-  return res.data;
+  const email = getUserData(setHeaders.sessionId).then((data) => (data.email));
+  // eslint-disable-next-line no-console
+  console.log(email);
+  const response = await axios.get(`http://localhost:8000/users/${email}/communities`);
+  const { data } = response;
+
+  if (data.length === 0) {
+    throw new Error('empty data');
+  } else {
+    return data;
+  }
 };
 
 const newCommunity = async (n, i, d) => {

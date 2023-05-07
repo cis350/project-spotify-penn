@@ -114,6 +114,58 @@ async function getRankedSongs(page, pageSize) {
   }
 }
 
+const getPlaylists = async(id) => {
+  const db = await getDB();
+  try {
+    const playlists = db.collection('users').findOne({_id: id}, {_id: 0, playlists: 1}).toArray;
+    console.log(`User Playlists: ${JSON.stringify(playlists)}`);
+    return playlists;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
+const postPlaylists = async(id, playlistid, name, desc) => {
+  try {
+    const db = await getDB();
+    const user = await db.collection('users').findOne({_id: id});
+    const updatedPlaylists = user.playlists;
+    const newPlaylist = [playlistid, name, desc];
+    updatedPlaylists.push(newPlaylist);
+    const res = await db.collection('users').updateOne(
+      { _id: item._id },
+      { $set: { playlists: updatedPlaylists } }
+    );
+
+    console.log(`Uploaded playlist: ${newPlaylist}`);
+    return res;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
+const getFriends = async(id) => {
+  const db = await getDB();
+  try {
+    const friends = db.collection('users').findOne({_id: id}, {_id: 0, friends: 1}).toArray;
+    console.log(`User Friends: ${JSON.stringify(friends)}`);
+    return friends;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
+const getCommmunities = async(id) => {
+  const db = await getDB();
+  try {
+    const communities = db.collection('users').findOne({_id: id}, {_id: 0, communities: 1}).toArray;
+    console.log(`User Communities: ${JSON.stringify(communities)}`);
+    return communities;
+  } catch (err) {
+    console.log(`error: ${err.message}`);
+  }
+}
+
 module.exports = {
   connect,
   close,
@@ -123,4 +175,8 @@ module.exports = {
   updateUser,
   getPassword,
   getRankedSongs,
+  getPlaylists,
+  postPlaylists,
+  getFriends,
+  getCommmunities
 };
