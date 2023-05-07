@@ -104,9 +104,6 @@ function MainHeader() {
             <a href="/leaderboard" className={classes.link}>
               Leaderboard
             </a>
-            <a href="/home" className={classes.link}>
-              PennMix
-            </a>
             <a href="/communities" className={classes.link}>
               Community
             </a>
