@@ -307,8 +307,6 @@ webapp.get('/communities', async (req, res) => {
 webapp.put('/songs/:id', async (req, res) => {
   try {
     const { songs } = req.body;
-    console.log(songs);
-    console.log(req.params.id);
     const results = await dbSpotify.setUserSongs(req.params.id, songs);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown song' });
@@ -325,8 +323,6 @@ webapp.put('/songs/:id', async (req, res) => {
 webapp.put('/artists/:id', async (req, res) => {
   try {
     const { artists } = req.body;
-    console.log(artists);
-    console.log(req.params.id);
     const results = await dbSpotify.setUserAlbums(req.params.id, artists);
     if (results === undefined) {
       res.status(404).json({ error: 'unknown album' });

@@ -14,6 +14,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 import { darkLogo } from '../assets/logos';
+import { getFullName } from '../api/getUserData';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -61,6 +62,7 @@ const useStyles = createStyles((theme) => ({
 function MainHeader() {
   const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
   const [currentUser, setCurrentUser] = useState('');
+  const [fullName, setFullName] = useState('');
   const { classes } = useStyles();
   const navigate = useNavigate();
 
@@ -71,6 +73,12 @@ function MainHeader() {
       setCurrentUser(window.sessionStorage.getItem('sessionId'));
     }
   }, []);
+
+  useEffect(() => {
+    getFullName(currentUser).then((data) => {
+      setFullName(data);
+    });
+  }, [currentUser]);
 
   function clearAccessToken() {
     window.sessionStorage.removeItem('sessionId');
@@ -116,7 +124,7 @@ function MainHeader() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
-            <Text>{currentUser}</Text>
+            <Text>{`${fullName} (${currentUser})`}</Text>
             <Avatar
               component="a"
               href={`http://localhost:${window.location.port}/profile`}
