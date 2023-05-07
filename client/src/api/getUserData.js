@@ -6,12 +6,10 @@ const getUserData = async (username) => {
   const url = `http://localhost:8000/users/${username}`;
   const res = await axios.get(url);
   const userData = res.data;
-  console.log(userData);
-  if (Object.keys(userData).length === 0) {
-    throw new Error('Invalid username');
-  } else {
-    return userData;
+  if (!userData) {
+    return null;
   }
+  return userData;
 };
 
 const newUser = async (email, first, last, password) => {

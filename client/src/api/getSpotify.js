@@ -1,29 +1,81 @@
 import axios from 'axios';
 
-const setSongs = async (username, token, newSongs) => {
-//   const spotifyOptions = {
-//     time_range: 'short_term',
-//     limit: 50,
-//     offset: 0,
-//   };
-
-  const data = {
-    songs: newSongs,
-  };
-  const options = {
+const getSongs = async (token, options) => {
+  let url = 'https://api.spotify.com/v1/me/top/tracks';
+  const timeRange = options.timeRange || 'short_term';
+  const limit = options.limit || 50;
+  const offset = options.offset || 0;
+  url = `${url}?time_range=${timeRange}&limit=${limit}&offset=${offset}`;
+  const res = await axios.get(url, {
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
-  };
-  const url = `http://localhost:8000/songs/${username}`;
-  const res = await axios.put(
-    url,
-    data,
-    options,
-  );
+  });
   return res.data;
 };
 
-const returnOne = () => 1;
+const getArtists = async (token, options) => {
+  let url = 'https://api.spotify.com/v1/me/top/artists';
+  const timeRange = options.timeRange || 'short_term';
+  const limit = options.limit || 50;
+  const offset = options.offset || 0;
+  url = `${url}?time_range=${timeRange}&limit=${limit}&offset=${offset}`;
+  const res = await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+};
 
-export { setSongs, returnOne };
+const setSongs = async (username, newSongs) => {
+  try {
+    const data = {
+      songs: newSongs,
+    };
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const url = `http://localhost:8000/songs/${username}`;
+    const res = await axios.put(
+      url,
+      data,
+      options,
+    );
+    return res.data;
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    return errmsg;
+  }
+};
+
+const setArtists = async (username, newArtists) => {
+  try {
+    const data = {
+      artists: newArtists,
+    };
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const url = `http://localhost:8000/artists/${username}`;
+    const res = await axios.put(
+      url,
+      data,
+      options,
+    );
+    return res.data;
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    return errmsg;
+  }
+};
+
+export {
+  getSongs, setSongs, getArtists, setArtists,
+};

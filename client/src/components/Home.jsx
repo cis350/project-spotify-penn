@@ -1,10 +1,14 @@
 /* eslint-disable no-console */
 
 import React, { useEffect, useState } from 'react';
-import { Title, Center, Button } from '@mantine/core';
+import {
+  Title, Center, Button, Stack,
+} from '@mantine/core';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { useNavigate } from 'react-router-dom';
-import { setSongs } from '../api/getSpotify';
+import {
+  setSongs, getSongs, setArtists, getArtists,
+} from '../api/getSpotify';
 
 function Home() {
   const [auth, setAuth] = useState(false);
@@ -30,35 +34,64 @@ function Home() {
   const getSpotifyData = (token) => {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(token);
-    spotifyApi.getMe().then((data) => {
-      console.log(data);
-    });
-    spotifyApi.getMyTopArtists().then((data) => {
-      console.log(data);
-    });
-    spotifyApi.getMyTopTracks().then((data) => {
-      console.log(window.sessionStorage.getItem('sessionId'));
-      const userId = window.sessionStorage.getItem('sessionId');
-      setSongs(userId, token, data.items);
-    });
-  };
 
-  // eslint-disable-next-line no-unused-vars
-  const getSongs = (token) => {
-    const spotifyApi = new SpotifyWebApi();
-    spotifyApi.setAccessToken(token);
-    spotifyApi.getMyTopTracks().then((data) => {
-      console.log(data);
+    const spotifyOptions = {
+      time_range: 'short_term',
+      limit: 50,
+      offset: 0,
+    };
+
+    getArtists(token, spotifyOptions).then((data) => {
+      console.log('raw', data);
+      const artistData = data.items.map((item) => {
+        const artistName = item.name;
+        const { genres } = item;
+        const { popularity } = item;
+        const artistImage = item.images[0].url;
+
+        return {
+          artistName,
+          genres,
+          popularity,
+          artistImage,
+        };
+      });
+      console.log('filtered', artistData);
+      const userId = window.sessionStorage.getItem('sessionId');
+      setArtists(userId, artistData);
+    });
+
+    getSongs(token, spotifyOptions).then((data) => {
+      console.log('raw', data);
+      const songData = data.items.map((item) => {
+        const songName = item.name;
+        const artistsNames = item.artists.map((artist) => artist.name);
+        const albumName = item.album.name;
+        const releaseYear = item.album.release_date.slice(0, 4);
+        const albumImage = item.album.images[0].url;
+
+        return {
+          songName,
+          artistsNames,
+          albumName,
+          releaseYear,
+          albumImage,
+        };
+      });
+      console.log('filtered', songData);
+      const userId = window.sessionStorage.getItem('sessionId');
+      setSongs(userId, songData);
     });
   };
 
   useEffect(() => {
     getAccessToken();
   }, []);
+
   return (
     <Center mt="33vh">
       {auth ? (
-        <>
+        <Stack align="center" direction="column" spacing="xl">
           <Title
             align="center"
             height="100vh"
@@ -70,11 +103,10 @@ function Home() {
           >
             Welcome to Spotify@Penn!
           </Title>
-          <Button onClick={() => getSpotifyData(accessToken)}>
-            Get Spotify Data
+          <Button size="xl" onClick={() => getSpotifyData(accessToken)}>
+            Get My Spotify Data
           </Button>
-
-        </>
+        </Stack>
       ) : (
         <Title
           align="center"

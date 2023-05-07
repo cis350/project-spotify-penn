@@ -322,4 +322,22 @@ webapp.put('/songs/:id', async (req, res) => {
   }
 });
 
+webapp.put('/artists/:id', async (req, res) => {
+  try {
+    const { artists } = req.body;
+    console.log(artists);
+    console.log(req.params.id);
+    const results = await dbSpotify.setUserAlbums(req.params.id, artists);
+    if (results === undefined) {
+      res.status(404).json({ error: 'unknown album' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    const errmsg = err.message;
+    console.log(err);
+    res.status(404).json({ message: errmsg });
+  }
+});
+
 module.exports = webapp;

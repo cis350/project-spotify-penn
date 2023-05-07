@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { Link, useNavigate } from 'react-router-dom';
 import '@fontsource/rubik';
+import '@fontsource/inter';
 
 import {
   TextInput,
@@ -19,7 +20,7 @@ import {
   Image,
 } from '@mantine/core';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { newUser } from '../api/getUserData';
+import { getUserData, newUser } from '../api/getUserData';
 import { darkLogo } from '../assets/logos';
 
 function Register() {
@@ -49,14 +50,14 @@ function Register() {
       firstName, lastName, email, password,
     } = form.values;
 
-    // if (getPassword(email) !== null) {
-    //   setInUse(true);
-    //   return;
-    // }
-
-    newUser(email, firstName, lastName, password).then(navigate('/login')).catch((error) => {
-      if (error.message === 'Request failed with status code 500') {
+    getUserData(email).then((data) => {
+      if (data !== null) {
         setInUse(true);
+      } else {
+        console.log('new user');
+        newUser(email, firstName, lastName, password).then(navigate('/login')).catch(() => {
+          setInUse(true);
+        });
       }
     });
   };

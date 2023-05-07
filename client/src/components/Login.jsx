@@ -150,7 +150,7 @@ function Login() {
           }
             radius="md"
           />
-          <Group position="apart" mt="lg">
+          {/* <Group position="apart" mt="lg">
             <Checkbox label="Remember me" />
             <Link
               component={Link}
@@ -164,7 +164,7 @@ function Login() {
             >
               Forgot password?
             </Link>
-          </Group>
+          </Group> */}
           <Button size="md" type="submit" fullWidth mt="lg" radius="md">
             Sign in
           </Button>
