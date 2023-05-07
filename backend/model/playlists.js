@@ -30,6 +30,18 @@ const getPlaylists = async () => {
   return playlists;
 };
 
+const postPlaylists = async ( name, desc) => {
+  const db = await getDB();
+  const result = await db.collection('playlists').insertOne({
+    name: name,
+    description: desc,
+    likes: false,
+  });
+  console.log(`Uploaded playlist: ${result.insertedId}`);
+  return result.insertedId;
+
+};
+
 module.exports = {
-  getPlaylists,
+  getPlaylists, postPlaylists
 };

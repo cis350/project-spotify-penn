@@ -184,6 +184,24 @@ webapp.get('/playlists', async (req, res) => {
   }
 });
 
+webapp.post('/playlists', async (req, res) => {
+  const {
+    name, desc,
+  } = req.body;
+
+  if (!name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbPlaylists.postPlaylists(name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
+  }
+});
+
 webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db

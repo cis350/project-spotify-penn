@@ -6,6 +6,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { postNewUserPlaylist } from '../api/getUserPlaylists';
+import { postPlaylists } from '../api/getAllPlaylists';
 
 export function AddPlaylist(props) {
   const form = useForm({
@@ -25,6 +26,7 @@ export function AddPlaylist(props) {
   const handleCreatePlaylist = () => {
     const { id, name, desc } = form.values;
     postNewUserPlaylist(id, name, desc).then(() => {
+      postPlaylists(name, desc);
       form.reset();
       props.onPlaylistCreated();
     });
