@@ -130,7 +130,7 @@ function MainHeader() {
               href={`http://localhost:${window.location.port}/profile`}
               onClick={() => navigate('/profile')}
               // href="http://localhost:3000/profile"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU"
+              src={window.sessionStorage.getItem('imageURL')}
               alt="User"
               radius="xl"
             />

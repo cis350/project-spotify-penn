@@ -39,6 +39,8 @@ function Home() {
 
     spotifyApi.getMe().then((data) => {
       console.log('User info', data);
+      console.log('user pic', data.images[0].url);
+      window.sessionStorage.setItem('imageURL', data.images[0].url);
     });
 
     const spotifyOptions = {
