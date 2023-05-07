@@ -75,10 +75,8 @@ webapp.post('/communities', async (req, res) => {
   try {
     const form = formidable({ multiples: false });
     form.parse(req, (err, fields, files) => {
-      console.log('form:');
-      console.log(form);
-      console.log('fields:');
-      console.log(fields);
+      console.log('form', form);
+      console.log('fields:', fields);
 
       if (err) {
         console.log('error', err.message);
@@ -119,7 +117,6 @@ webapp.post('/communities', async (req, res) => {
       });
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: 'There was an error' });
   }
 });
@@ -128,15 +125,13 @@ webapp.get('/newartistplaylists', async (req, res) => {
   console.log('hit GET /newartistplaylists');
   try {
     const results = await dbNewArtist.getNewArtistPlaylists();
-    console.log('Results:');
-    console.log(results);
+    console.log('results', results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
-    console.log(err);
     res.status(404).json({ message: 'there was an error' });
   }
 });
@@ -185,7 +180,6 @@ webapp.get('/playlists', async (req, res) => {
     // send the response with the appropriate status code
     res.status(200).json(results);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: 'there was a server error' });
   }
 });
@@ -201,7 +195,7 @@ webapp.get('/users/:id', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -216,7 +210,7 @@ webapp.put('/users/:id', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -233,7 +227,7 @@ webapp.put('/sockets/:socket', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -250,7 +244,7 @@ webapp.get('/sockets/:socket', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -266,7 +260,7 @@ webapp.get('/sockets', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -283,7 +277,7 @@ webapp.post('/sockets', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -299,7 +293,7 @@ webapp.get('/communities', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -315,7 +309,7 @@ webapp.put('/songs/:id', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });
@@ -331,7 +325,7 @@ webapp.put('/artists/:id', async (req, res) => {
     }
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
+
     res.status(404).json({ message: errmsg });
   }
 });

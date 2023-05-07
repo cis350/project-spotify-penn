@@ -47,7 +47,6 @@ const setSongs = async (username, newSongs) => {
     return res.data;
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
     return errmsg;
   }
 };
@@ -71,7 +70,6 @@ const setArtists = async (username, newArtists) => {
     return res.data;
   } catch (err) {
     const errmsg = err.message;
-    console.log(err);
     return errmsg;
   }
 };

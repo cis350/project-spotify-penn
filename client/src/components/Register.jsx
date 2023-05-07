@@ -54,7 +54,6 @@ function Register() {
       if (data !== null) {
         setInUse(true);
       } else {
-        console.log('new user');
         newUser(email, firstName, lastName, password).then(navigate('/login')).catch(() => {
           setInUse(true);
         });

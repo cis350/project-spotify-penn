@@ -11,7 +11,6 @@ const connect = async () => {
     console.log('connected to DB - spotify', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };

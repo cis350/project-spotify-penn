@@ -10,7 +10,6 @@ const connect = async () => {
     console.log('connected to DB - communities', mongoConnection.db().databaseName);
     return mongoConnection;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };

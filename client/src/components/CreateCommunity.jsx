@@ -57,7 +57,7 @@ function CreateCommunity(props) {
       form.reset();
       props.onCommunityCreated();
     });
-    
+
     // set fileDir here -- insert whatever function that returns the aws link here.
     // newCommunity(name, image, desc).then(() => {
     //   form.reset();
