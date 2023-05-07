@@ -24,9 +24,11 @@ function Home() {
     } else {
       setAuth(true);
       const hash = window.location.href;
-      const accessToken = hash.substring(hash.indexOf('=') + 1, hash.indexOf('&'));
-      console.log(`Access token: ${accessToken}`);
-      window.sessionStorage.setItem('accessToken', accessToken);
+      if (!(window.sessionStorage.getItem('accessToken'))) {
+        const accessToken = hash.substring(hash.indexOf('=') + 1, hash.indexOf('&'));
+        console.log(`Access token: ${accessToken}`);
+        window.sessionStorage.setItem('accessToken', accessToken);
+      }
     }
   };
   const accessToken = window.sessionStorage.getItem('accessToken');

@@ -332,7 +332,7 @@ webapp.put('/artists/:id', async (req, res) => {
 
 webapp.get('/songs', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
-  const pageSize = parseInt(req.query.page_size, 10) || 10;
+  const pageSize = parseInt(req.query.page_size, 10) || 10000000000;
   try {
     const results = await dbUsers.getRankedSongs(page, pageSize);
     if (results === null) {

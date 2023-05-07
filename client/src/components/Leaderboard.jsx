@@ -58,7 +58,7 @@ export default function HomePage() {
 
   let comp;
   if (content === 'Song') {
-    comp = <LazyTable route="http://localhost:8000/songs" columns={songColumns} />;
+    comp = <LazyTable route="http://localhost:8000/songs" columns={songColumns} defaultPageSize={10} />;
   } else {
     comp = <LazyTable route="http://localhost:8000/artists" columns={artistColumns} />;
   }
