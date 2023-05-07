@@ -35,6 +35,10 @@ function Home() {
     const spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(token);
 
+    spotifyApi.getMe().then((data) => {
+      console.log('User info', data);
+    });
+
     const spotifyOptions = {
       time_range: 'short_term',
       limit: 50,
