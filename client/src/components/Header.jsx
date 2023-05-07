@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createStyles,
   Header,
@@ -8,6 +8,7 @@ import {
   Burger,
   rem,
   Image,
+  Text,
   Avatar,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -59,10 +60,20 @@ const useStyles = createStyles((theme) => ({
 
 function MainHeader() {
   const [drawerOpened, { toggle: toggleDrawer }] = useDisclosure(false);
+  const [currentUser, setCurrentUser] = useState('');
   const { classes } = useStyles();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (window.sessionStorage.getItem('sessionId') === null) {
+      navigate('/login');
+    } else {
+      setCurrentUser(window.sessionStorage.getItem('sessionId'));
+    }
+  }, []);
+
   function clearAccessToken() {
+    window.sessionStorage.removeItem('sessionId');
     window.sessionStorage.removeItem('accessToken');
   }
 
@@ -105,6 +116,7 @@ function MainHeader() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
+            <Text>{currentUser}</Text>
             <Avatar
               component="a"
               href={`http://localhost:${window.location.port}/profile`}

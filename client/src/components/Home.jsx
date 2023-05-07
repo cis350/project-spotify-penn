@@ -64,13 +64,18 @@ function Home() {
     getSongs(token, spotifyOptions).then((data) => {
       console.log('raw', data);
       const songData = data.items.map((item) => {
+        const { id } = item;
         const songName = item.name;
-        const artistsNames = item.artists.map((artist) => artist.name);
+        const artistsNames = item.artists.map((artist) => ({
+          name: artist.name,
+          id: artist.id,
+        }));
         const albumName = item.album.name;
         const releaseYear = item.album.release_date.slice(0, 4);
         const albumImage = item.album.images[0].url;
 
         return {
+          id,
           songName,
           artistsNames,
           albumName,
