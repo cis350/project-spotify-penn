@@ -20,6 +20,9 @@ const newUser = async (email, first, last, password) => {
     password,
     new: true,
     songs: [],
+    communites: [],
+    playlists: [],
+    friends: [],
   };
   const options = {
     headers: {
