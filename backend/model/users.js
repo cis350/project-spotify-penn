@@ -83,6 +83,37 @@ const updateUser = async (id) => {
   }
 };
 
+async function getRankedSongs(page, pageSize) {
+  try {
+    const db = await getDB();
+    const offset = (page - 1) * pageSize;
+    let rankedSongs = await db.collection('users').aggregate([
+      { $unwind: '$songs' },
+      { $group: { _id: '$songs.id', count: { $sum: 1 }, song: { $first: '$songs' } } },
+      { $sort: { count: -1, 'song.songName': 1 } },
+      {
+        $project: {
+          title: '$song.songName',
+          album: '$song.albumName',
+          count: 1,
+        },
+      },
+      { $skip: offset },
+      { $limit: pageSize },
+
+    ]).toArray();
+
+    rankedSongs = rankedSongs.map((song, index) => ({
+      ...song,
+      rank: offset + index + 1,
+    }));
+
+    return rankedSongs;
+  } catch (err) {
+    return null;
+  }
+}
+
 module.exports = {
   connect,
   close,
@@ -91,4 +122,5 @@ module.exports = {
   addUser,
   updateUser,
   getPassword,
+  getRankedSongs,
 };

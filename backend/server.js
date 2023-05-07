@@ -330,4 +330,19 @@ webapp.put('/artists/:id', async (req, res) => {
   }
 });
 
+webapp.get('/songs', async (req, res) => {
+  const page = parseInt(req.query.page, 10) || 1;
+  const pageSize = parseInt(req.query.page_size, 10) || 10;
+  try {
+    const results = await dbUsers.getRankedSongs(page, pageSize);
+    if (results === null) {
+      res.status(404).json({ error: 'unknown song' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
 module.exports = webapp;

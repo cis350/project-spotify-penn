@@ -20,7 +20,7 @@ export default function HomePage() {
       headerName: 'Album',
     },
     {
-      field: 'jammies',
+      field: 'count',
       headerName: 'Number of Penn Jammers',
     },
     {
@@ -43,7 +43,7 @@ export default function HomePage() {
       headerName: 'Genre',
     },
     {
-      field: 'jammies',
+      field: 'count',
       headerName: 'Number of Penn Jammers',
     },
   ];
