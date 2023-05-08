@@ -7,7 +7,12 @@ import {
 import CreateNewCommunity from './CreateCommunity';
 import { getCommunities } from '../api/getCommunities';
 
-const handleSearchClick = () => {
+const handleClick = () => {
+  try {
+    togglePlaylistLikes(itm).then(() => {
+      setReload(!reload);
+    });
+  } catch (error) { /* do nothing */ }
 };
 
 const useStyles = createStyles((theme) => ({
@@ -60,7 +65,7 @@ function Card({ item }) {
           {name}
         </Title>
       </div>
-      <Button variant="white" color="dark" onClick={() => setJoinStatus(!joinStatus)}>
+      <Button variant="white" color="dark" onClick={() => handleClick()}>
         {joinStatus ? 'Joined' : 'Join Community'}
       </Button>
     </Paper>

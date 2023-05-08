@@ -29,4 +29,10 @@ const newCommunity = async (n, i, d) => {
   return res.data;
 };
 
+const toggleJoin = async (item) => {
+  setHeaders();
+  const res = await axios.get(`http://localhost:8000/communities/members/${item.id}`);
+  return res.data;
+}
+
 export { getCommunities, newCommunity };

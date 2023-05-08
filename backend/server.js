@@ -30,6 +30,7 @@ const dbNewArtist = require('./model/newArtist');
 const dbPlaylists = require('./model/playlists');
 const dbUsers = require('./model/users');
 const dbSpotify = require('./model/spotify');
+const { default: CommunitiesTable } = require('../client/src/components/CommunitiesTable');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -56,53 +57,6 @@ webapp.post('/users', async (req, res) => {
     res.status(400).json({ message: 'Error adding user', error: err });
   }
 });
-
-webapp.get('/other-users', async (req, res) => {
-  try {
-    console.log('hit GET /other-users');
-    
-
-
-    const users = await dbUsers.getUsers(req.headers.authorization);
-    if (users === undefined) {
-      res.status(404).json({ error: 'no users exist' });
-      return;
-    }
-
-    //remove current user
-    if (req.headers.authorization) {
-      console.log('authorization header exists: ', req.headers.authorization);
-      const filteredUsers = users.filter((user) => user._id !== req.headers.authorization);
-      res.status(200).json(filteredUsers);
-    } else { //if no authorization header, return all users
-      console.log('authorization header does not exist');
-      res.status(200).json(users);
-    }
-
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({ message: 'Error retrieving users', error: err });
-  }
-});
-
-webapp.post('/other-users/follow/:id', async (req, res) => {
-  try {
-    console.log('hit GET /other-users/follow/:id');
-    console.log('req.params.id: ', req.params.id);
-    const result = await dbUsers.toggleFollow(req.headers.authorization, req.params.id);
-    // const id = req.params.id;
-    // const user = await dbUsers.getUser(id);
-    if (result === undefined) {
-      res.status(404).json({ error: 'user not found' });
-      return;
-    }
-    res.status(200).json(result);
-  } catch (err) {
-    console.log(err);
-    res.status(400).json({ message: 'error in following user', error: err });
-  }
-});
-
 
 webapp.get('/communities', async (req, res) => {
   try {
@@ -215,7 +169,7 @@ webapp.get('/playlists', async (req, res) => {
   try {
     console.log('Called get playlists');
     // get the data from the db
-    const results = await dbPlaylists.getPlaylists(req.headers.authorization);
+    const results = await dbPlaylists.getPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'No Playlists found' });
       return;
@@ -226,22 +180,6 @@ webapp.get('/playlists', async (req, res) => {
     res.status(500).json({ message: 'there was a server error' });
   }
 });
-
-webapp.post('/playlists/like/:id', async (req, res) => {
-  try {
-    console.log('Called like playlist');
-    const results = await dbPlaylists.toggleLikePlaylist(req.params.id, req.headers.authorization);
-    if (results === undefined) {
-      res.status(404).json({ error: 'Playlist not found' });
-      return;
-    }
-    res.status(200).json(results);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: 'server error' });
-  }
-});
-
 
 webapp.get('/users/:id', async (req, res) => {
   try {
@@ -418,5 +356,22 @@ webapp.get('/artists', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
+
+webapp.get('/communities/members/:id', async (req, res) => {
+  try {
+    community_id = req.params.id;
+    user_id = req.headers.authorization;
+    const results = await dbCommunities.toggleMembership(user_id, community_id);
+    if (results === null) {
+      res.status(404).json({ error: 'unknown community' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+
 
 module.exports = webapp;
