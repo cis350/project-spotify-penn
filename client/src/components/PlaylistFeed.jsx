@@ -6,7 +6,8 @@ import {
 } from '@mantine/core';
 import { getPlaylists } from '../api/getAllPlaylists';
 import { likes, nolikes } from '../assets/likes';
-import updateLikes from '../api/updateLikesNewArtist';
+// import updateLikes from '../api/updateLikesNewArtist';
+import togglePlaylistLikes from '../api/playlistFeedAPI';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -46,11 +47,13 @@ function Card({ item }) {
 
   function handleClick(itm) {
     try {
-      updateLikes(itm).then(() => {
+      togglePlaylistLikes(itm).then(() => {
         setReload(!reload);
       });
     } catch (error) { /* do nothing */ }
   }
+
+  console.log('item', item);
 
   return (
     <Paper

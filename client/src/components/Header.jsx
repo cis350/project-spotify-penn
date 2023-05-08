@@ -112,7 +112,7 @@ function MainHeader() {
               Chat
             </a>
             <a href="/users" className={classes.link}>
-              Vibe
+              Find Friends
             </a>
             <a href="/newartists" className={classes.link}>
               New Artists
