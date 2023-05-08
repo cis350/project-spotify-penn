@@ -139,41 +139,22 @@ webapp.get('/newartistplaylists', async (req, res) => {
 webapp.post('/newartistplaylists', async (req, res) => {
   console.log('hit POST /newartistplaylists');
   const {
-    name, email, playlist, url, desc,
+    artistName, email, spotifyURL, playlistName, description,
   } = req.body;
 
-  // if (!name || !email || !url || !playlist || !desc) {
-  //   res.status(400).json({ message: 'missing info' });
-  //   return;
-  // }
-
-  if (!name) {
-    res.status(400).json({message: 'missing name'});
-    return;
-  }
-
-  if (!email) {
-    res.status(400).json({message: 'missing email'});
-    return;
-  }
-
-  if (!url) {
-    res.status(400).json({message: 'missing url'});
-    return;
-  }
-
-  if (!playlist) {
-    res.status(400).json({message: 'missing playlist'});
-    return;
-  }
-
-  if (!desc) {
-    res.status(400).json({message: 'missing description'});
+  if (!artistName || !email || !spotifyURL || !playlistName || !description) {
+    res.status(400).json({ message: 'missing info' });
     return;
   }
 
   try {
-    const results = await dbNewArtist.postNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await dbNewArtist.postNewArtistPlaylist(
+      artistName,
+      email,
+      spotifyURL,
+      playlistName,
+      description,
+    );
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
@@ -212,16 +193,16 @@ webapp.get('/playlists', async (req, res) => {
 
 webapp.post('/playlists', async (req, res) => {
   const {
-    name, desc,
+    id, name, desc,
   } = req.body;
 
-  if (!name || !desc) {
+  if (!id || !name || !desc) {
     res.status(400).json({ message: 'missing info' });
     return;
   }
 
   try {
-    const results = await dbPlaylists.postPlaylists(name, desc);
+    const results = await dbPlaylists.postPlaylists(id, name, desc);
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
@@ -399,17 +380,18 @@ webapp.get('/users/playlists/:id', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({message: 'server error' });
+    res.status(500).json({ message: 'server error' });
   }
-})
+});
 
 webapp.post('/users/playlists/:id', async (req, res) => {
   console.log('hit POST user playlists');
   const {
-    id, playlistid, name, desc
+    playlistid, name, desc,
   } = req.body;
+  const { id } = req.params;
 
-  if (!id || !name || !desc) {
+  if (!playlistid || !name || !desc) {
     res.status(400).json({ message: 'missing info' });
     return;
   }
@@ -420,7 +402,7 @@ webapp.post('/users/playlists/:id', async (req, res) => {
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
   }
-})
+});
 
 webapp.get('/users/friends/:id', async (req, res) => {
   try {
@@ -431,9 +413,9 @@ webapp.get('/users/friends/:id', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({message: 'server error' });
+    res.status(500).json({ message: 'server error' });
   }
-})
+});
 
 webapp.get('/users/communities/:id', async (req, res) => {
   try {
@@ -444,8 +426,8 @@ webapp.get('/users/communities/:id', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({message: 'server error' });
+    res.status(500).json({ message: 'server error' });
   }
-})
+});
 
 module.exports = webapp;

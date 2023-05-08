@@ -16,14 +16,14 @@ const getUserPlaylists = async (email) => {
 
 const postNewUserPlaylist = async (
   email,
-  id,
+  playlistid,
   name,
   desc,
 ) => {
   const res = await axios.post(
     `http://localhost:8000/users/playlists/${email}`,
     {
-      id,
+      playlistid,
       name,
       desc,
     },

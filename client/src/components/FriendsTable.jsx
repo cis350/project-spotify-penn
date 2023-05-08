@@ -12,11 +12,12 @@ export function FriendsTable() {
   const goToVibes = () => {
     navigate('/users');
   };
+  const userId = window.sessionStorage.getItem('sessionId');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getFriends();
+        const res = await getFriends(userId);
         const data = await res.json();
 
         if (data.length === 0) {

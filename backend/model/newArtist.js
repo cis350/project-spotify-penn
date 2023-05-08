@@ -28,7 +28,7 @@ async function postNewArtistPlaylist(name, email, playlist, url, desc) {
   const db = await getDB();
   const result = await db.collection('newArtists').insertOne({
     artistName: name,
-    email: email,
+    email,
     spotifyURL: url,
     playlistName: playlist,
     description: desc,

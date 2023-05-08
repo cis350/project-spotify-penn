@@ -11,14 +11,13 @@ import {
   Container,
   Title,
 } from '@mantine/core';
-import { getNewArtistPlaylists, postNewArtistPlaylist } from '../api/newArtistPlaylists';
+import { postNewArtistPlaylist } from '../api/newArtistPlaylists';
 
 function addNewArtistPlaylist() {
   const navigate = useNavigate();
 
   const form = useForm({
     initialValues: {
-      id: getNewArtistPlaylists.length,
       artistName: '',
       email: '',
       playlistName: '',

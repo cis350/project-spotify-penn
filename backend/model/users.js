@@ -112,87 +112,95 @@ async function getRankedSongs(page, pageSize) {
   }
 }
 
-const getPlaylists = async(id) => {
+const getPlaylists = async (id) => {
   const db = await getDB();
   try {
-    const userData = await db.collection('users').findOne({_id: id});
+    const userData = await db.collection('users').findOne({ _id: id });
     console.log(`User Playlists: ${JSON.stringify(userData.playlists)}`);
     return userData.playlists;
   } catch (err) {
     console.log(`error: ${err.message}`);
+    return null;
   }
-}
+};
 
-const postPlaylists = async(id, playlistid, name, desc) => {
+const postPlaylists = async (id, playlistid, name, desc) => {
   try {
     const db = await getDB();
-    const user = await db.collection('users').findOne({_id: id});
+    const user = await db.collection('users').findOne({ _id: id });
 
     if (!user) {
       console.log(`User not found: ${id}`);
-      return;
+      return null;
     }
 
     const updatedPlaylists = user.playlists;
-    const newPlaylist = [playlistid, name, desc];
+    const newPlaylist = {
+      playlistid,
+      name,
+      desc,
+    };
     updatedPlaylists.push(newPlaylist);
     const res = await db.collection('users').updateOne(
       { _id: id },
-      { $set: { playlists: updatedPlaylists } }
+      { $set: { playlists: updatedPlaylists } },
     );
 
     console.log(`Uploaded playlist: ${newPlaylist}`);
 
     if (res.matchedCount === 0) {
       console.log(`No matching document found for user id: ${id}`);
-    } else if (res.modifiedCount === 0) {
+      return null;
+    } if (res.modifiedCount === 0) {
       console.log(`User document not modified for user id: ${id}`);
-    } else {
-      console.log(`Uploaded playlist: ${newPlaylist}`);
+      return null;
     }
-
-    return res;
+    console.log(`Uploaded playlist: ${newPlaylist}`);
+    return res.matchedCount;
   } catch (err) {
     console.log(`error: ${err.message}`);
+    return null;
   }
-}
+};
 
-const getFriends = async(id) => {
+const getFriends = async (id) => {
   const db = await getDB();
   try {
-    const userData = db.collection('users').findOne({_id: id});
+    const user = await db.collection('users').findOne({ _id: id });
 
-    if (!userData) {
+    if (!user) {
       console.log(`User not found: ${id}`);
-      return;
+      return null;
     }
 
-    const friends = userData.friends;
+    const { friends } = user;
     console.log(`User Friends: ${JSON.stringify(friends)}`);
     return friends;
   } catch (err) {
     console.log(`error: ${err.message}`);
+    return null;
   }
-}
+};
 
-const getCommmunities = async(id) => {
+const getCommmunities = async (id) => {
   const db = await getDB();
   try {
-    const userData = db.collection('users').findOne({_id: id});
-
-    if (!userData) {
+    const user = await db.collection('users').findOne({ _id: id });
+    console.log(user.communities);
+    if (!user) {
       console.log(`User not found: ${id}`);
-      return;
+      return null;
     }
 
-    const communities = userData.communities;
+    const { communities } = user;
     console.log(id);
     console.log(`User Communities: ${JSON.stringify(communities)}`);
     return communities;
   } catch (err) {
     console.log(`error: ${err.message}`);
+    return null;
   }
-}
+};
 
 module.exports = {
   connect,
@@ -206,5 +214,5 @@ module.exports = {
   getPlaylists,
   postPlaylists,
   getFriends,
-  getCommmunities
+  getCommmunities,
 };

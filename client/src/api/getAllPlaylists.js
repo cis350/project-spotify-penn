@@ -12,12 +12,14 @@ const getPlaylists = async () => {
 };
 
 const postPlaylists = async (
+  id,
   name,
   desc,
 ) => {
   const res = await axios.post(
     'http://localhost:8000/playlists',
     {
+      id,
       name,
       desc,
     },

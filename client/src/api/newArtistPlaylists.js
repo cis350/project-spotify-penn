@@ -12,7 +12,6 @@ const getNewArtistPlaylists = async () => {
 };
 
 const postNewArtistPlaylist = async (
-  id,
   artistName,
   email,
   spotifyURL,
