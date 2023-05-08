@@ -35,10 +35,28 @@ const getDB = async () => {
 };
 
 /* get all the users */
-const getUsers = async () => {
+const getUsers = async (user_id) => {
   const db = await getDB();
   const users = await db.collection('users').find({}).toArray();
-  console.log('users', JSON.stringify(users));
+
+  if (user_id) {
+    console.log('getUsers includes user_id: ', user_id);
+    // add following true/false to each playlist object
+
+    const follower = await db.collection('users').findOne({ _id: user_id });
+
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      if (checkFollow(follower, user._id)) {
+        console.log('user', user._id, ' follows: true');
+        user.follows = true;
+      } else {
+        console.log('user', user._id, ' follows: false');
+        user.follows = false;
+      }
+    }
+  }
+  // console.log('users', JSON.stringify(users));
   return users;
 };
 
@@ -114,6 +132,46 @@ async function getRankedSongs(page, pageSize) {
   }
 }
 
+const checkFollow = (user, followee_id) => {
+  console.log('adding user follow to object', user._id, ' for ', followee_id, ' result: ', user.following && user.following.includes(followee_id));
+  return user.following && user.following.includes(followee_id);
+};
+
+const toggleFollow = async (follower_id, followee_id) => {
+  const db = await getDB();
+  //check folowee exists
+  const followee = await db.collection('users').findOne({ _id: followee_id });
+
+  if (!followee) {
+    console.log('followee does not exist');
+    return undefined;
+  }
+
+  const obj = await db.collection('users').findOne({ _id: follower_id });
+
+  if (!obj) {
+    console.log('follower does not exist');
+    return undefined;
+  }
+
+  //check if user_likes exists
+  if (!obj.following) {
+    console.log('following does not exist, adding with followee_id');
+    await db.collection('users').updateOne({ _id: follower_id }, { $set: { following: [followee_id] } });
+    return { following: true};
+  } else if (obj.following.includes(followee_id)) {
+    console.log('following exists, removing followee_id')
+    await db.collection('users').updateOne({ _id: follower_id }, { $pull: { following: followee_id } });
+    return { following: false};
+  } else {
+    console.log('following exists, adding followee_id')
+    await db.collection('users').updateOne({ _id: follower_id }, { $push: { following: followee_id } });
+    return { following: true};
+  }
+
+};
+
+
 async function getRankedArtists(page, pageSize) {
   try {
     const db = await getDB();
@@ -166,5 +224,6 @@ module.exports = {
   updateUser,
   getPassword,
   getRankedSongs,
+  toggleFollow,
   getRankedArtists,
 };

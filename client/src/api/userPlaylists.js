@@ -1,6 +1,9 @@
 import axios from 'axios';
 
+import setHeaders from './setHeaders';
+
 const getPlaylists = async () => {
+  setHeaders();
   const response = await axios.get('http://localhost:8000/playlists');
   const { data } = response;
 
@@ -16,6 +19,7 @@ const postNewPlaylist = async (
   name,
   desc,
 ) => {
+  setHeaders();
   const res = await axios.post(
     'http://localhost:8000/playlists',
     {
