@@ -5,9 +5,12 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { postNewPlaylist } from '../api/userPlaylists';
+import { postNewUserPlaylist } from '../api/getUserPlaylists';
+import { postPlaylists } from '../api/getAllPlaylists';
 
 export function AddPlaylist(props) {
+  const userId = window.sessionStorage.getItem('sessionId');
+
   const form = useForm({
     initialValues: {
       id: '',
@@ -24,7 +27,8 @@ export function AddPlaylist(props) {
 
   const handleCreatePlaylist = () => {
     const { id, name, desc } = form.values;
-    postNewPlaylist(id, name, desc).then(() => {
+    postNewUserPlaylist(userId, id, name, desc).then(() => {
+      postPlaylists(id, name, desc);
       form.reset();
       props.onPlaylistCreated();
     });
@@ -63,8 +67,8 @@ export function AddPlaylist(props) {
             onChange={(event) => form.setFieldValue('id', event.currentTarget.value)}
             value={form.values.id}
             error={form.errors.id}
-            label="Playlist ID"
-            placeholder="3cEYpjA9oz9GiPac4AsH4n"
+            label="Spotify URL"
+            placeholder="https://open.spotify.com/playlist/7A4x0PAsV8mQhmcKMYqoh1?si=8116bbd893c84e17&pt=3d25df74e576bbae1f93019beb71cea0"
             size="xs"
             mt="xs"
           />

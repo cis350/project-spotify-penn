@@ -180,17 +180,24 @@ webapp.get('/newartistplaylists', async (req, res) => {
 });
 
 webapp.post('/newartistplaylists', async (req, res) => {
+  console.log('hit POST /newartistplaylists');
   const {
-    id, name, url, playlist, desc,
+    artistName, email, spotifyURL, playlistName, description,
   } = req.body;
 
-  if (!id || !name || !url || !playlist || !desc) {
+  if (!artistName || !email || !spotifyURL || !playlistName || !description) {
     res.status(400).json({ message: 'missing info' });
     return;
   }
 
   try {
-    const results = await dbNewArtist.postNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await dbNewArtist.postNewArtistPlaylist(
+      artistName,
+      email,
+      spotifyURL,
+      playlistName,
+      description,
+    );
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
@@ -224,6 +231,24 @@ webapp.get('/playlists', async (req, res) => {
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ message: 'there was a server error' });
+  }
+});
+
+webapp.post('/playlists', async (req, res) => {
+  const {
+    id, name, desc,
+  } = req.body;
+
+  if (!id || !name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbPlaylists.postPlaylists(id, name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
   }
 });
 
@@ -403,6 +428,62 @@ webapp.get('/songs', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
+
+webapp.get('/users/playlists/:id', async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const results = await dbUsers.getPlaylists(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.post('/users/playlists/:id', async (req, res) => {
+  console.log('hit POST user playlists');
+  const {
+    playlistid, name, desc,
+  } = req.body;
+  const { id } = req.params;
+
+  if (!playlistid || !name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbUsers.postPlaylists(id, playlistid, name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
+  }
+});
+
+webapp.get('/users/friends/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.getFriends(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.get('/users/communities/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.getCommmunities(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
 
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;

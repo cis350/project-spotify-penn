@@ -3,14 +3,15 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import AddNewPlaylist from './AddPlaylist';
-import { getPlaylists } from '../api/userPlaylists';
+import { getUserPlaylists } from '../api/getUserPlaylists';
 
 export function PlaylistTable() {
   const [rows, setRows] = useState([]);
+  const userId = window.sessionStorage.getItem('sessionId');
 
   const handlePlaylistCreated = () => {
     // Fetch the updated playlist data and update the state
-    getPlaylists()
+    getUserPlaylists(userId)
       .then((data) => {
         if (data.length === 0) {
           throw new Error('empty data');
