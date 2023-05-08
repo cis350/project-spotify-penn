@@ -148,10 +148,6 @@ webapp.post('/communities', async (req, res) => {
         const s3URL = await s3.uploadFile(cacheBuffer, files.File_0.newFilename);
         console.log('end', cacheBuffer.length);
 
-        // You can store the URL in mongoDB with the rest of the data
-        // send a response to the client
-        // res.status(201).json({ message: `files uploaded at ${s3URL}` });
-
         const newCommunity = {
           name: fields.name,
           image: s3URL,
@@ -400,6 +396,21 @@ webapp.get('/songs', async (req, res) => {
     const results = await dbUsers.getRankedSongs(page, pageSize);
     if (results === null) {
       res.status(404).json({ error: 'unknown song' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.get('/artists', async (req, res) => {
+  const page = parseInt(req.query.page, 10) || 1;
+  const pageSize = parseInt(req.query.page_size, 10) || 10000000000;
+  try {
+    const results = await dbUsers.getRankedArtists(page, pageSize);
+    if (results === null) {
+      res.status(404).json({ error: 'unknown artist' });
     } else {
       res.status(200).json(results);
     }
