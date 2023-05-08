@@ -83,6 +83,7 @@ function MainHeader() {
   function clearAccessToken() {
     window.sessionStorage.removeItem('sessionId');
     window.sessionStorage.removeItem('accessToken');
+    window.sessionStorage.removeItem('imageURL');
   }
 
   return (
@@ -121,7 +122,7 @@ function MainHeader() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
-            <Text>{`${fullName} (${currentUser})`}</Text>
+            <Text>{`${(fullName || '')} (${currentUser})`}</Text>
             <Avatar
               component="a"
               href={`http://localhost:${window.location.port}/profile`}
