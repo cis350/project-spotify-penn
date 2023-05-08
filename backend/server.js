@@ -438,6 +438,11 @@ webapp.get('/users/communities/:id', async (req, res) => {
       return;
     }
     res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
 
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
@@ -468,7 +473,6 @@ webapp.get('/communities/members/:id', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
-
 
 
 module.exports = webapp;
