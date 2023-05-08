@@ -125,7 +125,19 @@ async function getRankedArtists(page, pageSize) {
       {
         $project: {
           artist: '$artist.artistName',
-          genre: { $arrayElemAt: ['$artist.genres', 0] },
+          genre: {
+            $reduce: {
+              input: '$artist.genres',
+              initialValue: '',
+              in: {
+                $cond: {
+                  if: { $eq: ['', '$$value'] },
+                  then: '$$this',
+                  else: { $concat: ['$$value', ', ', '$$this'] }
+                }
+              }
+            }
+          },
           count: 1,
         },
       },
