@@ -1,30 +1,48 @@
+/* eslint-disable no-underscore-dangle */
+
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  Avatar, Table, Group, Text, ScrollArea, Center, Button,
+  Table, Group, Text, ScrollArea, Center, Button, Input, Flex, Space, Container,
 } from '@mantine/core';
-import { getOtherUsers } from '../api/getUsers';
+import { getOtherUsers, followUser } from '../api/getUsers';
 
 export function FriendsTable() {
   const [rows, setRows] = useState(null);
+  const [currName, setName] = useState('');
+
+  const handleSearchInputChange = (e) => {
+    console.log('setting name to: ', e.target.value);
+    setName(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+
+  };
 
   useEffect(() => {
     getOtherUsers()
-      .then((res) => res.json()).then((data) => {
+      .then((data) => {
+        console.log('data');
+        console.log(data);
         if (data.length === 0) {
           throw new Error('empty data');
         }
         setRows(
-          data.map((item) => (
-            <tr key={item.name}>
+          data.filter((item) => item.firstName.startsWith(currName)).map((item) => (
+            <tr key={item._id}>
               <td>
                 <Group spacing="md">
-                  <NavLink to={`/profile/${item.id}`}>
-                    <Avatar size={75} src={item.avatar} radius={75} />
+                  <NavLink to={`/profile/${item._id}`}>
+                    {/* <Avatar size={75} src={item.avatar} radius={75} /> */}
                     <Text fz="lg" fw={500}>
-                      {item.name}
+                      {item.firstName}
                     </Text>
                   </NavLink>
+                  <Button color="red" onClick={() => followUser(item._id)}>
+                    {item.follows ? 'Unfollow' : 'Follow'}
+                  </Button>
+
                 </Group>
               </td>
             </tr>
@@ -42,16 +60,39 @@ export function FriendsTable() {
           </td>
         </tr>,
       ));
-  }, []);
+  }, [currName]);
 
   return (
-    <Center>
-      <ScrollArea>
-        <Table sx={{ minWidth: 800 }} verticalSpacing="md">
-          <tbody>{rows}</tbody>
-        </Table>
-      </ScrollArea>
-    </Center>
+
+    <Container my="md">
+      <Flex
+        direction={{ base: 'column', sm: 'row' }}
+        gap="sm"
+        align="center"
+        style={{ margin: '10px' }}
+      >
+        <Input
+          placeholder="Search Users"
+          onChange={handleSearchInputChange}
+          style={{ width: '400px' }}
+          radius="xl"
+        />
+        <Button onClick={handleSearchClick} size="xs" radius="xl">
+          Search
+        </Button>
+      </Flex>
+      <Space h="xl" />
+
+      <Center>
+        <ScrollArea>
+          <Table sx={{ minWidth: 800 }} verticalSpacing="md">
+            <tbody>{rows}</tbody>
+          </Table>
+        </ScrollArea>
+      </Center>
+
+    </Container>
+
   );
 }
 
