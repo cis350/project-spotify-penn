@@ -137,12 +137,38 @@ webapp.get('/newartistplaylists', async (req, res) => {
 });
 
 webapp.post('/newartistplaylists', async (req, res) => {
+  console.log('hit POST /newartistplaylists');
   const {
-    id, name, url, playlist, desc,
+    name, email, playlist, url, desc,
   } = req.body;
 
-  if (!id || !name || !url || !playlist || !desc) {
-    res.status(400).json({ message: 'missing info' });
+  // if (!name || !email || !url || !playlist || !desc) {
+  //   res.status(400).json({ message: 'missing info' });
+  //   return;
+  // }
+
+  if (!name) {
+    res.status(400).json({message: 'missing name'});
+    return;
+  }
+
+  if (!email) {
+    res.status(400).json({message: 'missing email'});
+    return;
+  }
+
+  if (!url) {
+    res.status(400).json({message: 'missing url'});
+    return;
+  }
+
+  if (!playlist) {
+    res.status(400).json({message: 'missing playlist'});
+    return;
+  }
+
+  if (!desc) {
+    res.status(400).json({message: 'missing description'});
     return;
   }
 
@@ -368,7 +394,7 @@ webapp.get('/users/playlists/:id', async (req, res) => {
   try {
     const results = await dbUsers.getPlaylists(req.params.id);
     if (results === undefined) {
-      res.status(404).json({ error: 'no such user' });
+      res.status(404).json({ error: 'results undefined' });
       return;
     }
     res.status(200).json(results);
@@ -378,6 +404,7 @@ webapp.get('/users/playlists/:id', async (req, res) => {
 })
 
 webapp.post('/users/playlists/:id', async (req, res) => {
+  console.log('hit POST user playlists');
   const {
     id, playlistid, name, desc
   } = req.body;
@@ -399,7 +426,7 @@ webapp.get('/users/friends/:id', async (req, res) => {
   try {
     const results = await dbUsers.getFriends(req.params.id);
     if (results === undefined) {
-      res.status(404).json({ error: 'no such user' });
+      res.status(404).json({ error: 'results undefined' });
       return;
     }
     res.status(200).json(results);
@@ -412,7 +439,7 @@ webapp.get('/users/communities/:id', async (req, res) => {
   try {
     const results = await dbUsers.getCommmunities(req.params.id);
     if (results === undefined) {
-      res.status(404).json({ error: 'no such user' });
+      res.status(404).json({ error: 'results undefined' });
       return;
     }
     res.status(200).json(results);

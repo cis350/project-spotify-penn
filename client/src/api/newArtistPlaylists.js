@@ -22,7 +22,6 @@ const postNewArtistPlaylist = async (
   const res = await axios.post(
     'http://localhost:8000/newartistplaylists',
     {
-      id,
       artistName,
       email,
       spotifyURL,

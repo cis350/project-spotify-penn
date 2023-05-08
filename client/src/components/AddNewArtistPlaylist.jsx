@@ -15,7 +15,7 @@ import { getNewArtistPlaylists, postNewArtistPlaylist } from '../api/newArtistPl
 
 function addNewArtistPlaylist() {
   const navigate = useNavigate();
-  const id = getNewArtistPlaylists().length;
+
   const form = useForm({
     initialValues: {
       id: getNewArtistPlaylists.length,
@@ -24,7 +24,6 @@ function addNewArtistPlaylist() {
       playlistName: '',
       spotifyURL: '',
       description: '',
-      likes: false,
     },
 
     validate: {
@@ -41,7 +40,7 @@ function addNewArtistPlaylist() {
     } = form.values;
 
     try {
-      postNewArtistPlaylist(id, artistName, email, spotifyURL, playlistName, description);
+      postNewArtistPlaylist(artistName, email, spotifyURL, playlistName, description);
       console.log(`Uploaded playlist: ${playlistName}`);
     } catch (error) {
       // eslint-disable-next-line no-console
