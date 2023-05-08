@@ -28,7 +28,7 @@ export function AddPlaylist(props) {
   const handleCreatePlaylist = () => {
     const { id, name, desc } = form.values;
     postNewUserPlaylist(userId, id, name, desc).then(() => {
-      postPlaylists(name, desc);
+      postPlaylists(id, name, desc);
       form.reset();
       props.onPlaylistCreated();
     });
@@ -67,8 +67,8 @@ export function AddPlaylist(props) {
             onChange={(event) => form.setFieldValue('id', event.currentTarget.value)}
             value={form.values.id}
             error={form.errors.id}
-            label="Playlist ID"
-            placeholder="3cEYpjA9oz9GiPac4AsH4n"
+            label="Spotify URL"
+            placeholder="https://open.spotify.com/playlist/7A4x0PAsV8mQhmcKMYqoh1?si=8116bbd893c84e17&pt=3d25df74e576bbae1f93019beb71cea0"
             size="xs"
             mt="xs"
           />
