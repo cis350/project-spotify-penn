@@ -41,6 +41,18 @@ const getPlaylists = async (user_id) => {
   return playlists;
 };
 
+const postPlaylists = async (id, name, desc) => {
+  const db = await getDB();
+  const result = await db.collection('playlists').insertOne({
+    id,
+    name,
+    description: desc,
+    likes: false,
+  });
+  console.log(`Uploaded playlist: ${result.insertedId}`);
+  return result.insertedId;
+};
+
 const toggleLikeObject = async (obj_id, user_id, collection) => {
   const db = await getDB();
   const obj = await db.collection(collection).findOne({ id: obj_id });
@@ -49,42 +61,37 @@ const toggleLikeObject = async (obj_id, user_id, collection) => {
     return undefined;
   }
 
-  //check if user_likes exists
+  // check if user_likes exists
   if (!obj.user_likes) {
     await db.collection(collection).updateOne({ id: obj_id }, { $set: { user_likes: [user_id] } });
-    return { likes: true};
-  } else if (obj.user_likes.includes(user_id)) {
+    return { likes: true };
+  } if (obj.user_likes.includes(user_id)) {
     await db.collection(collection).updateOne({ id: obj_id }, { $pull: { user_likes: user_id } });
-    return { likes: false};
-  } else {
-    await db.collection(collection).updateOne({ id: obj_id }, { $push: { user_likes: user_id } });
-    return { likes: true};
+    return { likes: false };
   }
-}
+  await db.collection(collection).updateOne({ id: obj_id }, { $push: { user_likes: user_id } });
+  return { likes: true };
+};
 
-const toggleLikePlaylist = async (playlist_id, user_id) => {
-  return await toggleLikeObject(playlist_id, user_id, 'playlists');
-}
+const toggleLikePlaylist = async (playlist_id, user_id) => await toggleLikeObject(playlist_id, user_id, 'playlists');
 
 const checkLikeObjectFromDB = async (obj_id, user_id, collection) => {
   const db = await getDB();
   const obj = await db.collection(collection).findOne({ id: obj_id });
 
   return (checkLikeObject(obj, user_id));
-}
+};
 
 const checkLikeObject = (obj, user_id) => {
   console.log('adding user like to object', obj, ' for ', user_id, ' result: ', obj.user_likes && obj.user_likes.includes(user_id));
   return (obj.user_likes && obj.user_likes.includes(user_id));
-}
+};
 
-const checkLikePlaylist = async (playlist_id, user_id) => {
-  return await checkLikeObjectFromDB(playlist_id, user_id, 'playlists');
-}
-
+const checkLikePlaylist = async (playlist_id, user_id) => await checkLikeObjectFromDB(playlist_id, user_id, 'playlists');
 
 module.exports = {
   getPlaylists,
+  postPlaylists,
   toggleLikePlaylist,
   checkLikePlaylist,
 };

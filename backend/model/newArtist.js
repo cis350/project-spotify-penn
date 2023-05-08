@@ -24,15 +24,16 @@ const getDB = async () => {
   return mongoConnection.db('spotify');
 };
 
-async function postNewArtistPlaylist(id, name, url, playlist, desc) {
+async function postNewArtistPlaylist(name, email, playlist, url, desc) {
   const db = await getDB();
   const result = await db.collection('newArtists').insertOne({
-    _id: id,
     artistName: name,
+    email,
     spotifyURL: url,
     playlistName: playlist,
     description: desc,
     likes: false,
+    userLikes: [email],
   });
   console.log(`Uploaded playlist: ${result.insertedId}`);
   return result.insertedId;

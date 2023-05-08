@@ -1,12 +1,9 @@
 import axios from 'axios';
 
-import setHeaders from './setHeaders';
-
 const getPlaylists = async () => {
-  setHeaders();
-  const response = await axios.get('http://localhost:8000/playlists');
-  const { data } = response;
-
+  const url = 'http://localhost:8000/playlists';
+  const res = await axios.get(url);
+  const { data } = res;
   if (data.length === 0) {
     throw new Error('empty data');
   } else {
@@ -14,12 +11,11 @@ const getPlaylists = async () => {
   }
 };
 
-const postNewPlaylist = async (
+const postPlaylists = async (
   id,
   name,
   desc,
 ) => {
-  setHeaders();
   const res = await axios.post(
     'http://localhost:8000/playlists',
     {
@@ -31,4 +27,4 @@ const postNewPlaylist = async (
   return res.data;
 };
 
-export { getPlaylists, postNewPlaylist };
+export { getPlaylists, postPlaylists };
