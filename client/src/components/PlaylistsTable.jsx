@@ -7,10 +7,11 @@ import { getUserPlaylists } from '../api/getUserPlaylists';
 
 export function PlaylistTable() {
   const [rows, setRows] = useState([]);
+  const userId = window.sessionStorage.getItem('sessionId');
 
   const handlePlaylistCreated = () => {
     // Fetch the updated playlist data and update the state
-    getUserPlaylists()
+    getUserPlaylists(userId)
       .then((data) => {
         if (data.length === 0) {
           throw new Error('empty data');

@@ -363,7 +363,8 @@ webapp.get('/songs', async (req, res) => {
   }
 });
 
-webapp.get('/users/:id/playlists', async (req, res) => {
+webapp.get('/users/playlists/:id', async (req, res) => {
+  console.log(req.params.id);
   try {
     const results = await dbUsers.getPlaylists(req.params.id);
     if (results === undefined) {
@@ -376,7 +377,7 @@ webapp.get('/users/:id/playlists', async (req, res) => {
   }
 })
 
-webapp.post('/users/:id/playlsits', async (req, res) => {
+webapp.post('/users/playlists/:id', async (req, res) => {
   const {
     id, playlistid, name, desc
   } = req.body;
@@ -394,7 +395,7 @@ webapp.post('/users/:id/playlsits', async (req, res) => {
   }
 })
 
-webapp.get('/users/:id/friends', async (req, res) => {
+webapp.get('/users/friends/:id', async (req, res) => {
   try {
     const results = await dbUsers.getFriends(req.params.id);
     if (results === undefined) {
@@ -407,7 +408,7 @@ webapp.get('/users/:id/friends', async (req, res) => {
   }
 })
 
-webapp.get('/users/:id/communities', async (req, res) => {
+webapp.get('/users/communities/:id', async (req, res) => {
   try {
     const results = await dbUsers.getCommmunities(req.params.id);
     if (results === undefined) {

@@ -38,7 +38,6 @@ const getDB = async () => {
 const getUsers = async () => {
   const db = await getDB();
   const users = await db.collection('users').find({}).toArray();
-  console.log('users', JSON.stringify(users));
   return users;
 };
 
@@ -54,7 +53,6 @@ const addUser = async (newUser) => {
   // get the db
   const db = await getDB();
   const result = await db.collection('users').insertOne(newUser);
-  console.log(result);
   return result.insertedId;
 };
 
@@ -117,9 +115,9 @@ async function getRankedSongs(page, pageSize) {
 const getPlaylists = async(id) => {
   const db = await getDB();
   try {
-    const playlists = db.collection('users').findOne({_id: id}, {_id: 0, playlists: 1}).toArray;
-    console.log(`User Playlists: ${JSON.stringify(playlists)}`);
-    return playlists;
+    const userData = await db.collection('users').findOne({_id: id});
+    console.log(`User Playlists: ${JSON.stringify(userData.playlists)}`);
+    return userData.playlists;
   } catch (err) {
     console.log(`error: ${err.message}`);
   }
@@ -129,15 +127,30 @@ const postPlaylists = async(id, playlistid, name, desc) => {
   try {
     const db = await getDB();
     const user = await db.collection('users').findOne({_id: id});
+
+    if (!user) {
+      console.log(`User not found: ${id}`);
+      return;
+    }
+
     const updatedPlaylists = user.playlists;
     const newPlaylist = [playlistid, name, desc];
     updatedPlaylists.push(newPlaylist);
     const res = await db.collection('users').updateOne(
-      { _id: item._id },
+      { _id: id },
       { $set: { playlists: updatedPlaylists } }
     );
 
     console.log(`Uploaded playlist: ${newPlaylist}`);
+
+    if (res.matchedCount === 0) {
+      console.log(`No matching document found for user id: ${id}`);
+    } else if (res.modifiedCount === 0) {
+      console.log(`User document not modified for user id: ${id}`);
+    } else {
+      console.log(`Uploaded playlist: ${newPlaylist}`);
+    }
+
     return res;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -147,7 +160,14 @@ const postPlaylists = async(id, playlistid, name, desc) => {
 const getFriends = async(id) => {
   const db = await getDB();
   try {
-    const friends = db.collection('users').findOne({_id: id}, {_id: 0, friends: 1}).toArray;
+    const userData = db.collection('users').findOne({_id: id});
+
+    if (!userData) {
+      console.log(`User not found: ${id}`);
+      return;
+    }
+
+    const friends = userData.friends;
     console.log(`User Friends: ${JSON.stringify(friends)}`);
     return friends;
   } catch (err) {
@@ -158,7 +178,15 @@ const getFriends = async(id) => {
 const getCommmunities = async(id) => {
   const db = await getDB();
   try {
-    const communities = db.collection('users').findOne({_id: id}, {_id: 0, communities: 1}).toArray;
+    const userData = db.collection('users').findOne({_id: id});
+
+    if (!userData) {
+      console.log(`User not found: ${id}`);
+      return;
+    }
+
+    const communities = userData.communities;
+    console.log(id);
     console.log(`User Communities: ${JSON.stringify(communities)}`);
     return communities;
   } catch (err) {

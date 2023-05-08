@@ -5,7 +5,7 @@ import {
   Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem, Space,
 } from '@mantine/core';
 import CreateNewCommunity from './CreateCommunity';
-import { getCommunities } from '../api/getUserCommunities';
+import { getCommunities } from '../api/getCommunities';
 
 const handleSearchClick = () => {
 };

@@ -9,6 +9,8 @@ import { postNewUserPlaylist } from '../api/getUserPlaylists';
 import { postPlaylists } from '../api/getAllPlaylists';
 
 export function AddPlaylist(props) {
+  const userId = window.sessionStorage.getItem('sessionId');
+
   const form = useForm({
     initialValues: {
       id: '',
@@ -25,7 +27,7 @@ export function AddPlaylist(props) {
 
   const handleCreatePlaylist = () => {
     const { id, name, desc } = form.values;
-    postNewUserPlaylist(id, name, desc).then(() => {
+    postNewUserPlaylist(userId, id, name, desc).then(() => {
       postPlaylists(name, desc);
       form.reset();
       props.onPlaylistCreated();
