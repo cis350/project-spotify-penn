@@ -83,6 +83,7 @@ function MainHeader() {
   function clearAccessToken() {
     window.sessionStorage.removeItem('sessionId');
     window.sessionStorage.removeItem('accessToken');
+    window.sessionStorage.removeItem('imageURL');
   }
 
   return (
@@ -104,9 +105,6 @@ function MainHeader() {
             <a href="/leaderboard" className={classes.link}>
               Leaderboard
             </a>
-            <a href="/home" className={classes.link}>
-              PennMix
-            </a>
             <a href="/communities" className={classes.link}>
               Community
             </a>
@@ -124,13 +122,13 @@ function MainHeader() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
-            <Text>{`${fullName} (${currentUser})`}</Text>
+            <Text>{`${(fullName || '')} (${currentUser})`}</Text>
             <Avatar
               component="a"
               href={`http://localhost:${window.location.port}/profile`}
               onClick={() => navigate('/profile')}
               // href="http://localhost:3000/profile"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU"
+              src={window.sessionStorage.getItem('imageURL')}
               alt="User"
               radius="xl"
             />

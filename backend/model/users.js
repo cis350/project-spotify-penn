@@ -202,6 +202,49 @@ const getCommmunities = async (id) => {
   }
 };
 
+async function getRankedArtists(page, pageSize) {
+  try {
+    const db = await getDB();
+    const offset = (page - 1) * pageSize;
+    let rankedArtists = await db.collection('users').aggregate([
+      { $unwind: '$artists' },
+      { $group: { _id: '$artists.artistName', count: { $sum: 1 }, artist: { $first: '$artists' } } },
+      { $sort: { count: -1, 'artist.artistName': 1 } },
+      {
+        $project: {
+          artist: '$artist.artistName',
+          genre: {
+            $reduce: {
+              input: '$artist.genres',
+              initialValue: '',
+              in: {
+                $cond: {
+                  if: { $eq: ['', '$$value'] },
+                  then: '$$this',
+                  else: { $concat: ['$$value', ', ', '$$this'] }
+                }
+              }
+            }
+          },
+          count: 1,
+        },
+      },
+      { $skip: offset },
+      { $limit: pageSize },
+
+    ]).toArray();
+
+    rankedArtists = rankedArtists.map((artist, index) => ({
+      ...artist,
+      rank: offset + index + 1,
+    }));
+
+    return rankedArtists;
+  } catch (err) {
+    return null;
+  }
+}
+
 module.exports = {
   connect,
   close,
@@ -215,4 +258,5 @@ module.exports = {
   postPlaylists,
   getFriends,
   getCommmunities,
+  getRankedArtists,
 };
