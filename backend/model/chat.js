@@ -1,4 +1,4 @@
-const { getDB } = require('../utils/dbUtils');
+const { getDB, closeMongoDBConnection } = require('../utils/dbUtils');
 
 const newConversation = async (document) => {
   const db = await getDB();
@@ -13,10 +13,14 @@ const getMessages = async (socket) => {
 };
 
 const getSockets = async () => {
-  const db = await getDB();
-  // console.log('Hello');
-  const sockets = await db.collection('sockets').find({}).toArray();
-  return sockets;
+  try {
+    const db = await getDB();
+    // console.log('Hello');
+    const sockets = await db.collection('sockets').find({}).toArray();
+    return sockets;
+  } finally {
+    await closeMongoDBConnection();
+  }
 };
 
 const updateMessages = async (socket, updatedSocket) => {
