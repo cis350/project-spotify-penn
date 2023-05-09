@@ -56,14 +56,13 @@ describe('GET users endpoint integration test', () => {
  * "env" key add -'jest': true-
 */
   let db;
-  let testUserID;
 
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
 
     // add test user to mongodb
-    testUserID = await insertTestDataToUsersDB(db, testUser);
+    await insertTestDataToUsersDB(db, testUser);
   });
 
   /**
