@@ -51,7 +51,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "jest --coverage",
-        "db": "npx json-server -w db.json -p 8000"
+        "db": "npx json-server -w db.json -p 8000",
+        "cypress:open": "cypress open"
     },
     "browserslist": {
         "production": [
