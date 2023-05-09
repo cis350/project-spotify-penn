@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const { getDB } = require('../utils/dbUtils');
 
 const setUserSongs = async (id, newSongs) => {
@@ -9,8 +8,6 @@ const setUserSongs = async (id, newSongs) => {
   );
   if (result.matchedCount === 0) {
     throw new Error(`User with ID ${id} not found`);
-  } else {
-    console.log(`Successfully updated songs for ID ${id}`);
   }
   return result;
 };
@@ -23,8 +20,6 @@ const setUserAlbums = async (id, newArtists) => {
   );
   if (result.matchedCount === 0) {
     throw new Error(`User with ID ${id} not found`);
-  } else {
-    console.log(`Successfully updated albums for ID ${id}`);
   }
   return result;
 };

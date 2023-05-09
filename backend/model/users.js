@@ -1,15 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
-/**
- * this file contains all the CRUD operations from swaggerHub.
- */
 
 const { getDB } = require('../utils/dbUtils');
 
-const checkFollow = (user, followeeId) => {
-  console.log('adding user follow to object', user._id, ' for ', followeeId, ' result: ', user.following && user.following.includes(followeeId));
-  return user.following && user.following.includes(followeeId);
-};
+const checkFollow = (user, followeeId) => user.following && user.following.includes(followeeId);
 
 /* get all the users */
 const getUsers = async (userId) => {
@@ -17,7 +10,6 @@ const getUsers = async (userId) => {
   const users = await db.collection('users').find({}).toArray();
 
   if (userId) {
-    console.log('getUsers includes user_id: ', userId);
     // add following true/false to each playlist object
 
     const follower = await db.collection('users').findOne({ _id: userId });
@@ -25,15 +17,12 @@ const getUsers = async (userId) => {
     for (let i = 0; i < users.length; i += 1) {
       const user = users[i];
       if (checkFollow(follower, user._id)) {
-        console.log('user', user._id, ' follows: true');
         user.follows = true;
       } else {
-        console.log('user', user._id, ' follows: false');
         user.follows = false;
       }
     }
   }
-  // console.log('users', JSON.stringify(users));
   return users;
 };
 
@@ -70,10 +59,8 @@ const updateUser = async (id) => {
     if (result.matchedCount === 0) {
       throw new Error(`User with ID ${id} not found`);
     }
-
-    console.log(`Successfully updated user with ID ${id}`);
   } catch (error) {
-    console.error(`Error updating user with ID ${id}:`, error.message);
+    /* do nothing */
   }
 };
 
@@ -114,28 +101,23 @@ const toggleFollow = async (followerId, followeeId) => {
   const followee = await db.collection('users').findOne({ _id: followeeId });
 
   if (!followee) {
-    console.log('followee does not exist');
     return undefined;
   }
 
   const obj = await db.collection('users').findOne({ _id: followerId });
 
   if (!obj) {
-    console.log('follower does not exist');
     return undefined;
   }
 
   // check if user_likes exists
   if (!obj.following) {
-    console.log('following does not exist, adding with followee_id');
     await db.collection('users').updateOne({ _id: followerId }, { $set: { following: [followeeId] } });
     return { following: true };
   } if (obj.following.includes(followeeId)) {
-    console.log('following exists, removing followee_id');
     await db.collection('users').updateOne({ _id: followerId }, { $pull: { following: followeeId } });
     return { following: false };
   }
-  console.log('following exists, adding followee_id');
   await db.collection('users').updateOne({ _id: followerId }, { $push: { following: followeeId } });
   return { following: true };
 };
@@ -144,11 +126,9 @@ const getPlaylists = async (id) => {
   const db = await getDB();
   try {
     const userData = await db.collection('users').findOne({ _id: id });
-    console.log(`User Playlists: ${JSON.stringify(userData.playlists)}`);
     return userData.playlists;
   } catch (err) {
-    console.log(`error: ${err.message}`);
-    return null;
+    return err;
   }
 };
 
@@ -158,7 +138,6 @@ const postPlaylists = async (id, playlistid, name, desc) => {
     const user = await db.collection('users').findOne({ _id: id });
 
     if (!user) {
-      console.log(`User not found: ${id}`);
       return null;
     }
 
@@ -174,20 +153,14 @@ const postPlaylists = async (id, playlistid, name, desc) => {
       { $set: { playlists: updatedPlaylists } },
     );
 
-    console.log(`Uploaded playlist: ${newPlaylist}`);
-
     if (res.matchedCount === 0) {
-      console.log(`No matching document found for user id: ${id}`);
       return null;
     } if (res.modifiedCount === 0) {
-      console.log(`User document not modified for user id: ${id}`);
       return null;
     }
-    console.log(`Uploaded playlist: ${newPlaylist}`);
     return res.matchedCount;
   } catch (err) {
-    console.log(`error: ${err.message}`);
-    return null;
+    return err;
   }
 };
 
@@ -197,16 +170,13 @@ const getFriends = async (id) => {
     const user = await db.collection('users').findOne({ _id: id });
 
     if (!user) {
-      console.log(`User not found: ${id}`);
       return null;
     }
 
     const { friends } = user;
-    console.log(`User Friends: ${JSON.stringify(friends)}`);
     return friends;
   } catch (err) {
-    console.log(`error: ${err.message}`);
-    return null;
+    return err;
   }
 };
 
@@ -214,19 +184,14 @@ const getCommmunities = async (id) => {
   const db = await getDB();
   try {
     const user = await db.collection('users').findOne({ _id: id });
-    console.log(user.communities);
     if (!user) {
-      console.log(`User not found: ${id}`);
       return null;
     }
 
     const { communities } = user;
-    console.log(id);
-    console.log(`User Communities: ${JSON.stringify(communities)}`);
     return communities;
   } catch (err) {
-    console.log(`error: ${err.message}`);
-    return null;
+    return err;
   }
 };
 

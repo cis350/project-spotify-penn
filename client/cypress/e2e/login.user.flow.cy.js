@@ -4,6 +4,10 @@ describe('Login User Flow', () => {
     cy.visit('http://localhost:3000/login');
   });
 
+  // it('takes you to the login page', () => {
+  //   cy.get('button').contains('Sign In');
+  // });
+
   it('successfully logs in a user and redirects to the correct page', () => {
 
     const adminEmail = 'admin@gmail.com';

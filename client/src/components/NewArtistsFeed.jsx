@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 import {
   Table, Group, Text, ScrollArea, Center, Button, Stack, ActionIcon,
 } from '@mantine/core';
@@ -18,7 +18,7 @@ export function ArtistsFeed() {
       updateLikes(item).then(() => {
         setReload(!reload);
       });
-    } catch (error) { console.log(error); }
+    } catch (error) { /* do nothing */ }
   }
 
   useEffect(() => {

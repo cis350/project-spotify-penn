@@ -14,7 +14,6 @@ const getMessages = async (socket) => {
 
 const getSockets = async () => {
   const db = await getDB();
-  // console.log('Hello');
   const sockets = await db.collection('sockets').find({}).toArray();
   return sockets;
 };
