@@ -81,26 +81,6 @@ describe('GET users endpoint integration test', () => {
     }
   });
 
-  // test('Get all new user endpoint status code and data', async () => {
-  //   const resp = await request(webapp).get('/newartistplaylists');
-  //   expect(resp.status).toEqual(200);
-  //   expect(resp.type).toBe('application/json');
-  //   // const artistArr = JSON.parse(resp.text);
-  //   const testUsers = await db.collection('users').find({ firstName: 'Test' }).toArray();
-  //   console.log(testUsers);
-  //   // testStudent is in the response
-  //   console.log(testUsers.length);
-  //   expect(testUsers.length >= 1).toBe(true);
-  // });
-
-  // test('Get a new user endpoint status code and data', async () => {
-  //   const resp = await request(webapp).get(`/newartistplaylists/${testUserID}`);
-  //   expect(resp.status).toEqual(200);
-  //   expect(resp.type).toBe('application/json');
-  //   const userArr = JSON.parse(resp.text).data;
-  //   // testStudent is in the response
-  //   expect(userArr).toMatchObject({ _id: testUserID, ...testUser });
-  // });
 
   test('user not in db status code 400', async () => {
     const resp = await request(webapp).get('/users/1');
