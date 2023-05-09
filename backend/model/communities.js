@@ -1,32 +1,7 @@
-const { MongoClient } = require('mongodb');
-
-const uri = 'mongodb+srv://dzung:dzungthan@spotifypenn.kfju1o3.mongodb.net/test';
-let mongoConnection;
-const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const { getDB } = require('../utils/dbUtils');
 
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
-
-const connect = async () => {
-  try {
-    mongoConnection = await mongoClient.connect();
-    console.log('connected to DB - communities', mongoConnection.db().databaseName);
-    return mongoConnection;
-  } catch (err) {
-    return err;
-  }
-};
-
-// connect to mongoDb and return the database
-
-const getDB = async () => {
-  // test if already connected
-  console.log(mongoConnection);
-  if (!mongoConnection) {
-    await connect();
-  }
-  return mongoConnection.db('spotify');
-};
 
 /** get all the communities */
 const getCommunities = async (user_id) => {

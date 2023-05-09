@@ -274,7 +274,8 @@ webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
     const results = await dbUsers.getUser(req.params.id);
-    if (results === undefined) {
+    console.log(results);
+    if (results === null) {
       res.status(404).json({ error: 'unknown student' });
     } else {
       res.status(200).json(results);

@@ -4,36 +4,7 @@
  * this file contains all the CRUD operations from swaggerHub.
  */
 
-const { MongoClient } = require('mongodb');
-
-const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
-
-let mongoConnection;
-const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const connect = async () => {
-  try {
-    mongoConnection = await mongoClient.connect();
-    console.log('connected to DB - users', mongoConnection.db().databaseName);
-    return mongoConnection;
-  } catch (err) {
-    return err;
-  }
-};
-
-const close = async () => {
-  await mongoConnection.close();
-};
-
-// connect to mongoDb and return the database
-
-const getDB = async () => {
-  // test if already connected
-  if (!mongoConnection) {
-    await connect();
-  }
-  return mongoConnection.db('spotify');
-};
+const { getDB } = require('../utils/dbUtils');
 
 const checkFollow = (user, followeeId) => {
   console.log('adding user follow to object', user._id, ' for ', followeeId, ' result: ', user.following && user.following.includes(followeeId));
@@ -303,8 +274,6 @@ async function getRankedArtists(page, pageSize) {
 }
 
 module.exports = {
-  connect,
-  close,
   getUsers,
   getUser,
   addUser,

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const getDB = require('../utils/dbUtils');
+const { getDB } = require('../utils/dbUtils');
 const { toggleLikeObject, checkLikeObject, checkLikeObjectFromDB } = require('../utils/toggleLikeUtil');
 
 const getPlaylists = async (userId) => {
