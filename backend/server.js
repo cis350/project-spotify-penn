@@ -166,7 +166,6 @@ webapp.get('/newartistplaylists', async (req, res) => {
   console.log('hit GET /newartistplaylists');
   try {
     const results = await dbNewArtist.getNewArtistPlaylists(req.headers.authorization);
-    console.log('results', results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
@@ -205,7 +204,10 @@ webapp.post('/newartistplaylists', async (req, res) => {
 webapp.post('/newartistplaylists/:_id', async (req, res) => {
   try {
     console.log('Called like new artist playlist');
-    const results = await dbNewArtist.toggleNewArtistLikes(req.params.id, req.headers.authorization);
+    const results = await dbNewArtist.toggleNewArtistLikes(
+      req.params.id,
+      req.headers.authorization,
+    );
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found' });
       return;

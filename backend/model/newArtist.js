@@ -3,14 +3,14 @@
 const { getDB } = require('../utils/dbUtils');
 const { toggleLikeObject, checkLikeObject } = require('../utils/toggleLikeUtil');
 
-async function postNewArtistPlaylist(name, email, playlist, url, desc) {
+async function postNewArtistPlaylist(name, email, spotifyURL, playlistName, description) {
   const db = await getDB();
   const result = await db.collection('newArtists').insertOne({
     artistName: name,
     email,
-    spotifyURL: url,
-    playlistName: playlist,
-    description: desc,
+    spotifyURL,
+    playlistName,
+    description,
     likes: false,
     userLikes: [email],
   });

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://stela:stelarosa@spotifypenn.kfju1o3.mongodb.net/test';
@@ -27,4 +28,4 @@ const closeMongoDBConnection = async () => {
   await mongoConnection.close();
 };
 
-module.exports = { getDB, closeMongoDBConnection };
+module.exports = { connect, getDB, closeMongoDBConnection };
