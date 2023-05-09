@@ -30,7 +30,7 @@ const dbNewArtist = require('./model/newArtist');
 const dbPlaylists = require('./model/playlists');
 const dbUsers = require('./model/users');
 const dbSpotify = require('./model/spotify');
-const { default: CommunitiesTable } = require('../client/src/components/CommunitiesTable');
+// const { default: CommunitiesTable } = require('../client/src/components/CommunitiesTable');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -60,14 +60,15 @@ webapp.post('/users', async (req, res) => {
 
 webapp.get('/communities', async (req, res) => {
   try {
-    const results = await dbCommunities.getCommunities();
+    const results = await dbCommunities.getCommunities(req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'no communities exist' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(404).json({ message: 'error in retrieving communities' });
+    console.log(err);
+    res.status(400).json({ message: 'error in retrieving communities' });
   }
 });
 
@@ -105,8 +106,8 @@ webapp.post('/communities', async (req, res) => {
         const newCommunity = {
           name: fields.name,
           image: s3URL,
-          numMember: fields.numMember,
           description: fields.desc,
+          members: [req.headers.authorization]
         };
 
         const result = await dbCommunities.addCommunity(newCommunity);
@@ -320,21 +321,6 @@ webapp.post('/sockets', async (req, res) => {
   }
 });
 
-webapp.get('/communities', async (req, res) => {
-  try {
-    // get the data from the db
-    const results = await dbCommunities.getCommunities();
-    if (results === undefined) {
-      res.status(404).json({ error: 'unknown community' });
-    } else {
-      res.status(200).json(results);
-    }
-  } catch (err) {
-    const errmsg = err.message;
-
-    res.status(404).json({ message: errmsg });
-  }
-});
 
 webapp.put('/songs/:id', async (req, res) => {
   try {
@@ -461,8 +447,10 @@ webapp.get('/artists', async (req, res) => {
 
 webapp.get('/communities/members/:id', async (req, res) => {
   try {
-    community_id = req.params.id;
-    user_id = req.headers.authorization;
+    console.log('hit GET /communities/members/:id');
+    const community_id = req.params.id;
+    const user_id = req.headers.authorization;
+    console.log('community id: ', community_id, ' user id: ', user_id);
     const results = await dbCommunities.toggleMembership(user_id, community_id);
     if (results === null) {
       res.status(404).json({ error: 'unknown community' });
@@ -470,6 +458,7 @@ webapp.get('/communities/members/:id', async (req, res) => {
       res.status(200).json(results);
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });

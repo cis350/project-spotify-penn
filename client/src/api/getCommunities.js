@@ -1,7 +1,12 @@
 /* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+
 import axios from 'axios';
 
+import setHeaders from './setHeaders';
+
 const getCommunities = async () => {
+  setHeaders();
   const url = 'http://localhost:8000/communities';
   const res = await axios.get(url);
   console.log(res.data);
@@ -9,10 +14,10 @@ const getCommunities = async () => {
 };
 
 const newCommunity = async (n, i, d) => {
+  setHeaders();
   const data = {
     name: n,
     image: i || 'https://cdn.vox-cdn.com/thumbor/rUje72-KDI-XYKbKnvYxov-ueyQ=/0x0:1000x655/1400x1050/filters:focal(420x248:580x408):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/48671171/shutterstock_114033616.0.jpg',
-    numMember: '1',
     description: d,
   };
   const options = {
@@ -31,8 +36,8 @@ const newCommunity = async (n, i, d) => {
 
 const toggleJoin = async (item) => {
   setHeaders();
-  const res = await axios.get(`http://localhost:8000/communities/members/${item.id}`);
+  const res = await axios.get(`http://localhost:8000/communities/members/${item._id}`);
   return res.data;
-}
+};
 
-export { getCommunities, newCommunity };
+export { getCommunities, newCommunity, toggleJoin };

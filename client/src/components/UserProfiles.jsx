@@ -30,7 +30,9 @@ function UserGroup() {
   return (
     <Group position="center">
       <Avatar radius="300px" size="xl" color="dark" src={window.sessionStorage.getItem('imageURL')} />
-      <Title fz="100"> {fullName} </Title>
+      <Title fz="100">
+        {fullName}
+      </Title>
     </Group>
   );
 }

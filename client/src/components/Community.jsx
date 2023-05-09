@@ -5,15 +5,7 @@ import {
   Container, Input, Button, Flex, createStyles, Paper, Title, Text, rem, Space,
 } from '@mantine/core';
 import CreateNewCommunity from './CreateCommunity';
-import { getCommunities } from '../api/getCommunities';
-
-const handleClick = () => {
-  try {
-    togglePlaylistLikes(itm).then(() => {
-      setReload(!reload);
-    });
-  } catch (error) { /* do nothing */ }
-};
+import { getCommunities, toggleJoin } from '../api/getCommunities';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -46,8 +38,16 @@ const useStyles = createStyles((theme) => ({
 
 function Card({ item }) {
   const { classes } = useStyles();
-  const { image, name, numMember } = item;
-  const [joinStatus, setJoinStatus] = useState(false);
+  const {
+    image, name, numMember, member,
+  } = item;
+  // const [joinStatus, setJoinStatus] = useState(false);
+
+  const handleClick = (i) => {
+    try {
+      toggleJoin(i);
+    } catch (error) { /* do nothing */ }
+  };
 
   return (
     <Paper
@@ -65,8 +65,8 @@ function Card({ item }) {
           {name}
         </Title>
       </div>
-      <Button variant="white" color="dark" onClick={() => handleClick()}>
-        {joinStatus ? 'Joined' : 'Join Community'}
+      <Button variant="white" color="dark" onClick={() => handleClick(item)}>
+        {member ? 'Joined' : 'Join Community'}
       </Button>
     </Paper>
   );
@@ -76,7 +76,8 @@ Card.propTypes = {
   item: PropTypes.shape({
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    numMember: PropTypes.string.isRequired,
+    numMember: PropTypes.number.isRequired,
+    member: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
@@ -128,7 +129,7 @@ export function Community() {
           style={{ width: '400px' }}
           radius="xl"
         />
-        <Button onClick={handleSearchClick} size="xs" radius="xl">
+        <Button size="xs" radius="xl">
           Search
         </Button>
       </Flex>
