@@ -27,4 +27,4 @@ const closeMongoDBConnection = async () => {
   await mongoConnection.close();
 };
 
-module.exports = { getDB, closeMongoDBConnection };
+module.exports = { getDB, closeMongoDBConnection, connect };
