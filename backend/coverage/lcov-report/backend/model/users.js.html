@@ -382,7 +382,9 @@
 <a name='L317'></a><a href='#L317'>317</a>
 <a name='L318'></a><a href='#L318'>318</a>
 <a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -418,6 +420,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -517,11 +524,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -701,7 +703,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-console */
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-console */
 /**
  * this file contains all the CRUD operations from swaggerHub.
  */
@@ -737,18 +740,23 @@ const getDB = <span class="fstat-no" title="function not covered" >as</span>ync 
 <span class="cstat-no" title="statement not covered" >  return mongoConnection.db('spotify');</span>
 };
 &nbsp;
+const checkFollow = <span class="fstat-no" title="function not covered" >(u</span>ser, followeeId) =&gt; {
+<span class="cstat-no" title="statement not covered" >  console.log('adding user follow to object', user._id, ' for ', followeeId, ' result: ', user.following &amp;&amp; user.following.includes(followeeId));</span>
+<span class="cstat-no" title="statement not covered" >  return user.following &amp;&amp; user.following.includes(followeeId);</span>
+};
+&nbsp;
 /* get all the users */
-const getUsers = <span class="fstat-no" title="function not covered" >as</span>ync (user_id) =&gt; {
+const getUsers = <span class="fstat-no" title="function not covered" >as</span>ync (userId) =&gt; {
   const db = <span class="cstat-no" title="statement not covered" >await getDB();</span>
   const users = <span class="cstat-no" title="statement not covered" >await db.collection('users').find({}).toArray();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (user_id) {</span>
-<span class="cstat-no" title="statement not covered" >    console.log('getUsers includes user_id: ', user_id);</span>
+<span class="cstat-no" title="statement not covered" >  if (userId) {</span>
+<span class="cstat-no" title="statement not covered" >    console.log('getUsers includes user_id: ', userId);</span>
     // add following true/false to each playlist object
 &nbsp;
-    const follower = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: user_id });</span>
+    const follower = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: userId });</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; users.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >    for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; users.length; i += 1) {</span>
       const user = <span class="cstat-no" title="statement not covered" >users[i];</span>
 <span class="cstat-no" title="statement not covered" >      if (checkFollow(follower, user._id)) {</span>
 <span class="cstat-no" title="statement not covered" >        console.log('user', user._id, ' follows: true');</span>
@@ -834,22 +842,17 @@ async function <span class="fstat-no" title="function not covered" >getRankedSon
   }
 }
 &nbsp;
-const checkFollow = <span class="fstat-no" title="function not covered" >(u</span>ser, followee_id) =&gt; {
-<span class="cstat-no" title="statement not covered" >  console.log('adding user follow to object', user._id, ' for ', followee_id, ' result: ', user.following &amp;&amp; user.following.includes(followee_id));</span>
-<span class="cstat-no" title="statement not covered" >  return user.following &amp;&amp; user.following.includes(followee_id);</span>
-};
-&nbsp;
-const toggleFollow = <span class="fstat-no" title="function not covered" >as</span>ync (follower_id, followee_id) =&gt; {
+const toggleFollow = <span class="fstat-no" title="function not covered" >as</span>ync (followerId, followeeId) =&gt; {
   const db = <span class="cstat-no" title="statement not covered" >await getDB();</span>
   // check folowee exists
-  const followee = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: followee_id });</span>
+  const followee = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: followeeId });</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (!followee) {</span>
 <span class="cstat-no" title="statement not covered" >    console.log('followee does not exist');</span>
 <span class="cstat-no" title="statement not covered" >    return undefined;</span>
   }
 &nbsp;
-  const obj = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: follower_id });</span>
+  const obj = <span class="cstat-no" title="statement not covered" >await db.collection('users').findOne({ _id: followerId });</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (!obj) {</span>
 <span class="cstat-no" title="statement not covered" >    console.log('follower does not exist');</span>
@@ -859,15 +862,15 @@ const toggleFollow = <span class="fstat-no" title="function not covered" >as</sp
   // check if user_likes exists
 <span class="cstat-no" title="statement not covered" >  if (!obj.following) {</span>
 <span class="cstat-no" title="statement not covered" >    console.log('following does not exist, adding with followee_id');</span>
-<span class="cstat-no" title="statement not covered" >    await db.collection('users').updateOne({ _id: follower_id }, { $set: { following: [followee_id] } });</span>
+<span class="cstat-no" title="statement not covered" >    await db.collection('users').updateOne({ _id: followerId }, { $set: { following: [followeeId] } });</span>
 <span class="cstat-no" title="statement not covered" >    return { following: true };</span>
-  } <span class="cstat-no" title="statement not covered" >if (obj.following.includes(followee_id)) {</span>
+  } <span class="cstat-no" title="statement not covered" >if (obj.following.includes(followeeId)) {</span>
 <span class="cstat-no" title="statement not covered" >    console.log('following exists, removing followee_id');</span>
-<span class="cstat-no" title="statement not covered" >    await db.collection('users').updateOne({ _id: follower_id }, { $pull: { following: followee_id } });</span>
+<span class="cstat-no" title="statement not covered" >    await db.collection('users').updateOne({ _id: followerId }, { $pull: { following: followeeId } });</span>
 <span class="cstat-no" title="statement not covered" >    return { following: false };</span>
   }
 <span class="cstat-no" title="statement not covered" >  console.log('following exists, adding followee_id');</span>
-<span class="cstat-no" title="statement not covered" >  await db.collection('users').updateOne({ _id: follower_id }, { $push: { following: followee_id } });</span>
+<span class="cstat-no" title="statement not covered" >  await db.collection('users').updateOne({ _id: followerId }, { $push: { following: followeeId } });</span>
 <span class="cstat-no" title="statement not covered" >  return { following: true };</span>
 };
 &nbsp;
@@ -1027,7 +1030,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-09T01:15:58.172Z
+                at 2023-05-09T01:47:33.745Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

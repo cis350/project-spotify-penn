@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { MongoClient } = require('mongodb');
 
 const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';

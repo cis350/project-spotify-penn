@@ -34,9 +34,7 @@ export function PlaylistTable() {
         );
       })
       .catch(() => setRows(
-        <tr>
-          <td />
-        </tr>,
+        <tr />,
       ));
   };
 

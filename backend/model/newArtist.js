@@ -1,28 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
-const { MongoClient } = require('mongodb');
-
-const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
-let mongoConnection;
-const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const connect = async () => {
-  try {
-    mongoConnection = await mongoClient.connect();
-    console.log('connected to DB - new artists', mongoConnection.db().databaseName);
-    return mongoConnection;
-  } catch (err) {
-    return err;
-  }
-};
-
-// connect to mongoDb and return the database
-const getDB = async () => {
-  // test if already connected
-  if (!mongoConnection) {
-    await connect();
-  }
-  return mongoConnection.db('spotify');
-};
+const { getDB } = require('../utils/dbUtils');
+const { toggleLikeObject, checkLikeObject } = require('../utils/toggleLikeUtil');
 
 async function postNewArtistPlaylist(name, email, playlist, url, desc) {
   const db = await getDB();
@@ -39,13 +18,22 @@ async function postNewArtistPlaylist(name, email, playlist, url, desc) {
   return result.insertedId;
 }
 
-async function getNewArtistPlaylists() {
+async function getNewArtistPlaylists(userId) {
   try {
     // get the db
     const db = await getDB();
     const result = await db.collection('newArtists').find({}).toArray();
-    // print the result
-    console.log(`New Artist Playlists: ${JSON.stringify(result.playlistName)}`);
+
+    // add like true/false to each playlist object
+    for (let i = 0; i < result.length; i += 1) {
+      const newArtist = result[i];
+      if (checkLikeObject(newArtist, userId)) {
+        newArtist.likes = true;
+      } else {
+        newArtist.likes = false;
+      }
+    }
+
     return result;
   } catch (err) {
     console.log(`error: ${err.message}`);
@@ -53,16 +41,8 @@ async function getNewArtistPlaylists() {
   return null;
 }
 
-async function toggleNewArtistLikes(item) {
-  try {
-    const db = await getDB();
-    const itemlikes = !item.likes;
-    const res = await db.collection('newArtists').updateOne({ _id: item._id }, { likes: itemlikes });
-    return res.data;
-  } catch (err) {
-    console.log(`error: ${err.message}`);
-  }
-  return null;
+async function toggleNewArtistLikes(itemId, userId) {
+  return toggleLikeObject(itemId, userId, 'newArtists');
 }
 
 module.exports = {

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 /**
  * this file contains all the CRUD operations from swaggerHub.
@@ -34,18 +35,23 @@ const getDB = async () => {
   return mongoConnection.db('spotify');
 };
 
+const checkFollow = (user, followeeId) => {
+  console.log('adding user follow to object', user._id, ' for ', followeeId, ' result: ', user.following && user.following.includes(followeeId));
+  return user.following && user.following.includes(followeeId);
+};
+
 /* get all the users */
-const getUsers = async (user_id) => {
+const getUsers = async (userId) => {
   const db = await getDB();
   const users = await db.collection('users').find({}).toArray();
 
-  if (user_id) {
-    console.log('getUsers includes user_id: ', user_id);
+  if (userId) {
+    console.log('getUsers includes user_id: ', userId);
     // add following true/false to each playlist object
 
-    const follower = await db.collection('users').findOne({ _id: user_id });
+    const follower = await db.collection('users').findOne({ _id: userId });
 
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < users.length; i += 1) {
       const user = users[i];
       if (checkFollow(follower, user._id)) {
         console.log('user', user._id, ' follows: true');
@@ -131,22 +137,17 @@ async function getRankedSongs(page, pageSize) {
   }
 }
 
-const checkFollow = (user, followee_id) => {
-  console.log('adding user follow to object', user._id, ' for ', followee_id, ' result: ', user.following && user.following.includes(followee_id));
-  return user.following && user.following.includes(followee_id);
-};
-
-const toggleFollow = async (follower_id, followee_id) => {
+const toggleFollow = async (followerId, followeeId) => {
   const db = await getDB();
   // check folowee exists
-  const followee = await db.collection('users').findOne({ _id: followee_id });
+  const followee = await db.collection('users').findOne({ _id: followeeId });
 
   if (!followee) {
     console.log('followee does not exist');
     return undefined;
   }
 
-  const obj = await db.collection('users').findOne({ _id: follower_id });
+  const obj = await db.collection('users').findOne({ _id: followerId });
 
   if (!obj) {
     console.log('follower does not exist');
@@ -156,15 +157,15 @@ const toggleFollow = async (follower_id, followee_id) => {
   // check if user_likes exists
   if (!obj.following) {
     console.log('following does not exist, adding with followee_id');
-    await db.collection('users').updateOne({ _id: follower_id }, { $set: { following: [followee_id] } });
+    await db.collection('users').updateOne({ _id: followerId }, { $set: { following: [followeeId] } });
     return { following: true };
-  } if (obj.following.includes(followee_id)) {
+  } if (obj.following.includes(followeeId)) {
     console.log('following exists, removing followee_id');
-    await db.collection('users').updateOne({ _id: follower_id }, { $pull: { following: followee_id } });
+    await db.collection('users').updateOne({ _id: followerId }, { $pull: { following: followeeId } });
     return { following: false };
   }
   console.log('following exists, adding followee_id');
-  await db.collection('users').updateOne({ _id: follower_id }, { $push: { following: followee_id } });
+  await db.collection('users').updateOne({ _id: followerId }, { $push: { following: followeeId } });
   return { following: true };
 };
 
