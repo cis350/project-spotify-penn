@@ -89,16 +89,8 @@ const toggleMembership = async (user_id, community_id) => {
 
 };
 
-const getMembers = async () => {
-  const db = await getDB();
-  const result = await db.collection('communities').findOne({ id: obj_id }).toArray();
-  
-  return result;
-};
-
 module.exports = {
   getCommunities,
   addCommunity,
-  getMembers,
   toggleMembership,
 };
