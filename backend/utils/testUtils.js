@@ -6,15 +6,9 @@ const insertTestDataToCommunitiesDB = async (db, testData) => {
 
 const deleteTestDataFromCommunitiesDB = async (db, testData) => {
   try {
-    const result = await db.collection('communities').deleteMany({ name: testData });
-    const { deletedCount } = result;
-    if (deletedCount === 1) {
-      console.log('info', 'Successfully deleted test community');
-    } else {
-      console.log('warning', 'test community was not deleted');
-    }
+    await db.collection('communities').deleteMany({ name: testData });
   } catch (err) {
-    console.log('error', err.message);
+    /* do nothig */
   }
 };
 
@@ -53,15 +47,10 @@ const insertTestDataToUsersDB = async (db, testData) => {
 */
 const deleteTestDataFromUsersDB = async (db, testDataName) => {
   try {
-    const result = await db.collection('users').deleteMany({ artistName: testDataName });
-    const { deletedCount } = result;
-    if (deletedCount >= 1) {
-      console.log('info', 'Successfully deleted test user');
-    } else {
-      console.log('warning', 'test user was not deleted');
-    }
+    await db.collection('users').deleteMany({ artistName: testDataName });
+    return null;
   } catch (err) {
-    console.log('error', err.message);
+    return err;
   }
 };
 
@@ -105,17 +94,7 @@ const insertTestDataToNewArtistsDB = async (db, testData) => {
 * @returns
 */
 const deleteTestDataFromNewArtistsDB = async (db, testDataName) => {
-  try {
-    const result = await db.collection('newArtists').deleteMany({ artistName: testDataName });
-    const { deletedCount } = result;
-    if (deletedCount >= 1) {
-      console.log('info', 'Successfully deleted test new artist');
-    } else {
-      console.log('warning', 'test new artist was not deleted');
-    }
-  } catch (err) {
-    console.log('error', err.message);
-  }
+  await db.collection('newArtists').deleteMany({ artistName: testDataName });
 };
 
 /**

@@ -1,13 +1,9 @@
-/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 
 const fs = require('fs');
 
 const formidable = require('formidable');
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-// const rawBody = require('raw-body');
 
 // import the cors -cross origin resource sharing- module
 const cors = require('cors');
@@ -62,8 +58,6 @@ webapp.post('/users', async (req, res) => {
 
 webapp.get('/other-users', async (req, res) => {
   try {
-    console.log('hit GET /other-users');
-
     const users = await dbUsers.getUsers(req.headers.authorization);
     if (users === undefined) {
       res.status(404).json({ error: 'no users exist' });
@@ -72,23 +66,18 @@ webapp.get('/other-users', async (req, res) => {
 
     // remove current user
     if (req.headers.authorization) {
-      console.log('authorization header exists: ', req.headers.authorization);
       const filteredUsers = users.filter((user) => user._id !== req.headers.authorization);
       res.status(200).json(filteredUsers);
     } else { // if no authorization header, return all users
-      console.log('authorization header does not exist');
       res.status(200).json(users);
     }
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: 'Error retrieving users', error: err });
   }
 });
 
 webapp.post('/other-users/follow/:id', async (req, res) => {
   try {
-    console.log('hit GET /other-users/follow/:id');
-    console.log('req.params.id: ', req.params.id);
     const result = await dbUsers.toggleFollow(req.headers.authorization, req.params.id);
     // const id = req.params.id;
     // const user = await dbUsers.getUser(id);
@@ -98,7 +87,6 @@ webapp.post('/other-users/follow/:id', async (req, res) => {
     }
     res.status(200).json(result);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: 'error in following user', error: err });
   }
 });
@@ -112,27 +100,18 @@ webapp.get('/communities', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: 'error in retrieving communities' });
   }
 });
 
 webapp.post('/communities', async (req, res) => {
-  console.log('hit POST /communities');
   try {
     const form = formidable({ multiples: false });
     form.parse(req, (err, fields, files) => {
-      console.log('form', form);
-      console.log('fields:', fields);
-
       if (err) {
-        console.log('error', err.message);
         res.status(404).json({ error: err.message });
       }
       let cacheBuffer = Buffer.alloc(0);
-
-      console.log('files:');
-      console.log(files);
 
       // create a stream from the virtual path of the uploaded file
       const fStream = fs.createReadStream(files.File_0.filepath);
@@ -144,9 +123,7 @@ webapp.post('/communities', async (req, res) => {
 
       fStream.on('end', async () => {
         // send buffer to AWS
-        console.log('sending to aws');
         const s3URL = await s3.uploadFile(cacheBuffer, files.File_0.newFilename);
-        console.log('end', cacheBuffer.length);
 
         const newCommunity = {
           name: fields.name,
@@ -165,7 +142,6 @@ webapp.post('/communities', async (req, res) => {
 });
 
 webapp.get('/newartistplaylists', async (req, res) => {
-  console.log('hit GET /newartistplaylists');
   try {
     const results = await dbNewArtist.getNewArtistPlaylists(req.headers.authorization);
     if (results === undefined) {
@@ -179,7 +155,6 @@ webapp.get('/newartistplaylists', async (req, res) => {
 });
 
 webapp.post('/newartistplaylists', async (req, res) => {
-  console.log('hit POST /newartistplaylists');
   const {
     artistName, email, spotifyURL, playlistName, description,
   } = req.body;
@@ -205,7 +180,6 @@ webapp.post('/newartistplaylists', async (req, res) => {
 
 webapp.post('/newartistplaylists/:_id', async (req, res) => {
   try {
-    console.log('Called like new artist playlist');
     const results = await dbNewArtist.toggleNewArtistLikes(
       req.params.id,
       req.headers.authorization,
@@ -216,14 +190,12 @@ webapp.post('/newartistplaylists/:_id', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });
 
 webapp.get('/playlists', async (req, res) => {
   try {
-    console.log('Called get playlists');
     // get the data from the db
     const results = await dbPlaylists.getPlaylists();
     if (results === undefined) {
@@ -257,7 +229,6 @@ webapp.post('/playlists', async (req, res) => {
 
 webapp.post('/playlists/like/:id', async (req, res) => {
   try {
-    console.log('Called like playlist');
     const results = await dbPlaylists.toggleLikePlaylist(req.params.id, req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found' });
@@ -265,7 +236,6 @@ webapp.post('/playlists/like/:id', async (req, res) => {
     }
     res.status(200).json(results);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });
@@ -274,7 +244,7 @@ webapp.get('/users/:id', async (req, res) => {
   try {
     // get the data from the db
     const results = await dbUsers.getUser(req.params.id);
-    console.log(results);
+
     if (results === null) {
       res.status(404).json({ error: 'unknown student' });
     } else {
@@ -355,7 +325,7 @@ webapp.get('/sockets', async (req, res) => {
 webapp.post('/sockets', async (req, res) => {
   try {
     const document = req.body;
-    console.log(document);
+
     const result = await dbChat.newConversation(document);
     if (result === undefined) {
       res.status(404).json({ error: 'unknown socket' });
@@ -417,7 +387,6 @@ webapp.get('/songs', async (req, res) => {
 });
 
 webapp.get('/users/playlists/:id', async (req, res) => {
-  console.log(req.params.id);
   try {
     const results = await dbUsers.getPlaylists(req.params.id);
     if (results === undefined) {
@@ -431,7 +400,6 @@ webapp.get('/users/playlists/:id', async (req, res) => {
 });
 
 webapp.post('/users/playlists/:id', async (req, res) => {
-  console.log('hit POST user playlists');
   const {
     playlistid, name, desc,
   } = req.body;
@@ -493,10 +461,9 @@ webapp.get('/artists', async (req, res) => {
 
 webapp.get('/communities/members/:id', async (req, res) => {
   try {
-    console.log('hit GET /communities/members/:id');
     const communityId = req.params.id;
     const userId = req.headers.authorization;
-    console.log('community id: ', communityId, ' user id: ', userId);
+
     const results = await dbCommunities.toggleMembership(userId, communityId);
     if (results === null) {
       res.status(404).json({ error: 'unknown community' });
@@ -504,7 +471,6 @@ webapp.get('/communities/members/:id', async (req, res) => {
       res.status(200).json(results);
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });

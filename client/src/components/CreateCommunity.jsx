@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
@@ -7,23 +7,15 @@ import {
   Popover, Button, TextInput, Center,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-// import { newCommunity } from '../api/getCommunities';
 import uploadFile from '../api/upload';
 
 function CreateCommunity(props) {
   const [files, setFiles] = useState();
-  // const [fileDir, setFileDir] = useState('');
 
   // event handler for file selection
   const updateFile = (evt) => {
     setFiles(evt.target.files);
   };
-  // const handleUpload = async () => {
-  //   // upload the file
-  //   const formData = new FormData();
-  //   formData.append('File_0', files);
-  //   uploadFile(formData); // add file dir here
-  // };
 
   const form = useForm({
     initialValues: {
@@ -40,12 +32,6 @@ function CreateCommunity(props) {
 
   const handleCreateCommunity = () => {
     const { name, image, desc } = form.values;
-    console.log(name);
-    console.log(image);
-    console.log(desc);
-    console.log(files);
-
-    console.log(files[0]);
 
     const formData = new FormData();
     formData.append('name', name);
@@ -59,11 +45,6 @@ function CreateCommunity(props) {
       props.onCommunityCreated();
     });
 
-    // set fileDir here -- insert whatever function that returns the aws link here.
-    // newCommunity(name, image, desc).then(() => {
-    //   form.reset();
-    //   props.onCommunityCreated();
-    // });
   };
 
   const handleKeyDown = (event) => {
@@ -102,11 +83,8 @@ function CreateCommunity(props) {
               type="file"
               name="someFiles"
               onChange={(e) => {
-                console.log('adding file');
                 form.setFieldValue('image', e.currentTarget.value);
                 updateFile(e);
-                // setFiles(evt.target.files);
-                // handleUpload();
               }}
             />
           </div>

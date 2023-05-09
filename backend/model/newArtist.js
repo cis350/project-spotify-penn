@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 const { getDB } = require('../utils/dbUtils');
 const { toggleLikeObject, checkLikeObject } = require('../utils/toggleLikeUtil');
@@ -14,7 +13,6 @@ async function postNewArtistPlaylist(name, email, spotifyURL, playlistName, desc
     likes: false,
     userLikes: [email],
   });
-  console.log(`Uploaded playlist: ${result.insertedId}`);
   return result.insertedId;
 }
 
@@ -36,9 +34,8 @@ async function getNewArtistPlaylists(userId) {
 
     return result;
   } catch (err) {
-    console.log(`error: ${err.message}`);
+    return err;
   }
-  return null;
 }
 
 async function toggleNewArtistLikes(itemId, userId) {

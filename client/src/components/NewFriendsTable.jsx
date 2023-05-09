@@ -12,7 +12,6 @@ export function FriendsTable() {
   const [currName, setName] = useState('');
 
   const handleSearchInputChange = (e) => {
-    console.log('setting name to: ', e.target.value);
     setName(e.target.value);
   };
 
@@ -23,8 +22,6 @@ export function FriendsTable() {
   useEffect(() => {
     getOtherUsers()
       .then((data) => {
-        console.log('data');
-        console.log(data);
         if (data.length === 0) {
           throw new Error('empty data');
         }

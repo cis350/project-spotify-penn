@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 const { getDB } = require('../utils/dbUtils');
 const { toggleLikeObject, checkLikeObject, checkLikeObjectFromDB } = require('../utils/toggleLikeUtil');
 
@@ -30,7 +28,6 @@ const postPlaylists = async (id, name, desc) => {
     image: 'https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg',
     likes: false,
   });
-  console.log(`Uploaded playlist: ${result.insertedId}`);
   return result.insertedId;
 };
 

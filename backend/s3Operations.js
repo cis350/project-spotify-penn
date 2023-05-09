@@ -16,9 +16,6 @@ const s3 = new AWS.S3({
 
 // upload a file
 const uploadFile = async (fileContent, fileName) => {
-  console.log(process.env.ID);
-  console.log(process.env.SECRET);
-
   // Setting up S3 upload parameters
   const params = {
     Bucket: BUCKET_NAME,
@@ -26,7 +23,6 @@ const uploadFile = async (fileContent, fileName) => {
     Body: fileContent,
   };
   const data = await s3.upload(params).promise();
-  console.log(`File uploaded successfully. ${data.Location}`);
   return data.Location;
 };
 
@@ -45,7 +41,6 @@ const retrieveFile = (fileName) => {
     if (err) {
       throw err;
     }
-    console.log(`File downloaded successfully. ${data.Body}`);
     // do something with the file
     const fStream = fs.createWriteStream(`${fileName}`);
     fStream.write(data.Body);
@@ -64,12 +59,11 @@ const deleteFile = (fileName) => {
   };
 
   // download file from the bucket
-  s3.deleteObject(params, (err, data) => {
+  s3.deleteObject(params, (err) => {
     if (err) {
       // throw err;
       return false;
     }
-    console.log(`File deleted successfully. ${data}`);
     return true;
   });
 };

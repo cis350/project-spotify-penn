@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 import axios from 'axios';
 
 import setHeaders from './setHeaders';
@@ -8,7 +8,6 @@ const getNewArtistPlaylists = async () => {
   const response = await axios.get('http://localhost:8000/newartistplaylists');
   const { data } = response;
 
-  console.log(data);
 
   if (!data || data.length === 0) {
     throw new Error('empty data');

@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import { useForm } from '@mantine/form';
 import { useNavigate, Link } from 'react-router-dom';

@@ -30,10 +30,6 @@ describe('GET /users', () => {
   });
 });
 
-describe('POST /users', () => {
-  // TODO: Write tests for the /users POST endpoint
-});
-
 describe('GET /other-users', () => {
   it('should respond with an array of other users', async () => {
     const response = await request(app).get('/other-users').set('Authorization', 'admin@gmail.com');
@@ -57,7 +53,7 @@ describe('GET /other-users', () => {
 
 describe('POST /other-users/follow/:id', () => {
   it('should respond with a success message when following a user', async () => {
-    const userId = 'admin@upenn.edu'; // Replace with a valid user ID
+    const userId = 'admin@upenn.edu';
     const response = await request(app).post(`/other-users/follow/${userId}`).set('Authorization', 'admin@gmail.com');
     expect(response.statusCode).toBe(200);
     expect(response.body).toMatchObject({
