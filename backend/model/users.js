@@ -146,6 +146,7 @@ const postPlaylists = async (id, playlistid, name, desc) => {
       playlistid,
       name,
       desc,
+      image: 'https://st2.depositphotos.com/33190558/47628/i/450/depositphotos_476287700-stock-photo-purple-solid-color-background-plain.jpg',
     };
     updatedPlaylists.push(newPlaylist);
     const res = await db.collection('users').updateOne(
