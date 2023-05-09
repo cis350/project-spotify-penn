@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const getUserPlaylists = async (email) => {
-  // eslint-disable-next-line no-console
-  console.log(email);
+
   const response = await axios.get(`http://localhost:8000/users/playlists/${email}`);
 
   const { data } = response;

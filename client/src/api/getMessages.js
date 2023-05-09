@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
+
 import axios from 'axios';
 
 const getMessages = async (socket) => {
@@ -54,10 +54,9 @@ const getSockets = async () => {
   let sockets = [];
   try {
     const res = await axios.get(url);
-    console.log(res.data);
     sockets = res.data.map((socket) => socket._id);
   } catch (error) {
-    // console.error(error);
+    // do nothing
   }
   return sockets;
 };

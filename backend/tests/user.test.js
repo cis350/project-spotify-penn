@@ -13,11 +13,9 @@ describe('POST new user endpoint tests', () => {
   let response;
 
   beforeAll(async () => {
-    // Connect to the DB
     mongo = await connect();
     db = mongo.db();
 
-    // Send a request to the API and collect the response
     response = await request(webapp).post('/users')
       .send(testUser);
   });
@@ -50,18 +48,12 @@ describe('POST new user endpoint tests', () => {
 
 // test GET users endpoint
 describe('GET users endpoint integration test', () => {
-  /**
- * If you get an error with afterEach
- * inside .eslintrc.json in the
- * "env" key add -'jest': true-
-*/
   let db;
 
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
 
-    // add test user to mongodb
     await insertTestDataToUsersDB(db, testUser);
   });
 
@@ -73,33 +65,12 @@ describe('GET users endpoint integration test', () => {
     await deleteTestDataFromUsersDB(db, 'Test');
     try {
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      await closeMongoDBConnection();
       return null;
     } catch (err) {
       return err;
     }
   });
-
-  // test('Get all new user endpoint status code and data', async () => {
-  //   const resp = await request(webapp).get('/newartistplaylists');
-  //   expect(resp.status).toEqual(200);
-  //   expect(resp.type).toBe('application/json');
-  //   // const artistArr = JSON.parse(resp.text);
-  //   const testUsers = await db.collection('users').find({ firstName: 'Test' }).toArray();
-  //   console.log(testUsers);
-  //   // testStudent is in the response
-  //   console.log(testUsers.length);
-  //   expect(testUsers.length >= 1).toBe(true);
-  // });
-
-  // test('Get a new user endpoint status code and data', async () => {
-  //   const resp = await request(webapp).get(`/newartistplaylists/${testUserID}`);
-  //   expect(resp.status).toEqual(200);
-  //   expect(resp.type).toBe('application/json');
-  //   const userArr = JSON.parse(resp.text).data;
-  //   // testStudent is in the response
-  //   expect(userArr).toMatchObject({ _id: testUserID, ...testUser });
-  // });
 
   test('user not in db status code 400', async () => {
     const resp = await request(webapp).get('/users/1');

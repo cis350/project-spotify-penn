@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-// Import required modules and files
 const request = require('supertest');
 const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
 const {
@@ -8,7 +7,6 @@ const {
 
 const webapp = require('../server');
 
-// Connection to the DB
 let mongo;
 
 // test POST newArtists endpoint
@@ -17,11 +15,9 @@ describe('POST newArtists endpoint tests', () => {
   let response;
 
   beforeAll(async () => {
-    // Connect to the DB
     mongo = await connect();
     db = mongo.db();
 
-    // Send a request to the API and collect the response
     response = await request(webapp).post('/newartistplaylists')
       .send('artistName=TestArtist&email=test@example.com&spotifyURL=testtest&playlistName=TestPlaylist&description=TestDescription');
   });
@@ -60,18 +56,12 @@ describe('POST newArtists endpoint tests', () => {
 
 // test GET newArtists endpoint
 describe('GET newArtists endpoint integration test', () => {
-  /**
- * If you get an error with afterEach
- * inside .eslintrc.json in the
- * "env" key add -'jest': true-
-*/
   let db;
 
   beforeAll(async () => {
     mongo = await connect();
     db = mongo.db();
 
-    // add test user to mongodb
     await insertTestDataToNewArtistsDB(db, testNewArtist);
   });
 
@@ -83,7 +73,7 @@ describe('GET newArtists endpoint integration test', () => {
     await deleteTestDataFromNewArtistsDB(db, 'teststudent');
     try {
       await mongo.close();
-      await closeMongoDBConnection(); // mongo client that started server.
+      await closeMongoDBConnection();
       return null;
     } catch (err) {
       return err;
@@ -95,7 +85,6 @@ describe('GET newArtists endpoint integration test', () => {
     expect(resp.status).toEqual(200);
     expect(resp.type).toBe('application/json');
     const testArtists = await db.collection('newArtists').find({ artistName: 'TestArtist' }).toArray();
-    // testStudent is in the response
     expect(testArtists.length >= 1).toBe(true);
   });
 

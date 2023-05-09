@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -26,7 +25,6 @@ function Home() {
       const hash = window.location.href;
       if (!(window.sessionStorage.getItem('accessToken'))) {
         const accessToken = hash.substring(hash.indexOf('=') + 1, hash.indexOf('&'));
-        console.log(`Access token: ${accessToken}`);
         window.sessionStorage.setItem('accessToken', accessToken);
       }
     }
@@ -38,8 +36,6 @@ function Home() {
     spotifyApi.setAccessToken(token);
 
     spotifyApi.getMe().then((data) => {
-      console.log('User info', data);
-      console.log('user pic', data.images[0].url);
       window.sessionStorage.setItem('imageURL', data.images[0].url);
     });
 
@@ -50,7 +46,6 @@ function Home() {
     };
 
     getArtists(token, spotifyOptions).then((data) => {
-      console.log('raw', data);
       const artistData = data.items.map((item) => {
         const artistName = item.name;
         const { genres } = item;
@@ -64,13 +59,11 @@ function Home() {
           artistImage,
         };
       });
-      console.log('filtered', artistData);
       const userId = window.sessionStorage.getItem('sessionId');
       setArtists(userId, artistData);
     });
 
     getSongs(token, spotifyOptions).then((data) => {
-      console.log('raw', data);
       const songData = data.items.map((item) => {
         const { id } = item;
         const songName = item.name;
@@ -91,7 +84,6 @@ function Home() {
           albumImage,
         };
       });
-      console.log('filtered', songData);
       const userId = window.sessionStorage.getItem('sessionId');
       setSongs(userId, songData);
     });

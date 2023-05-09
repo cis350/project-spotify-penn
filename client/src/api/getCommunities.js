@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 
 import axios from 'axios';
@@ -9,7 +8,6 @@ const getCommunities = async () => {
   setHeaders();
   const url = 'http://localhost:8000/communities';
   const res = await axios.get(url);
-  console.log(res.data);
   return res.data;
 };
 

@@ -1,7 +1,5 @@
 const request = require('supertest');
 const app = require('../server');
-// const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
-// const { deleteTestDataFromNewArtistsDB } = require('../utils/testUtils');
 
 describe('GET songs test', () => {
   test('the status code is 200 and response type', async () => {

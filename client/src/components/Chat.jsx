@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-console */
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -28,7 +27,6 @@ function Chat() {
 
   const handleSocketChange = (n) => {
     getSockets().then((sockets) => {
-      console.log(sockets.includes(n));
       if (sockets.includes(n)) {
         setSocket(n);
         getMessages(socket).then((arr) => {
@@ -75,7 +73,6 @@ function Chat() {
       setMessages(arr);
     });
     getFirstName(currentUser).then((name) => {
-      console.log(name);
       setUserInitial(name[0].toUpperCase());
     });
   }, []);

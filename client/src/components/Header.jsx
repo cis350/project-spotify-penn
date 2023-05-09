@@ -127,7 +127,6 @@ function MainHeader() {
               component="a"
               href={`http://localhost:${window.location.port}/profile`}
               onClick={() => navigate('/profile')}
-              // href="http://localhost:3000/profile"
               src={window.sessionStorage.getItem('imageURL')}
               alt="User"
               radius="xl"
