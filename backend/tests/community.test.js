@@ -1,8 +1,7 @@
 const request = require('supertest');
 const app = require('../server');
-const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
-const { deleteTestDataFromNewArtistsDB } = require('../utils/testUtils');
-
+// const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
+// const { deleteTestDataFromNewArtistsDB } = require('../utils/testUtils');
 
 describe('GET communities integration test', () => {
   test('the status code is 200 and response type', async () => {
@@ -30,10 +29,9 @@ describe('GET communities members', () => {
     const response = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
     expect(response.status).toBe(200); // status code
 
-    //toggle back
+    // toggle back
     const response2 = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
     expect(response2.status).toBe(200); // status code
-
   });
 });
 
@@ -60,7 +58,7 @@ describe('GET communities members', () => {
 //       return err;
 //     }
 //   });
-      
+
 //   test('The status code is 201 and response type', () => {
 //     expect(response.status).toBe(201);
 //     // expect(response.type).toBe('application/json');
