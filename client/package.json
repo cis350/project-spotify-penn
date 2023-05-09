@@ -51,7 +51,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "jest --coverage",
-        "db": "npx json-server -w db.json -p 8000"
+        "db": "npx json-server -w db.json -p 8000",
+        "cypress:open": "cypress open"
     },
     "browserslist": {
         "production": [
@@ -73,6 +74,7 @@
         "@babel/preset-env": "^7.20.2",
         "@testing-library/jest-dom": "^5.16.5",
         "babel-jest": "^29.5.0",
+        "cypress": "^12.11.0",
         "eslint": "^8.36.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-plugin-flowtype": "^8.0.3",
