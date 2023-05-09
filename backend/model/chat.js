@@ -9,7 +9,7 @@ const newConversation = async (document) => {
 const getMessages = async (socket) => {
   const db = await getDB();
   const result = await db.collection('sockets').findOne({ _id: socket });
-  return result.messages;
+  return result;
 };
 
 const getSockets = async () => {
