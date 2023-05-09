@@ -32,6 +32,7 @@ const dbNewArtist = require('./model/newArtist');
 const dbPlaylists = require('./model/playlists');
 const dbUsers = require('./model/users');
 const dbSpotify = require('./model/spotify');
+// const { default: CommunitiesTable } = require('../client/src/components/CommunitiesTable');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -104,14 +105,15 @@ webapp.post('/other-users/follow/:id', async (req, res) => {
 
 webapp.get('/communities', async (req, res) => {
   try {
-    const results = await dbCommunities.getCommunities();
+    const results = await dbCommunities.getCommunities(req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'no communities exist' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(404).json({ message: 'error in retrieving communities' });
+    console.log(err);
+    res.status(400).json({ message: 'error in retrieving communities' });
   }
 });
 
@@ -149,8 +151,8 @@ webapp.post('/communities', async (req, res) => {
         const newCommunity = {
           name: fields.name,
           image: s3URL,
-          numMember: fields.numMember,
           description: fields.desc,
+          members: [req.headers.authorization],
         };
 
         const result = await dbCommunities.addCommunity(newCommunity);
@@ -223,7 +225,7 @@ webapp.get('/playlists', async (req, res) => {
   try {
     console.log('Called get playlists');
     // get the data from the db
-    const results = await dbPlaylists.getPlaylists(req.headers.authorization);
+    const results = await dbPlaylists.getPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'No Playlists found' });
       return;
@@ -366,22 +368,6 @@ webapp.post('/sockets', async (req, res) => {
   }
 });
 
-webapp.get('/communities', async (req, res) => {
-  try {
-    // get the data from the db
-    const results = await dbCommunities.getCommunities();
-    if (results === undefined) {
-      res.status(404).json({ error: 'unknown community' });
-    } else {
-      res.status(200).json(results);
-    }
-  } catch (err) {
-    const errmsg = err.message;
-
-    res.status(404).json({ message: errmsg });
-  }
-});
-
 webapp.put('/songs/:id', async (req, res) => {
   try {
     const { songs } = req.body;
@@ -476,18 +462,18 @@ webapp.get('/users/friends/:id', async (req, res) => {
   }
 });
 
-// webapp.get('/users/communities/:id', async (req, res) => {
-//   try {
-//     const results = await dbUsers.getCommmunities(req.params.id);
-//     if (results === undefined) {
-//       res.status(404).json({ error: 'results undefined' });
-//       return;
-//     }
-//     res.status(200).json(results);
-//   } catch (err) {
-
-//   }
-// });
+webapp.get('/users/communities/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.getCommmunities(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
 
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
@@ -500,6 +486,24 @@ webapp.get('/artists', async (req, res) => {
       res.status(200).json(results);
     }
   } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.get('/communities/members/:id', async (req, res) => {
+  try {
+    console.log('hit GET /communities/members/:id');
+    const communityId = req.params.id;
+    const userId = req.headers.authorization;
+    console.log('community id: ', communityId, ' user id: ', userId);
+    const results = await dbCommunities.toggleMembership(userId, communityId);
+    if (results === null) {
+      res.status(404).json({ error: 'unknown community' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });

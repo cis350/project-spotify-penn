@@ -35,6 +35,9 @@ function UserGroup() {
         {fullName}
         {' '}
       </Title>
+      <Title fz="100">
+        {fullName}
+      </Title>
     </Group>
   );
 }

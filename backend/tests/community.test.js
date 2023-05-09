@@ -1,92 +1,86 @@
 const request = require('supertest');
-const { close, connect } = require('../model/communities');
-const webapp = require('../server');
+const app = require('../server');
+const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
+const { deleteTestDataFromNewArtistsDB } = require('../utils/testUtils');
 
-const { testCommunity, insertTestDataToCommunitiesDB, deleteTestDataFromCommunitiesDB } = require('../utils/testUtils');
-
-let mongo;
 
 describe('GET communities integration test', () => {
-  let db;
-  let testCommunity;
-
-  /**
-     * Make sure that the data is in the DB before running
-     * any test
-     * connect to the DB
-     */
-  beforeAll(async () => {
-    mongo = await connect();
-    db = mongo.db();
-
-    // add test user to mongodb
-    testCommunity = await insertTestDataToCommunitiesDB(db, testCommunity);
-    console.log('testCommunity', testCommunity);
-  });
-
-  /**
- * Delete all test data from the DB
- * Close all open connections
- */
-  afterAll(async () => {
-    await deleteTestDataFromCommunitiesDB(db, 'teststudent');
-    try {
-      await mongo.close();
-      await close(); // mongo client that started server.
-    } catch (err) {
-      return err;
-    }
-  });
-
-  test('the status code is 201 and response type', () => {
-    expect(response.status).toBe(201); // status code
+  test('the status code is 200 and response type', async () => {
+    const response = await request(app).get('/communities').set('Authorization', 'admin@upenn.edu');
+    expect(response.status).toBe(200); // status code
     expect(response.type).toBe('application/json');
   });
 });
 
-describe('GET communities integration test', () => {
-  let db;
-
-  /**
-       * Make sure that the data is in the DB before running
-       * any test
-       * connect to the DB
-       */
-  beforeAll(async () => {
-    mongo = await connect();
-    db = mongo.db();
-
-    // add test user to mongodb
-    response = await request(webapp).post('http://localhost:8000/communities', testCommunity);
+describe('GET communities members', () => {
+  test('Invalid ID = the status code is 500 and unknown community message', async () => {
+    const variable = 'invalidID';
+    const response = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
+    expect(response.status).toBe(500); // status code
   });
 
-  /**
-   * Delete all test data from the DB
-   * Close all open connections
-   */
-  afterAll(async () => {
-    try {
-      await deleteTestDataFromCommunitiesDB(db, 'testCommunity');
-      await mongo.close();
-      await close(); // mongo client that started server.
-    } catch (err) {
-      return err;
-    }
+  test('Nonexistent ID = the status code is 404 and unknown community message', async () => {
+    const variable = '54201d4c2a5ec69d98ec63d4';
+    const response = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
+    expect(response.status).toBe(404); // status code
   });
 
-  test('the status code is 201 and response type', () => {
-    expect(response.status).toBe(201); // status code
-    expect(response.type).toBe('application/json');
-  });
+  test('correct = the status code is 200', async () => {
+    const variable = '64404d4c2a5ec69d98eb63d4';
+    const response = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
+    expect(response.status).toBe(200); // status code
 
-  test('the new student is in the returned data', () => {
-    // expect the id of the new student to not be undefined
-    console.log('returned data id', JSON.parse(response.text).data.id);
-    expect(JSON.parse(response.text).data.id).not.toBe(undefined);
-  });
+    //toggle back
+    const response2 = await request(app).get(`/communities/members/${variable}`).set('Authorization', 'admin@upenn.edu');
+    expect(response2.status).toBe(200); // status code
 
-  test('The new student is in the database', async () => {
-    const insertedUser = await db.collection('students').findOne({ name: 'testCommunity' });
-    expect(insertedUser.name).toEqual('testCommunity');
   });
 });
+
+// describe('POST communities', () => {
+//   let db;
+//   let response;
+
+//   beforeAll(async () => {
+//   // Connect to the DB
+//     mongo = await connect();
+//     console.log('line 38');
+//     db = mongo.db();
+//     console.log('line 40');
+//     response = await request(app).post('/communities');
+//     console.log('line 42');
+//   });
+//   afterAll(async () => {
+//     try {
+//       await deleteTestDataFromCommunitiesDB(db, 'TestCommunity');
+//       await mongo.close();
+//       await closeMongoDBConnection();
+//       return null;
+//     } catch (err) {
+//       return err;
+//     }
+//   });
+      
+//   test('The status code is 201 and response type', () => {
+//     expect(response.status).toBe(201);
+//     // expect(response.type).toBe('application/json');
+//   });
+// });
+
+// describe('GET communities integration test', () => {
+//   test('the status code is 201 and response type', () => {
+//     expect(response.status).toBe(201); // status code
+//     expect(response.type).toBe('application/json');
+//   });
+
+//   test('the new student is in the returned data', () => {
+//     // expect the id of the new student to not be undefined
+//     console.log('returned data id', JSON.parse(response.text).data.id);
+//     expect(JSON.parse(response.text).data.id).not.toBe(undefined);
+//   });
+
+//   test('The new student is in the database', async () => {
+//     // const insertedUser = await db.collection('students').findOne({ name: 'testCommunity' });
+//     expect(insertedUser.name).toEqual('testCommunity');
+//   });
+// });
