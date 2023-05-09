@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 
 const fs = require('fs');
@@ -60,8 +62,6 @@ webapp.post('/users', async (req, res) => {
 webapp.get('/other-users', async (req, res) => {
   try {
     console.log('hit GET /other-users');
-    
-
 
     const users = await dbUsers.getUsers(req.headers.authorization);
     if (users === undefined) {
@@ -69,16 +69,15 @@ webapp.get('/other-users', async (req, res) => {
       return;
     }
 
-    //remove current user
+    // remove current user
     if (req.headers.authorization) {
       console.log('authorization header exists: ', req.headers.authorization);
       const filteredUsers = users.filter((user) => user._id !== req.headers.authorization);
       res.status(200).json(filteredUsers);
-    } else { //if no authorization header, return all users
+    } else { // if no authorization header, return all users
       console.log('authorization header does not exist');
       res.status(200).json(users);
     }
-
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: 'Error retrieving users', error: err });
@@ -102,7 +101,6 @@ webapp.post('/other-users/follow/:id', async (req, res) => {
     res.status(400).json({ message: 'error in following user', error: err });
   }
 });
-
 
 webapp.get('/communities', async (req, res) => {
   try {
@@ -167,7 +165,7 @@ webapp.post('/communities', async (req, res) => {
 webapp.get('/newartistplaylists', async (req, res) => {
   console.log('hit GET /newartistplaylists');
   try {
-    const results = await dbNewArtist.getNewArtistPlaylists();
+    const results = await dbNewArtist.getNewArtistPlaylists(req.headers.authorization);
     console.log('results', results);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
@@ -204,16 +202,17 @@ webapp.post('/newartistplaylists', async (req, res) => {
   }
 });
 
-webapp.put('newartistplaylists/:_id', async (req, res) => {
+webapp.post('/newartistplaylists/:_id', async (req, res) => {
   try {
-    console.log('change likes');
-    const results = await dbNewArtist.toggleNewArtistLikes();
+    console.log('Called like new artist playlist');
+    const results = await dbNewArtist.toggleNewArtistLikes(req.params.id, req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });
@@ -266,7 +265,6 @@ webapp.post('/playlists/like/:id', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
-
 
 webapp.get('/users/:id', async (req, res) => {
   try {
@@ -476,14 +474,18 @@ webapp.get('/users/friends/:id', async (req, res) => {
   }
 });
 
-webapp.get('/users/communities/:id', async (req, res) => {
-  try {
-    const results = await dbUsers.getCommmunities(req.params.id);
-    if (results === undefined) {
-      res.status(404).json({ error: 'results undefined' });
-      return;
-    }
-    res.status(200).json(results);
+// webapp.get('/users/communities/:id', async (req, res) => {
+//   try {
+//     const results = await dbUsers.getCommmunities(req.params.id);
+//     if (results === undefined) {
+//       res.status(404).json({ error: 'results undefined' });
+//       return;
+//     }
+//     res.status(200).json(results);
+//   } catch (err) {
+
+//   }
+// });
 
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
