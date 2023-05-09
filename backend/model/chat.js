@@ -29,9 +29,6 @@ const updateMessages = async (socket, updatedSocket) => {
 };
 
 module.exports = {
-  connect,
-  close,
-  getDB,
   newConversation,
   getMessages,
   getSockets,

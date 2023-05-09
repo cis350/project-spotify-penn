@@ -30,8 +30,6 @@ const setUserAlbums = async (id, newArtists) => {
 };
 
 module.exports = {
-  connect,
-  close,
   setUserSongs,
   setUserAlbums,
 };

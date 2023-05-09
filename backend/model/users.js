@@ -274,8 +274,6 @@ async function getRankedArtists(page, pageSize) {
 }
 
 module.exports = {
-  connect,
-  close,
   getUsers,
   getUser,
   addUser,
