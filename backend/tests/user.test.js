@@ -86,7 +86,7 @@ describe('GET users endpoint integration test', () => {
     expect(resp.status).toEqual(200);
     expect(resp.type).toBe('application/json');
     // const artistArr = JSON.parse(resp.text);
-    const testUsers = await db.collection('users').find({ firstName: 'Test' }).toArray;
+    const testUsers = await db.collection('users').find({ firstName: 'Test' }).toArray();
     console.log(testUsers);
     // testStudent is in the response
     console.log(testUsers.length);
