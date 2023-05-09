@@ -108,5 +108,3 @@ describe('GET users endpoint integration test', () => {
     expect(resp.type).toBe('application/json');
   });
 });
-
-
