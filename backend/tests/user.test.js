@@ -1,88 +1,111 @@
-// import mongoClient
-const { MongoClient } = require('mongodb');
+const request = require('supertest');
+const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
+const {
+  deleteTestDataFromUsersDB, insertTestDataToUsersDB, testUser,
+} = require('../utils/testUtils');
 
-// import functions to be tested
-const { connect, close, getAllUsers, addUser } = require('./../model/users');
+const webapp = require('../server');
 
-// connection string
-const uri = 'mongodb+srv://maggie:maggieschwierking@spotifypenn.kfju1o3.mongodb.net/test';
+let mongo;
 
-describe('User Operations', () => {
-  let mongoConnection;
+describe('POST new user endpoint tests', () => {
+  let db;
+  let response;
 
-  // connect to the database before running any test
   beforeAll(async () => {
-    mongoConnection = await connect();
+    // Connect to the DB
+    mongo = await connect();
+    db = mongo.db();
+
+    // Send a request to the API and collect the response
+    response = await request(webapp).post('/users')
+      .send(testUser);
   });
 
-  // close database connection after running all tests
   afterAll(async () => {
-    await mongoConnection.close();
+    try {
+      await deleteTestDataFromUsersDB(db, 'Test');
+      await mongo.close();
+      await closeMongoDBConnection();
+      return null;
+    } catch (err) {
+      return err;
+    }
   });
 
-  describe('connect()', () => {
-    test('connects to the database', async () => {
-      const result = await connect();
-
-      expect(result).toBeTruthy();
-      expect(mongoConnection.isConnected()).toBe(true);
-    });
+  test('The status code is 201 and response type', () => {
+    expect(response.status).toBe(201);
+    expect(response.type).toBe('application/json');
   });
 
-  describe('close()', () => {
-    test('closes the database connection', async () => {
-      await close();
-
-      expect(mongoConnection.isConnected()).toBe(false);
-    });
+  test('The new user is in the returned data', () => {
+    expect(JSON.parse(response.text)).not.toBe(undefined);
   });
 
-  describe('getAllUsers()', () => {
-    // add test data to the database before running each test
-    beforeEach(async () => {
-      await mongoConnection.db('spotify').collection('users').insertMany([
-        {
-          name: 'John Doe',
-          email: 'johndoe@example.com',
-          age: 25,
-        },
-        {
-          name: 'Jane Smith',
-          email: 'janesmith@example.com',
-          age: 30,
-        },
-      ]);
-    });
+  test('The new user is in the database', async () => {
+    const insertedUser = await db.collection('users').findOne({ firstName: 'Test' });
+    expect(insertedUser.firstName).toEqual('Test');
+  });
+});
 
-    // clear database after running each test
-    afterEach(async () => {
-      await mongoConnection.db('spotify').collection('users').deleteMany({});
-    });
+// test GET users endpoint
+describe('GET users endpoint integration test', () => {
+  /**
+ * If you get an error with afterEach
+ * inside .eslintrc.json in the
+ * "env" key add -'jest': true-
+*/
+  let db;
+  let testUserID;
 
-    test('returns all users from the database', async () => {
-      const result = await getAllUsers();
+  beforeAll(async () => {
+    mongo = await connect();
+    db = mongo.db();
 
-      expect(result.length).toBe(2);
-    });
+    // add test user to mongodb
+    testUserID = await insertTestDataToUsersDB(db, testUser);
   });
 
-  describe('addUser()', () => {
-    // clear database after running each test
-    afterEach(async () => {
-      await mongoConnection.db('spotify').collection('students').deleteMany({});
-    });
+  /**
+ * Delete all test data from the DB
+ * Close all open connections
+ */
+  afterAll(async () => {
+    await deleteTestDataFromUsersDB(db, 'Test');
+    try {
+      await mongo.close();
+      await closeMongoDBConnection(); // mongo client that started server.
+      return null;
+    } catch (err) {
+      return err;
+    }
+  });
 
-    test('adds a new user to the database', async () => {
-      const newUser = {
-        name: 'Sarah Lee',
-        email: 'sarahlee@example.com',
-        age: 35,
-      };
+  test('Get all new user endpoint status code and data', async () => {
+    const resp = await request(webapp).get('/newartistplaylists');
+    expect(resp.status).toEqual(200);
+    expect(resp.type).toBe('application/json');
+    // const artistArr = JSON.parse(resp.text);
+    const testUsers = await db.collection('users').find({ firstName: 'Test' }).toArray;
+    console.log(testUsers);
+    // testStudent is in the response
+    console.log(testUsers.length);
+    expect(testUsers.length >= 1).toBe(true);
+  });
 
-      const result = await addUser(newUser);
+  test('Get a new user endpoint status code and data', async () => {
+    const resp = await request(webapp).get(`/newartistplaylists/${testUserID}`);
+    expect(resp.status).toEqual(200);
+    expect(resp.type).toBe('application/json');
+    const userArr = JSON.parse(resp.text).data;
+    // testStudent is in the response
+    expect(userArr).toMatchObject({ _id: testUserID, ...testUser });
+  });
 
-      expect(result).toBeTruthy();
-    });
+  test('user not in db status code 400', async () => {
+    const resp = await request(webapp).get('/users/1');
+    expect(resp.status).toEqual(400);
+    expect(resp.type).toBe('application/json');
   });
 });
 

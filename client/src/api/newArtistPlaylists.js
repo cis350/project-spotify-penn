@@ -1,10 +1,16 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 
+import setHeaders from './setHeaders';
+
 const getNewArtistPlaylists = async () => {
+  setHeaders();
   const response = await axios.get('http://localhost:8000/newartistplaylists');
   const { data } = response;
 
-  if (data.length === 0) {
+  console.log(data);
+
+  if (!data || data.length === 0) {
     throw new Error('empty data');
   } else {
     return data;
@@ -12,7 +18,6 @@ const getNewArtistPlaylists = async () => {
 };
 
 const postNewArtistPlaylist = async (
-  id,
   artistName,
   email,
   spotifyURL,
@@ -22,7 +27,6 @@ const postNewArtistPlaylist = async (
   const res = await axios.post(
     'http://localhost:8000/newartistplaylists',
     {
-      id,
       artistName,
       email,
       spotifyURL,

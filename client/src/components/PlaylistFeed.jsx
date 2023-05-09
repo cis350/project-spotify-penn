@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Table, Group, ScrollArea, Center, Title, Space, Paper, createStyles, rem, Stack, ActionIcon,
 } from '@mantine/core';
-import getPlaylists from '../api/getUserPlaylists';
+import { getPlaylists } from '../api/getAllPlaylists';
 import { likes, nolikes } from '../assets/likes';
-// import updateLikes from '../api/updateLikesNewArtist';
 import togglePlaylistLikes from '../api/playlistFeedAPI';
 
 const useStyles = createStyles((theme) => ({
@@ -39,21 +37,20 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+// const [reload, setReload] = useState(false);
+
 function Card({ item }) {
   const { classes } = useStyles();
   //   const { image, name, numMember } = item;
   const { image, name } = item;
-  const [reload, setReload] = useState(false);
 
   function handleClick(itm) {
     try {
       togglePlaylistLikes(itm).then(() => {
-        setReload(!reload);
+        // setReload(!reload);
       });
     } catch (error) { /* do nothing */ }
   }
-
-  console.log('item', item);
 
   return (
     <Paper
@@ -100,14 +97,6 @@ export function PlaylistFeed() {
             <tr key={item.name}>
               <td>
                 <Card item={item} />
-                {/* <Group spacing="md">
-                  <NavLink to={`/profile/${item.id}`}>
-                    <Avatar size={75} src={item.avatar} radius={75} />
-                    <Text fz="lg" fw={500}>
-                      {item.name}
-                    </Text>
-                  </NavLink>
-                </Group> */}
               </td>
             </tr>
           )),

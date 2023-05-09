@@ -4,7 +4,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import getFriends from '../api/getFriends';
+import getFriends from '../api/getUserFriends';
 
 export function FriendsTable() {
   const [rows, setRows] = useState([]);
@@ -12,11 +12,12 @@ export function FriendsTable() {
   const goToVibes = () => {
     navigate('/users');
   };
+  const userId = window.sessionStorage.getItem('sessionId');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getFriends();
+        const res = await getFriends(userId);
         const data = await res.json();
 
         if (data.length === 0) {

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 
 const fs = require('fs');
@@ -30,6 +32,7 @@ const dbNewArtist = require('./model/newArtist');
 const dbPlaylists = require('./model/playlists');
 const dbUsers = require('./model/users');
 const dbSpotify = require('./model/spotify');
+// const { default: CommunitiesTable } = require('../client/src/components/CommunitiesTable');
 
 // root endpoint route
 webapp.get('/', (req, resp) => {
@@ -60,8 +63,6 @@ webapp.post('/users', async (req, res) => {
 webapp.get('/other-users', async (req, res) => {
   try {
     console.log('hit GET /other-users');
-    
-
 
     const users = await dbUsers.getUsers(req.headers.authorization);
     if (users === undefined) {
@@ -69,16 +70,15 @@ webapp.get('/other-users', async (req, res) => {
       return;
     }
 
-    //remove current user
+    // remove current user
     if (req.headers.authorization) {
       console.log('authorization header exists: ', req.headers.authorization);
       const filteredUsers = users.filter((user) => user._id !== req.headers.authorization);
       res.status(200).json(filteredUsers);
-    } else { //if no authorization header, return all users
+    } else { // if no authorization header, return all users
       console.log('authorization header does not exist');
       res.status(200).json(users);
     }
-
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: 'Error retrieving users', error: err });
@@ -103,17 +103,17 @@ webapp.post('/other-users/follow/:id', async (req, res) => {
   }
 });
 
-
 webapp.get('/communities', async (req, res) => {
   try {
-    const results = await dbCommunities.getCommunities();
+    const results = await dbCommunities.getCommunities(req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'no communities exist' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
-    res.status(404).json({ message: 'error in retrieving communities' });
+    console.log(err);
+    res.status(400).json({ message: 'error in retrieving communities' });
   }
 });
 
@@ -151,8 +151,8 @@ webapp.post('/communities', async (req, res) => {
         const newCommunity = {
           name: fields.name,
           image: s3URL,
-          numMember: fields.numMember,
           description: fields.desc,
+          members: [req.headers.authorization],
         };
 
         const result = await dbCommunities.addCommunity(newCommunity);
@@ -167,8 +167,7 @@ webapp.post('/communities', async (req, res) => {
 webapp.get('/newartistplaylists', async (req, res) => {
   console.log('hit GET /newartistplaylists');
   try {
-    const results = await dbNewArtist.getNewArtistPlaylists();
-    console.log('results', results);
+    const results = await dbNewArtist.getNewArtistPlaylists(req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'no new artists' });
       return;
@@ -180,33 +179,44 @@ webapp.get('/newartistplaylists', async (req, res) => {
 });
 
 webapp.post('/newartistplaylists', async (req, res) => {
+  console.log('hit POST /newartistplaylists');
   const {
-    id, name, url, playlist, desc,
+    artistName, email, spotifyURL, playlistName, description,
   } = req.body;
 
-  if (!id || !name || !url || !playlist || !desc) {
+  if (!artistName || !email || !spotifyURL || !playlistName || !description) {
     res.status(400).json({ message: 'missing info' });
     return;
   }
 
   try {
-    const results = await dbNewArtist.postNewArtistPlaylist(id, name, url, playlist, desc);
+    const results = await dbNewArtist.postNewArtistPlaylist(
+      artistName,
+      email,
+      spotifyURL,
+      playlistName,
+      description,
+    );
     res.status(201).json(results);
   } catch (err) {
     res.status(409).json({ message: 'error', error: err });
   }
 });
 
-webapp.put('newartistplaylists/:_id', async (req, res) => {
+webapp.post('/newartistplaylists/:_id', async (req, res) => {
   try {
-    console.log('change likes');
-    const results = await dbNewArtist.toggleNewArtistLikes();
+    console.log('Called like new artist playlist');
+    const results = await dbNewArtist.toggleNewArtistLikes(
+      req.params.id,
+      req.headers.authorization,
+    );
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found' });
       return;
     }
     res.status(200).json(results);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });
@@ -215,7 +225,7 @@ webapp.get('/playlists', async (req, res) => {
   try {
     console.log('Called get playlists');
     // get the data from the db
-    const results = await dbPlaylists.getPlaylists(req.headers.authorization);
+    const results = await dbPlaylists.getPlaylists();
     if (results === undefined) {
       res.status(404).json({ error: 'No Playlists found' });
       return;
@@ -224,6 +234,24 @@ webapp.get('/playlists', async (req, res) => {
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ message: 'there was a server error' });
+  }
+});
+
+webapp.post('/playlists', async (req, res) => {
+  const {
+    id, name, desc,
+  } = req.body;
+
+  if (!id || !name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbPlaylists.postPlaylists(id, name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
   }
 });
 
@@ -241,7 +269,6 @@ webapp.post('/playlists/like/:id', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
-
 
 webapp.get('/users/:id', async (req, res) => {
   try {
@@ -341,22 +368,6 @@ webapp.post('/sockets', async (req, res) => {
   }
 });
 
-webapp.get('/communities', async (req, res) => {
-  try {
-    // get the data from the db
-    const results = await dbCommunities.getCommunities();
-    if (results === undefined) {
-      res.status(404).json({ error: 'unknown community' });
-    } else {
-      res.status(200).json(results);
-    }
-  } catch (err) {
-    const errmsg = err.message;
-
-    res.status(404).json({ message: errmsg });
-  }
-});
-
 webapp.put('/songs/:id', async (req, res) => {
   try {
     const { songs } = req.body;
@@ -404,6 +415,66 @@ webapp.get('/songs', async (req, res) => {
   }
 });
 
+webapp.get('/users/playlists/:id', async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const results = await dbUsers.getPlaylists(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.post('/users/playlists/:id', async (req, res) => {
+  console.log('hit POST user playlists');
+  const {
+    playlistid, name, desc,
+  } = req.body;
+  const { id } = req.params;
+
+  if (!playlistid || !name || !desc) {
+    res.status(400).json({ message: 'missing info' });
+    return;
+  }
+
+  try {
+    const results = await dbUsers.postPlaylists(id, playlistid, name, desc);
+    res.status(201).json(results);
+  } catch (err) {
+    res.status(409).json({ message: 'error', error: err });
+  }
+});
+
+webapp.get('/users/friends/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.getFriends(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.get('/users/communities/:id', async (req, res) => {
+  try {
+    const results = await dbUsers.getCommmunities(req.params.id);
+    if (results === undefined) {
+      res.status(404).json({ error: 'results undefined' });
+      return;
+    }
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.page_size, 10) || 10000000000;
@@ -415,6 +486,24 @@ webapp.get('/artists', async (req, res) => {
       res.status(200).json(results);
     }
   } catch (err) {
+    res.status(500).json({ message: 'server error' });
+  }
+});
+
+webapp.get('/communities/members/:id', async (req, res) => {
+  try {
+    console.log('hit GET /communities/members/:id');
+    const communityId = req.params.id;
+    const userId = req.headers.authorization;
+    console.log('community id: ', communityId, ' user id: ', userId);
+    const results = await dbCommunities.toggleMembership(userId, communityId);
+    if (results === null) {
+      res.status(404).json({ error: 'unknown community' });
+    } else {
+      res.status(200).json(results);
+    }
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'server error' });
   }
 });

@@ -1,94 +1,107 @@
-// import MongoClient
-const { MongoClient } = require('mongodb');
+/* eslint-disable no-underscore-dangle */
+// Import required modules and files
+const request = require('supertest');
+const { connect, closeMongoDBConnection } = require('../utils/dbUtils');
+const {
+  deleteTestDataFromNewArtistsDB, insertTestDataToNewArtistsDB, testNewArtist,
+} = require('../utils/testUtils');
 
-// import functions to be tested
-const { addNewArtistPlaylist, getAllNewArtistPlaylist } = require('../model/newArtist');
+const webapp = require('../server');
 
-// connection string
-const uri = 'mongodb+srv://abhijay:abhijayagarwal@spotifypenn.kfju1o3.mongodb.net/?retryWrites=true&w=majority';
+// Connection to the DB
+let mongo;
 
-describe('Database Operations', () => {
-  let mongoConnection;
+// test POST newArtists endpoint
+describe('POST newArtists endpoint tests', () => {
+  let db;
+  let response;
 
-  // connect to the database before running any test
   beforeAll(async () => {
-    mongoConnection = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  });
+    // Connect to the DB
+    mongo = await connect();
+    db = mongo.db();
 
-  // close database connection after running all tests
-  afterAll(async () => {
-    await mongoConnection.close();
-  });
-
-  describe('addNewArtistPlaylist()', () => {
-    // clear database before running each test
-    beforeEach(async () => {
-      await mongoConnection.db('spotify').collection('newArtists').deleteMany({});
-    });
-
-    test('adds new artist playlist to the database', async () => {
-      const playlist = {
-        _id: 500,
-        artistName: 'John Doe',
-        spotifyURL: 'https://open.spotify.com/playlist/123',
-        playlistName: 'New Music',
-        description: 'Some new music',
-        likes: false,
-      };
-
-      // add new artist playlist to the database
-      await addNewArtistPlaylist(playlist._id, playlist.artistName, playlist.spotifyURL, playlist.playlistName, playlist.description, playlist.likes);
-
-      // get the newly added artist playlist
-      const result = await mongoConnection.db('spotify').collection('newArtists').findOne({ _id: playlist._id });
-
-      // check that the artist playlist was added correctly
-      expect(result).toEqual(playlist);
-    });
-    afterAll(async () => {
-      // we need to clear the DB
-      try {
-        await deleteTestDataFromDB(db, '_id: 500');
-        await mongo.close(); // the test  file connection
-        await closeMongoDBConnection(); // the express connection
-      } catch (err) {
-        return err;
-      }
-    });
-  });
-
-  describe('getAllNewArtistPlaylist()', () => {
-    // add test data to the database before running each test
-    beforeEach(async () => {
-      await mongoConnection.db('spotify').collection('newArtists').insertMany([
-        {
-          _id: 700,
-          artistName: 'Jane Smith',
-          spotifyURL: 'https://open.spotify.com/playlist/456',
-          playlistName: 'Cool Music',
-          description: 'Some cool music',
-          likes: true,
-        },
-      ]);
-    });
-
-    test('returns all new artist playlists from the database', async () => {
-      // get all new artist playlists from the database
-      const result = await getAllNewArtistPlaylist();
-
-      // check that all artist playlists were returned
-      expect(result.length).toBe(1);
-    });
+    // Send a request to the API and collect the response
+    response = await request(webapp).post('/newartistplaylists')
+      .send('artistName=TestArtist&email=test@example.com&spotifyURL=testtest&playlistName=TestPlaylist&description=TestDescription');
   });
 
   afterAll(async () => {
-    // we need to clear the DB
     try {
-      await deleteTestDataFromDB(db, '_id: 700');
-      await mongo.close(); // the test  file connection
-      await closeMongoDBConnection(); // the express connection
+      await deleteTestDataFromNewArtistsDB(db, 'TestArtist');
+      await mongo.close();
+      await closeMongoDBConnection();
+      return null;
     } catch (err) {
       return err;
     }
+  });
+
+  test('The status code is 201 and response type', () => {
+    expect(response.status).toBe(201);
+    expect(response.type).toBe('application/json');
+  });
+
+  test('The new artist playlist is in the returned data', () => {
+    expect(JSON.parse(response.text)).not.toBe(undefined);
+  });
+
+  test('The new artist playlist is in the database', async () => {
+    const insertedPlaylist = await db.collection('newArtists').findOne({ artistName: 'TestArtist' });
+    expect(insertedPlaylist.artistName).toEqual('TestArtist');
+  });
+
+  test('Missing a field (email) 400', async () => {
+    const res = await request(webapp).post('/newartistplaylists')
+      .send('artistName=TestArtist&spotifyURLrl=testtest&playlistName=TestPlaylist&description=TestDescription');
+    expect(res.status).toEqual(400);
+  });
+});
+
+// test GET newArtists endpoint
+describe('GET newArtists endpoint integration test', () => {
+  /**
+ * If you get an error with afterEach
+ * inside .eslintrc.json in the
+ * "env" key add -'jest': true-
+*/
+  let db;
+
+  beforeAll(async () => {
+    mongo = await connect();
+    db = mongo.db();
+
+    // add test user to mongodb
+    await insertTestDataToNewArtistsDB(db, testNewArtist);
+  });
+
+  /**
+ * Delete all test data from the DB
+ * Close all open connections
+ */
+  afterAll(async () => {
+    await deleteTestDataFromNewArtistsDB(db, 'teststudent');
+    try {
+      await mongo.close();
+      await closeMongoDBConnection(); // mongo client that started server.
+      return null;
+    } catch (err) {
+      return err;
+    }
+  });
+
+  test('Get all new artists endpoint status code and data', async () => {
+    const resp = await request(webapp).get('/newartistplaylists');
+    expect(resp.status).toEqual(200);
+    expect(resp.type).toBe('application/json');
+    const testArtists = await db.collection('newArtists').find({ artistName: 'TestArtist' }).toArray();
+    // testStudent is in the response
+    expect(testArtists.length >= 1).toBe(true);
+  });
+
+  test('new artist not in db status code 404', async () => {
+    const resp = await request(webapp).get('/newartistplaylists/1').set('Authorization', 'admin@gmail.com');
+    expect(resp.status).toEqual(404);
+    expect(resp.type).toBe('text/html');
   });
 });
