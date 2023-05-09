@@ -10,7 +10,7 @@ import Playlists from './PlaylistsTable';
 function UserGroup() {
   return (
     <Group position="center">
-      <Avatar radius="300px" size="xl" color="dark" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxU_HXn8zNqrMo5wdVZmnqOEZk4O708Zt1ZEEb2jBtPj50tjZ-0J4Y_N9lISrYk-PWVS0&usqp=CAU" />
+      <Avatar radius="300px" size="xl" color="dark" src={window.sessionStorage.getItem('imageURL')} />
       <Title fz="100"> Benjamin Franklin</Title>
     </Group>
   );
