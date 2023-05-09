@@ -65,8 +65,6 @@ const deleteTestDataFromUsersDB = async (db, testDataName) => {
   }
 };
 
-
-
 // test user
 // define the test user
 const testCommunity = {
@@ -138,7 +136,6 @@ const isInArrayNewArtist = (arr, val) => {
   });
   return value;
 };
-
 
 // export the functions
 module.exports = {
