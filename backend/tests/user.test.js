@@ -82,15 +82,6 @@ describe('GET users endpoint integration test', () => {
   });
 
 
-  // test('Get a new user endpoint status code and data', async () => {
-  //   const resp = await request(webapp).get(`/newartistplaylists/${testUserID}`);
-  //   expect(resp.status).toEqual(200);
-  //   expect(resp.type).toBe('application/json');
-  //   const userArr = JSON.parse(resp.text).data;
-  //   // testStudent is in the response
-  //   expect(userArr).toMatchObject({ _id: testUserID, ...testUser });
-  // });
-
   test('user not in db status code 400', async () => {
     const resp = await request(webapp).get('/users/1');
     expect(resp.status).toEqual(404);
