@@ -4,10 +4,12 @@ module.exports = {
     es2021: true,
     node: true,
     'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'plugin:cypress/recommended',
   ],
   overrides: [
   ],
@@ -18,6 +20,7 @@ module.exports = {
   plugins: [
     'react',
     'jest',
+    'cypress',
   ],
   rules: {
   },
