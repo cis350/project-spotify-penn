@@ -152,7 +152,7 @@ webapp.post('/communities', async (req, res) => {
           name: fields.name,
           image: s3URL,
           description: fields.desc,
-          members: [req.headers.authorization]
+          members: [req.headers.authorization],
         };
 
         const result = await dbCommunities.addCommunity(newCommunity);
@@ -207,7 +207,8 @@ webapp.post('/newartistplaylists', async (req, res) => {
 webapp.post('/newartistplaylists/:_id', async (req, res) => {
   try {
     console.log('Called like new artist playlist');
-    const results = await dbNewArtist.toggleNewArtistLikes(req.params.id, req.headers.authorization);
+    const results = await dbNewArtist
+      .toggleNewArtistLikes(req.params.id, req.headers.authorization);
     if (results === undefined) {
       res.status(404).json({ error: 'Playlist not found' });
       return;
@@ -366,7 +367,6 @@ webapp.post('/sockets', async (req, res) => {
   }
 });
 
-
 webapp.put('/songs/:id', async (req, res) => {
   try {
     const { songs } = req.body;
@@ -474,7 +474,6 @@ webapp.get('/users/communities/:id', async (req, res) => {
   }
 });
 
-
 webapp.get('/artists', async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
   const pageSize = parseInt(req.query.page_size, 10) || 10000000000;
@@ -493,10 +492,10 @@ webapp.get('/artists', async (req, res) => {
 webapp.get('/communities/members/:id', async (req, res) => {
   try {
     console.log('hit GET /communities/members/:id');
-    const community_id = req.params.id;
-    const user_id = req.headers.authorization;
-    console.log('community id: ', community_id, ' user id: ', user_id);
-    const results = await dbCommunities.toggleMembership(user_id, community_id);
+    const communityId = req.params.id;
+    const userId = req.headers.authorization;
+    console.log('community id: ', communityId, ' user id: ', userId);
+    const results = await dbCommunities.toggleMembership(userId, communityId);
     if (results === null) {
       res.status(404).json({ error: 'unknown community' });
     } else {
@@ -507,6 +506,5 @@ webapp.get('/communities/members/:id', async (req, res) => {
     res.status(500).json({ message: 'server error' });
   }
 });
-
 
 module.exports = webapp;
