@@ -52,8 +52,6 @@ function Card({ item }) {
     } catch (error) { /* do nothing */ }
   }
 
-  console.log('item', item);
-
   return (
     <Paper
       shadow="md"
