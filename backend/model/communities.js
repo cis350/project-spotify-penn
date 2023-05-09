@@ -1,5 +1,8 @@
 const { getDB } = require('../utils/dbUtils');
 
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
+
 /** get all the communities */
 const getCommunities = async (user_id) => {
   const db = await getDB();
