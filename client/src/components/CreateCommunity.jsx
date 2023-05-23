@@ -1,4 +1,3 @@
-
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
@@ -31,7 +30,7 @@ function CreateCommunity(props) {
   });
 
   const handleCreateCommunity = () => {
-    const { name, image, desc } = form.values;
+    const { name, desc } = form.values;
 
     const formData = new FormData();
     formData.append('name', name);
@@ -44,7 +43,6 @@ function CreateCommunity(props) {
       form.reset();
       props.onCommunityCreated();
     });
-
   };
 
   const handleKeyDown = (event) => {

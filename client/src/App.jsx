@@ -15,6 +15,7 @@ import Communities from './components/Community';
 import AddNewPlaylist from './components/AddNewArtistPlaylist';
 import NewArtistsPage from './components/NewArtistsPage';
 import { PlaylistFeed } from './components/PlaylistFeed';
+import GeneratePlaylist from './components/GeneratePlaylist';
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
             <Home />
           </>
         )}
+      />
+      <Route
+        path="/create"
+        element={(
+          <>
+            <MainHeader />
+            <GeneratePlaylist />
+          </>
+)}
       />
       <Route path="/register" element={(<Register />)} />
       <Route path="/login" element={<Login />} />

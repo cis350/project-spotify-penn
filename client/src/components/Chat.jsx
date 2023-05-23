@@ -1,9 +1,8 @@
-
 /* eslint-disable react/no-array-index-key */
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Tooltip, Button, Textarea, Avatar, Badge, Title, Paper, Container, Center, Stack, NumberInput,
+  Tooltip, Button, Textarea, Avatar, Badge, Title, Paper, Center, Stack, NumberInput,
 } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -97,7 +96,7 @@ function Chat() {
         align="center"
         size={60}
         my={25}
-        sx={(theme) => ({
+        sx={() => ({
           fontWeight: 900,
         })}
       >

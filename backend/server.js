@@ -475,4 +475,8 @@ webapp.get('/communities/members/:id', async (req, res) => {
   }
 });
 
+// accept an image and store it in the database using a playlist Id as the key to the image
+// webapp.post('/images', async (req, res) => {
+//   try {
+
 module.exports = webapp;

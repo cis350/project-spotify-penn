@@ -72,10 +72,13 @@ function MainHeader() {
     } else {
       setCurrentUser(window.sessionStorage.getItem('sessionId'));
     }
+    // getFullName(currentUser).then((data) => {
+    //   setFullName(data);
+    // });
   }, []);
 
   useEffect(() => {
-    getFullName(currentUser).then((data) => {
+    getFullName(window.sessionStorage.getItem('sessionId')).then((data) => {
       setFullName(data);
     });
   }, [currentUser]);
@@ -119,6 +122,9 @@ function MainHeader() {
             </a>
             <a href="/playlistfeed" className={classes.link}>
               Playlist Feed
+            </a>
+            <a href="/create" className={classes.link}>
+              Create Playlist
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>

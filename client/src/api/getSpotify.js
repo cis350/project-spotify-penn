@@ -74,6 +74,100 @@ const setArtists = async (username, newArtists) => {
   }
 };
 
+const getUserData = async (token) => {
+  const url = 'https://api.spotify.com/v1/me';
+  const res = await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const userData = res.data;
+  if (!userData) {
+    return null;
+  }
+  return userData;
+};
+
+const newPlaylist = async (token, id, name, desc) => {
+  const url = `https://api.spotify.com/v1/users/${id}/playlists`;
+  const data = {
+    name,
+    description: desc,
+    public: false,
+  };
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  const res = await axios.post(
+    url,
+    data,
+    options,
+  );
+  return res.data;
+};
+
+const getUserId = async (token) => {
+  const url = 'https://api.spotify.com/v1/me';
+  const res = await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const userData = res.data;
+  if (!userData) {
+    return null;
+  }
+  return userData.id;
+};
+
+const addSongs = async (token, playlistId, songUris) => {
+  const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+  const data = {
+    uris: songUris,
+  };
+  console.log(data);
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  const res = await axios.post(
+    url,
+    data,
+    options,
+  );
+  return res.data;
+};
+
+const addCoverImage = async (token, playlistId, image) => {
+  const url = `https://api.spotify.com/v1/playlists/${playlistId}/images`;
+  const data = image;
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'image/jpeg',
+    },
+  };
+  const res = await axios.put(
+    url,
+    data,
+    options,
+  );
+  return res.data;
+};
+
 export {
-  getSongs, setSongs, getArtists, setArtists,
+  getSongs,
+  setSongs,
+  getArtists,
+  setArtists,
+  getUserData,
+  newPlaylist,
+  getUserId,
+  addSongs,
+  addCoverImage,
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useForm } from '@mantine/form';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IconAlertCircle } from '@tabler/icons-react';
 // import the rubik font
 import '@fontsource/rubik';
@@ -10,9 +10,7 @@ import {
   Title,
   TextInput,
   PasswordInput,
-  Group,
   Paper,
-  Checkbox,
   Text,
   Button,
   Alert,
@@ -28,15 +26,13 @@ const generateRandomString = (length) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
 };
 
 function Login() {
-  const navigate = useNavigate();
-
   const clientId = '8a1688a9dcda4c06b6de6b77453d3f68';
   const redirectUri = 'http://localhost:3000/home';
 
